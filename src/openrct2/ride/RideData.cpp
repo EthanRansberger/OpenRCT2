@@ -54,6 +54,7 @@
 #include "coaster/meta/MiniRollerCoaster.h"
 #include "coaster/meta/MiniSuspendedCoaster.h"
 #include "coaster/meta/MultiDimensionRollerCoaster.h"
+#include "coaster/meta/PipelineCoaster.h"
 #include "coaster/meta/ReverseFreefallCoaster.h"
 #include "coaster/meta/ReverserRollerCoaster.h"
 #include "coaster/meta/SideFrictionRollerCoaster.h"
@@ -344,6 +345,7 @@ constexpr RideTypeDescriptor RideTypeDescriptors[RIDE_TYPE_COUNT] = {
     /* RIDE_TYPE_SINGLE_RAIL_ROLLER_COASTER         */ SingleRailRollerCoasterRTD,
     /* RIDE_TYPE_ALPINE_COASTER                     */ AlpineCoasterRTD,
     /* RIDE_TYPE_CLASSIC_WOODEN_ROLLER_COASTER      */ ClassicWoodenRollerCoasterRTD,
+    /* RIDE_TYPE_PIPELINE_COASTER                   */ PipelineCoasterRTD,
 };
 
 bool RideTypeDescriptor::HasFlag(uint64_t flag) const
