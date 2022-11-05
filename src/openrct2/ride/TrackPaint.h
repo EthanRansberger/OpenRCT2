@@ -486,6 +486,6 @@ namespace AlpineRC
 }
 namespace PipelineRC
 {
-TRACK_PAINT_FUNCTION get_track_paint_function_pipeline_rc(int32_t trackType);
+TRACK_PAINT_FUNCTION GetTrackPaintFunction(int32_t trackType);
 }
 TRACK_PAINT_FUNCTION GetTrackPaintFunctionClassicWoodenRC(int32_t trackType);
