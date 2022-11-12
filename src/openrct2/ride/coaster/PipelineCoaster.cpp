@@ -28,7 +28,7 @@
 namespace PipelineRC
 {
 
-static void TrackFlat(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,                               const TrackElement& trackElement)
+static void TrackFlat(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,                               const TrackElement& trackElement)
 {
     
     if (trackElement.AsTrack()->HasChain())
@@ -54,7 +54,7 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         }
         if (track_paint_util_should_paint_supports(session.MapPosition))
         {
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
         }
     }
     else
@@ -74,15 +74,15 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         }
         if (track_paint_util_should_paint_supports(session.MapPosition))
         {
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
         }
     }
-    paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 32, 0x20);
+    PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
 }
 
-static void TrackStation(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,                                  const TrackElement& trackElement)
+static void TrackStation(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,                                  const TrackElement& trackElement)
 {
     static constexpr const uint32_t imageIds[4][3] = {
         { (SPR_G2_PIPELINE_TRACK_BRAKE + 0), (SPR_G2_PIPELINE_TRACK_BLOCK_BRAKE + 0), SPR_STATION_BASE_B_SW_NE },        { (SPR_G2_PIPELINE_TRACK_BRAKE + 2), (SPR_G2_PIPELINE_TRACK_BLOCK_BRAKE + 2), SPR_STATION_BASE_B_NW_SE },        { (SPR_G2_PIPELINE_TRACK_BRAKE + 0), (SPR_G2_PIPELINE_TRACK_BLOCK_BRAKE + 0), SPR_STATION_BASE_B_SW_NE },        { (SPR_G2_PIPELINE_TRACK_BRAKE + 2), (SPR_G2_PIPELINE_TRACK_BLOCK_BRAKE + 2), SPR_STATION_BASE_B_NW_SE },    };
@@ -100,13 +100,13 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_MISC].WithIndex(imageIds[direction][2]),{0,0,height-2},{32,28,2},{0,2,height});
     track_paint_util_draw_station_metal_supports_2(session, direction, height, session.TrackColours[SCHEME_SUPPORTS], 0);
     //track_paint_util_draw_station_2(session, ride, direction, height, trackElement,4,7);
-    paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
-    paint_util_set_segment_support_height(session, SEGMENTS_ALL, 0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 32, 0x20);
+    PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+    PaintUtilSetSegmentSupportHeight(session, SEGMENTS_ALL, 0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
 }
 
 
-static void TrackUp25(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                    int32_t height, const TrackElement& trackElement)
+static void TrackUp25(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                    int32_t height, const TrackElement& trackElement)
 {
     if (trackElement.AsTrack()->HasChain())
     {
@@ -131,7 +131,7 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         }
         if (track_paint_util_should_paint_supports(session.MapPosition))
         {
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
         }
     }
     else
@@ -157,23 +157,23 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         }
         if (track_paint_util_should_paint_supports(session.MapPosition))
         {
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
         }
     }
     if (direction == 0 || direction == 3)
     {
-        paint_util_push_tunnel_rotated(session, direction, height - 8, TUNNEL_SQUARE_7);
+        PaintUtilPushTunnelRotated(session, direction, height - 8, TUNNEL_SQUARE_7);
     }
     else
     {
-        paint_util_push_tunnel_rotated(session, direction, height + 8, TUNNEL_SQUARE_8);
+        PaintUtilPushTunnelRotated(session, direction, height + 8, TUNNEL_SQUARE_8);
     }
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 56, 0x20);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
 }
 
 
-static void TrackUp60(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                    int32_t height, const TrackElement& trackElement)
+static void TrackUp60(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                    int32_t height, const TrackElement& trackElement)
 {
     switch (direction)
     {
@@ -196,21 +196,21 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
     if (track_paint_util_should_paint_supports(session.MapPosition))
     {
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 32, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 32, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
     if (direction == 0 || direction == 3)
     {
-        paint_util_push_tunnel_rotated(session, direction, height - 8, TUNNEL_SQUARE_7);
+        PaintUtilPushTunnelRotated(session, direction, height - 8, TUNNEL_SQUARE_7);
     }
     else
     {
-        paint_util_push_tunnel_rotated(session, direction, height + 56, TUNNEL_SQUARE_8);
+        PaintUtilPushTunnelRotated(session, direction, height + 56, TUNNEL_SQUARE_8);
     }
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 104, 0x20);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 104, 0x20);
 }
 
-static void TrackFlatToUp25(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                            int32_t height, const TrackElement& trackElement)
+static void TrackFlatToUp25(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                            int32_t height, const TrackElement& trackElement)
 {
     if (trackElement.AsTrack()->HasChain())
     {
@@ -235,7 +235,7 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         }
         if (track_paint_util_should_paint_supports(session.MapPosition))
         {
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 3, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 3, height, session.TrackColours[SCHEME_SUPPORTS]);
         }
     }
     else
@@ -261,22 +261,22 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         }
         if (track_paint_util_should_paint_supports(session.MapPosition))
         {
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 3, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 3, height, session.TrackColours[SCHEME_SUPPORTS]);
         }
     }
     if (direction == 0 || direction == 3)
     {
-        paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+        PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
     }
     else
     {
-        paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_8);
+        PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_8);
     }
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 48, 0x20);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
 }
 
-static void TrackUp25ToUp60(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                                 int32_t height, const TrackElement& trackElement)
+static void TrackUp25ToUp60(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                                 int32_t height, const TrackElement& trackElement)
 {
     switch (direction)
     {
@@ -299,21 +299,21 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
     if (track_paint_util_should_paint_supports(session.MapPosition))
     {
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 12, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 12, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
     if (direction == 0 || direction == 3)
     {
-        paint_util_push_tunnel_rotated(session, direction, height - 8, TUNNEL_SQUARE_7);
+        PaintUtilPushTunnelRotated(session, direction, height - 8, TUNNEL_SQUARE_7);
     }
     else
     {
-        paint_util_push_tunnel_rotated(session, direction, height + 24, TUNNEL_SQUARE_8);
+        PaintUtilPushTunnelRotated(session, direction, height + 24, TUNNEL_SQUARE_8);
     }
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 72, 0x20);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
 }
 
-static void TrackUp60ToUp25(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                                 int32_t height, const TrackElement& trackElement)
+static void TrackUp60ToUp25(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                                 int32_t height, const TrackElement& trackElement)
 {
     switch (direction)
     {
@@ -336,21 +336,21 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
     if (track_paint_util_should_paint_supports(session.MapPosition))
     {
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 20, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 20, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
     if (direction == 0 || direction == 3)
     {
-        paint_util_push_tunnel_rotated(session, direction, height - 8, TUNNEL_SQUARE_7);
+        PaintUtilPushTunnelRotated(session, direction, height - 8, TUNNEL_SQUARE_7);
     }
     else
     {
-        paint_util_push_tunnel_rotated(session, direction, height + 24, TUNNEL_SQUARE_8);
+        PaintUtilPushTunnelRotated(session, direction, height + 24, TUNNEL_SQUARE_8);
     }
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 72, 0x20);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
 }
 
-static void TrackUp25ToFlat(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                            int32_t height, const TrackElement& trackElement)
+static void TrackUp25ToFlat(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                            int32_t height, const TrackElement& trackElement)
 {
     if (trackElement.AsTrack()->HasChain())
     {
@@ -375,7 +375,7 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         }
         if (track_paint_util_should_paint_supports(session.MapPosition))
         {
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
         }
     }
     else
@@ -401,53 +401,53 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         }
         if (track_paint_util_should_paint_supports(session.MapPosition))
         {
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
         }
     }
     if (direction == 0 || direction == 3)
     {
-        paint_util_push_tunnel_rotated(session, direction, height - 8, TUNNEL_SQUARE_FLAT);
+        PaintUtilPushTunnelRotated(session, direction, height - 8, TUNNEL_SQUARE_FLAT);
     }
     else
     {
-        paint_util_push_tunnel_rotated(session, direction, height + 8, TUNNEL_14);
+        PaintUtilPushTunnelRotated(session, direction, height + 8, TUNNEL_14);
     }
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 40, 0x20);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 40, 0x20);
 }
 
-static void TrackDown25(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                      int32_t height, const TrackElement& trackElement)
+static void TrackDown25(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                      int32_t height, const TrackElement& trackElement)
 {
     TrackUp25(session, ride, trackSequence, (direction + 2) & 3, height, trackElement);
 }
 
-static void TrackDown60(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                      int32_t height, const TrackElement& trackElement)
+static void TrackDown60(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                      int32_t height, const TrackElement& trackElement)
 {
     TrackUp60(session, ride, trackSequence, (direction + 2) & 3, height, trackElement);
 }
 
-static void TrackFlatToDown25(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                              int32_t height, const TrackElement& trackElement)
+static void TrackFlatToDown25(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                              int32_t height, const TrackElement& trackElement)
 {
     TrackUp25ToFlat(session, ride, trackSequence, (direction + 2) & 3, height, trackElement);
 }
 
-static void TrackDown25ToDown60(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                     uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackDown25ToDown60(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                     uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     TrackUp60ToUp25(session, ride, trackSequence, (direction + 2) & 3, height, trackElement);
 }
 
-static void TrackDown60ToDown25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                     uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackDown60ToDown25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                     uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     TrackUp25ToUp60(session, ride, trackSequence, (direction + 2) & 3, height, trackElement);
 }
 
-static void TrackDown25ToFlat(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                              int32_t height, const TrackElement& trackElement)
+static void TrackDown25ToFlat(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                              int32_t height, const TrackElement& trackElement)
 {
     TrackFlatToUp25(session, ride, trackSequence, (direction + 2) & 3, height, trackElement);
 }
 
 
-static void TrackLeftQuarterTurn3(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                              int32_t height, const TrackElement& trackElement)
+static void TrackLeftQuarterTurn3(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                              int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -471,17 +471,17 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_CURVE+19),{0,0,height},{32,20,0},{0,6,height+27});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
         if (direction == 0 || direction == 3)
         {
-            paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 1:
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 2:
         switch (direction)
@@ -503,9 +503,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_CURVE+21),{0,0,height},{32,20,0},{0,6,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 3:
         switch (direction)
@@ -527,30 +527,30 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_CURVE+23),{0,0,height},{32,20,0},{0,6,height+27});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
         switch (direction)
         {
         case 2:
-            paint_util_push_tunnel_right(session, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRight(session, height, TUNNEL_SQUARE_FLAT);
             break;
         case 3:
-            paint_util_push_tunnel_left(session, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelLeft(session, height, TUNNEL_SQUARE_FLAT);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     }
 }
 
-static void TrackRightQuarterTurn3(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                               int32_t height, const TrackElement& trackElement)
+static void TrackRightQuarterTurn3(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                               int32_t height, const TrackElement& trackElement)
 {
     trackSequence = mapLeftQuarterTurn3TilesToRightQuarterTurn3Tiles[trackSequence];
     TrackLeftQuarterTurn3(session, ride, trackSequence, (direction - 1) & 3, height, trackElement);
 }
 
-static void TrackLeftQuarterTurn5(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                              int32_t height, const TrackElement& trackElement)
+static void TrackLeftQuarterTurn5(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                              int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -574,17 +574,17 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_MEDIUM_CURVE+31),{0,0,height},{32,20,0},{0,6,height+27});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
         if (direction == 0 || direction == 3)
         {
-            paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
         }
-	paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+	PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 1:
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 2:
         switch (direction)
@@ -606,9 +606,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_MEDIUM_CURVE+33),{0,0,height},{32,20,0},{0,6,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 3:
         switch (direction)
@@ -630,12 +630,12 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_MEDIUM_CURVE+35),{0,0,height},{32,20,0},{0,6,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 4:
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 5:
         switch (direction)
@@ -657,9 +657,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_MEDIUM_CURVE+37),{0,0,height},{32,20,0},{0,6,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 6:
         switch (direction)
@@ -681,30 +681,30 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_MEDIUM_CURVE+39),{0,0,height},{32,20,0},{0,6,height+27});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
         switch (direction)
         {
         case 2:
-            paint_util_push_tunnel_right(session, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRight(session, height, TUNNEL_SQUARE_FLAT);
             break;
         case 3:
-            paint_util_push_tunnel_left(session, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelLeft(session, height, TUNNEL_SQUARE_FLAT);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     }
 }
 
-static void TrackRightQuarterTurn5(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                               int32_t height, const TrackElement& trackElement)
+static void TrackRightQuarterTurn5(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                               int32_t height, const TrackElement& trackElement)
 {
     trackSequence = mapLeftQuarterTurn5TilesToRightQuarterTurn5Tiles[trackSequence];
     TrackLeftQuarterTurn5(session, ride, trackSequence, (direction - 1) & 3, height, trackElement);
 }
 
-static void TrackLeftEighthTodiag(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                              int32_t height, const TrackElement& trackElement)
+static void TrackLeftEighthTodiag(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                              int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -728,14 +728,14 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE+25),{0,0,height},{32,20,0},{0,6,height+27});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
         if (direction == 0 || direction == 3)
         {
-            paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 1:
         switch (direction)
@@ -757,9 +757,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE+27),{0,0,height},{32,20,0},{0,6,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 2:
         switch (direction)
@@ -781,14 +781,14 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE+29),{0,0,height},{32,20,0},{0,6,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 3:
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 4:
         switch (direction)
@@ -796,32 +796,32 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE+6),{0,0,height},{16,16,3},{16,16,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE+7),{0,0,height},{32,20,0},{0,6,height+27});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE+14),{0,0,height},{16,18,3},{0,16,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE+15),{0,0,height},{32,20,0},{0,6,height+27});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE+22),{0,0,height},{16,16,3},{0,0,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE+23),{0,0,height},{32,20,0},{0,6,height+27});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 3:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE+30),{0,0,height},{16,16,3},{16,0,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE+31),{0,0,height},{32,20,0},{0,6,height+27});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     }
 }
 
-static void TrackRightEighthTodiag(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                               int32_t height, const TrackElement& trackElement)
+static void TrackRightEighthTodiag(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                               int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -845,14 +845,14 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE+57),{0,0,height},{32,20,0},{0,6,height+27});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
         if (direction == 0 || direction == 3)
         {
-            paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 1:
         switch (direction)
@@ -874,9 +874,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE+59),{0,0,height},{32,20,0},{0,6,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 2:
         switch (direction)
@@ -898,14 +898,14 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE+61),{0,0,height},{32,20,0},{0,6,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 3:
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 4:
         switch (direction)
@@ -913,38 +913,38 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE+38),{0,0,height},{16,16,3},{16,0,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE+39),{0,0,height},{32,20,0},{0,6,height+27});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE+46),{0,0,height},{16,16,3},{0,0,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE+47),{0,0,height},{32,20,0},{0,6,height+27});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE+54),{0,0,height},{16,18,3},{0,16,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE+55),{0,0,height},{32,20,0},{0,6,height+27});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 3:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE+62),{0,0,height},{16,16,3},{16,16,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE+63),{0,0,height},{32,20,0},{0,6,height+27});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     }
 }
 
-static void TrackLeftEighthToorthogonal(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                    uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackLeftEighthToOrthogonal(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                    uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     trackSequence = mapLeftEighthTurnToOrthogonal[trackSequence];
     TrackRightEighthTodiag(session, ride, trackSequence, (direction + 2) & 3, height, trackElement);
 }
 
-static void TrackRightEighthToorthogonal(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                     uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRightEighthToOrthogonal(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                     uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     trackSequence = mapLeftEighthTurnToOrthogonal[trackSequence];
     TrackLeftEighthTodiag(session, ride, trackSequence, (direction + 3) & 3, height, trackElement);
@@ -952,7 +952,7 @@ static void TrackRightEighthToorthogonal(paint_session& session, const Ride& rid
 
 
 
-static void TrackDiagFlat(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                    int32_t height, const TrackElement& trackElement)
+static void TrackDiagFlat(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                    int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -975,9 +975,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
                 break;
             }
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 1:
         if (trackElement.AsTrack()->HasChain())
@@ -1000,9 +1000,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
                 break;
             }
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 2:
         if (trackElement.AsTrack()->HasChain())
@@ -1025,9 +1025,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
                 break;
             }
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 3:
         if (trackElement.AsTrack()->HasChain())
@@ -1035,17 +1035,17 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
             switch (direction)
             {
             case 0:
-                metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_LIFT_TRACK_FLAT_DIAGONAL+2),{-16,-16,height},{32,32,3},{-16,-16,height});
-                metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 2:
-                metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 3:
-                metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             }
         }
@@ -1054,28 +1054,28 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
             switch (direction)
             {
             case 0:
-                metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_FLAT_DIAGONAL+2),{-16,-16,height},{32,32,3},{-16,-16,height});
-                metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 2:
-                metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 3:
-                metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             }
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     }
 }
 
-static void TrackDiagUp25(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                         int32_t height, const TrackElement& trackElement)
+static void TrackDiagUp25(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                         int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -1098,9 +1098,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
                 break;
             }
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 56, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
         break;
     case 1:
         if (trackElement.AsTrack()->HasChain())
@@ -1123,9 +1123,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
                 break;
             }
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 56, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
         break;
     case 2:
         if (trackElement.AsTrack()->HasChain())
@@ -1148,9 +1148,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
                 break;
             }
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 56, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
         break;
     case 3:
         if (trackElement.AsTrack()->HasChain())
@@ -1158,17 +1158,17 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
             switch (direction)
             {
             case 0:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 8, height+1,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 8, height+1,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_LIFT_TRACK_GENTLE_DIAGONAL+14),{-16,-16,height},{32,32,3},{-16,-16,height});
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 8, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 8, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 2:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 8, height+1,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 8, height+1,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 3:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 8, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 8, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             }
         }
@@ -1177,28 +1177,28 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
             switch (direction)
             {
             case 0:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 8, height+1,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 8, height+1,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_DIAGONAL+14),{-16,-16,height},{32,32,3},{-16,-16,height});
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 8, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 8, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 2:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 8, height+1,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 8, height+1,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 3:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 8, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 8, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             }
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 56, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
         break;
     }
 }
 
-static void TrackDiagUp25ToFlat(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                                 int32_t height, const TrackElement& trackElement)
+static void TrackDiagUp25ToFlat(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                                 int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -1221,9 +1221,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
                 break;
             }
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 56, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
         break;
     case 1:
         if (trackElement.AsTrack()->HasChain())
@@ -1246,9 +1246,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
                 break;
             }
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 56, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
         break;
     case 2:
         if (trackElement.AsTrack()->HasChain())
@@ -1271,9 +1271,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
                 break;
             }
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 56, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
         break;
     case 3:
         if (trackElement.AsTrack()->HasChain())
@@ -1281,17 +1281,17 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
             switch (direction)
             {
             case 0:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 4, height+2,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 4, height+2,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_LIFT_TRACK_GENTLE_DIAGONAL+8),{-16,-16,height},{32,32,3},{-16,-16,height});
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 4, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 4, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 2:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 4, height+2,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 4, height+2,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 3:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 4, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 4, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             }
         }
@@ -1300,28 +1300,28 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
             switch (direction)
             {
             case 0:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 4, height+2,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 4, height+2,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_DIAGONAL+8),{-16,-16,height},{32,32,3},{-16,-16,height});
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 4, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 4, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 2:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 4, height+2,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 4, height+2,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 3:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 4, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 4, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             }
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 56, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
         break;
     }
 }
 
-static void TrackDiagFlatToUp25(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                                 int32_t height, const TrackElement& trackElement)
+static void TrackDiagFlatToUp25(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                                 int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -1344,9 +1344,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
                 break;
             }
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
         break;
     case 1:
         if (trackElement.AsTrack()->HasChain())
@@ -1369,9 +1369,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
                 break;
             }
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
         break;
     case 2:
         if (trackElement.AsTrack()->HasChain())
@@ -1394,9 +1394,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
                 break;
             }
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
         break;
     case 3:
         if (trackElement.AsTrack()->HasChain())
@@ -1404,17 +1404,17 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
             switch (direction)
             {
             case 0:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 0, height+2,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 0, height+2,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_LIFT_TRACK_GENTLE_DIAGONAL+2),{-16,-16,height},{32,32,3},{-16,-16,height});
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 2:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 0, height+2,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 0, height+2,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 3:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             }
         }
@@ -1423,28 +1423,28 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
             switch (direction)
             {
             case 0:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 0, height+2,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 0, height+2,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_DIAGONAL+2),{-16,-16,height},{32,32,3},{-16,-16,height});
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 2:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 0, height+2,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 0, height+2,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 3:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             }
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
         break;
     }
 }
 
-static void TrackDiagDown25(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                           int32_t height, const TrackElement& trackElement)
+static void TrackDiagDown25(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                           int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -1467,9 +1467,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
                 break;
             }
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 56, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
         break;
     case 1:
         if (trackElement.AsTrack()->HasChain())
@@ -1492,9 +1492,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
                 break;
             }
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 56, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
         break;
     case 2:
         if (trackElement.AsTrack()->HasChain())
@@ -1517,9 +1517,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
                 break;
             }
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 56, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
         break;
     case 3:
         if (trackElement.AsTrack()->HasChain())
@@ -1527,17 +1527,17 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
             switch (direction)
             {
             case 0:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 8, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 8, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_LIFT_TRACK_GENTLE_DIAGONAL+17),{-16,-16,height},{32,32,3},{-16,-16,height});
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 8, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 8, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 2:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 8, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 8, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 3:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 8, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 8, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             }
         }
@@ -1546,28 +1546,28 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
             switch (direction)
             {
             case 0:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 8, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 8, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_DIAGONAL+17),{-16,-16,height},{32,32,3},{-16,-16,height});
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 8, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 8, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 2:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 8, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 8, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 3:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 8, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 8, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             }
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 56, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
         break;
     }
 }
 
-static void TrackDiagFlatToDown25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                   uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackDiagFlatToDown25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                   uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -1590,8 +1590,8 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
                 break;
             }
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
         break;
     case 1:
         if (trackElement.AsTrack()->HasChain())
@@ -1614,8 +1614,8 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
                 break;
             }
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
         break;
     case 2:
         if (trackElement.AsTrack()->HasChain())
@@ -1638,8 +1638,8 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
                 break;
             }
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
         break;
     case 3:
         if (trackElement.AsTrack()->HasChain())
@@ -1647,17 +1647,17 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
             switch (direction)
             {
             case 0:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 4, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 4, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_LIFT_TRACK_GENTLE_DIAGONAL+11),{-16,-16,height},{32,32,3},{-16,-16,height});
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 4, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 4, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 2:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 4, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 4, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 3:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 4, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 4, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             }
         }
@@ -1666,29 +1666,29 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
             switch (direction)
             {
             case 0:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 4, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 4, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_DIAGONAL+11),{-16,-16,height},{32,32,3},{-16,-16,height});
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 4, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 4, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 2:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 4, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 4, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 3:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 4, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 4, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             }
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
         break;
     }
 
-    paint_util_set_general_support_height(session, height + 56, 0x20);
+    PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
 }
 
-static void TrackDiagDown25ToFlat(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                   uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackDiagDown25ToFlat(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                   uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -1711,9 +1711,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
                 break;
             }
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
         break;
     case 1:
         if (trackElement.AsTrack()->HasChain())
@@ -1736,9 +1736,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
                 break;
             }
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
         break;
     case 2:
         if (trackElement.AsTrack()->HasChain())
@@ -1761,9 +1761,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
                 break;
             }
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
         break;
     case 3:
         if (trackElement.AsTrack()->HasChain())
@@ -1771,17 +1771,17 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
             switch (direction)
             {
             case 0:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_LIFT_TRACK_GENTLE_DIAGONAL+5),{-16,-16,height},{32,32,3},{-16,-16,height});
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 2:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 3:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             }
         }
@@ -1790,28 +1790,28 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
             switch (direction)
             {
             case 0:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_DIAGONAL+5),{-16,-16,height},{32,32,3},{-16,-16,height});
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 2:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 3:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 0, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             }
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
         break;
     }
 }
 
-static void TrackDiagUp60(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                         int32_t height, const TrackElement& trackElement)
+static void TrackDiagUp60(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                         int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -1822,9 +1822,9 @@ static void TrackDiagUp60(paint_session& session, const Ride& ride, uint8_t trac
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP_DIAGONAL+17),{-16,-16,height},{32,32,3},{-16,-16,height});
                 break;
             }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 104, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 104, 0x20);
         break;
     case 1:
             switch (direction)
@@ -1834,9 +1834,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP_DIAGONAL+13),{-16,-16,height},{32,32,0},{-16,-16,height+95});
                 break;
             }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 104, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 104, 0x20);
         break;
     case 2:
             switch (direction)
@@ -1846,35 +1846,35 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP_DIAGONAL+16),{-16,-16,height},{32,32,0},{-16,-16,height+95});
                 break;
             }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 104, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 104, 0x20);
         break;
     case 3:
             switch (direction)
             {
             case 0:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 32, height+6, session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 32, height+6, session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP_DIAGONAL+14),{-16,-16,height},{32,32,3},{-16,-16,height});
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 36, height, session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 36, height, session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 2:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 32, height+6, session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 32, height+6, session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 3:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 36, height, session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 36, height, session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 104, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 104, 0x20);
         break;
     }
 }
 
-static void TrackDiagUp25ToUp60(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                      uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackDiagUp25ToUp60(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                      uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -1885,9 +1885,9 @@ static void TrackDiagUp25ToUp60(paint_session& session, const Ride& ride, uint8_
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP_DIAGONAL+5),{-16,-16,height},{32,32,3},{		-16,-16,height});
                 break;
             }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 1:
             switch (direction)
@@ -1897,9 +1897,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP_DIAGONAL+1),{-16,-16,height},{32,32,0},{-16,-16,height+64});
                 break;
             }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 2:
             switch (direction)
@@ -1909,35 +1909,35 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP_DIAGONAL+4),{-16,-16,height},{32,32,0},{-16,-16,height+64});
                 break;
             }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 3:
             switch (direction)
             {
             case 0:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 16, height, session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 16, height, session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP_DIAGONAL+2),{-16,-16,height},{32,32,3},{-16,-16,height});
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 16, height, session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 16, height, session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 2:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 16, height, session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 16, height, session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 3:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 16, height, session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 16, height, session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     }
 }
 
-static void TrackDiagUp60ToUp25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                      uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackDiagUp60ToUp25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                      uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -1948,9 +1948,9 @@ static void TrackDiagUp60ToUp25(paint_session& session, const Ride& ride, uint8_
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP_DIAGONAL+11),{-16,-16,height},{32,32,3},{-16,-16,height});
                 break;
             }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 1:
             switch (direction)
@@ -1960,9 +1960,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP_DIAGONAL+7),{-16,-16,height},{32,32,0},{-16,-16,height+60});
                 break;
             }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 2:
             switch (direction)
@@ -1972,35 +1972,35 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP_DIAGONAL+10),{-16,-16,height},{32,32,0},{-16,-16,height+60});
                 break;
             }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 3:
             switch (direction)
             {
             case 0:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 21, height, session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 21, height, session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP_DIAGONAL+8),{-16,-16,height},{16,16,3},{0,0,height});
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 21, height, session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 21, height, session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 2:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 21, height, session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 21, height, session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 3:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 21, height, session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 21, height, session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     }
 }
 
-static void TrackDiagDown60(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                   int32_t height, const TrackElement& trackElement)
+static void TrackDiagDown60(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                   int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -2011,9 +2011,9 @@ static void TrackDiagDown60(paint_session& session, const Ride& ride, uint8_t tr
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP_DIAGONAL+14),{-16,-16,height},{32,32,3},{-16,-16,height});
                 break;
             }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 104, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 104, 0x20);
         break;
     case 1:
             switch (direction)
@@ -2023,9 +2023,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP_DIAGONAL+16),{-16,-16,height},{32,32,0},{-16,-16,height+95});
                 break;
             }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 104, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 104, 0x20);
         break;
     case 2:
             switch (direction)
@@ -2035,35 +2035,35 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP_DIAGONAL+13),{-16,-16,height},{32,32,0},{-16,-16,height+95});
                 break;
             }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 104, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 104, 0x20);
         break;
     case 3:
             switch (direction)
             {
             case 0:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 24, height, session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 24, height, session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP_DIAGONAL+17),{-16,-16,height},{32,32,3},{-16,-16,height});
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 28, height, session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 28, height, session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 2:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 24, height, session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 24, height, session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 3:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 28, height, session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 28, height, session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 104, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 104, 0x20);
         break;
     }
 }
 
-static void TrackDiagDown25ToDown60(paint_session& session, const Ride& ride, uint8_t trackSequence,                      uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackDiagDown25ToDown60(PaintSession& session, const Ride& ride, uint8_t trackSequence,                      uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -2074,9 +2074,9 @@ static void TrackDiagDown25ToDown60(paint_session& session, const Ride& ride, ui
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP_DIAGONAL+8),{-16,-16,height},{16,16,3},{0,0,height});
                 break;
             }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 1:
             switch (direction)
@@ -2086,9 +2086,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP_DIAGONAL+10),{-16,-16,height},{32,32,0},{-16,-16,height+60});
                 break;
             }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 2:
             switch (direction)
@@ -2098,35 +2098,35 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP_DIAGONAL+7),{-16,-16,height},{32,32,0},{-16,-16,height+60});
                 break;
             }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 3:
             switch (direction)
             {
             case 0:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 17, height, session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 17, height, session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP_DIAGONAL+11),{-16,-16,height},{32,32,3},{-16,-16,height});
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 17, height, session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 17, height, session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 2:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 17, height, session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 17, height, session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 3:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 17, height, session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 17, height, session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     }
 }
 
-static void TrackDiagDown60ToDown25(paint_session& session, const Ride& ride, uint8_t trackSequence,                      uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackDiagDown60ToDown25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                      uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -2137,9 +2137,9 @@ static void TrackDiagDown60ToDown25(paint_session& session, const Ride& ride, ui
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP_DIAGONAL+2),{-16,-16,height},{32,32,3},{-16,-16,height});
                 break;
             }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 1:
             switch (direction)
@@ -2149,9 +2149,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP_DIAGONAL+4),{-16,-16,height},{32,32,0},{-16,-16,height+64});
                 break;
             }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 2:
             switch (direction)
@@ -2161,30 +2161,30 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP_DIAGONAL+1),{-16,-16,height},{32,32,0},{-16,-16,height+64});
                 break;
             }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 3:
             switch (direction)
             {
             case 0:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP_DIAGONAL+5),{-16,-16,height},{32,32,3},{-16,-16,height});
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 2:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             case 3:
-                metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+                MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
                 break;
             }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     }
 }
@@ -2192,7 +2192,7 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 
 
 
-static void TrackFlatToLeftBank(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                            int32_t height, const TrackElement& trackElement)
+static void TrackFlatToLeftBank(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                            int32_t height, const TrackElement& trackElement)
 {
     switch (direction)
     {
@@ -2215,14 +2215,14 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
     if (track_paint_util_should_paint_supports(session.MapPosition))
     {
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
-    paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 32, 0x20);
+    PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
 }
 
-static void TrackFlatToRightBank(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                             int32_t height, const TrackElement& trackElement)
+static void TrackFlatToRightBank(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                             int32_t height, const TrackElement& trackElement)
 {
     switch (direction)
     {
@@ -2245,25 +2245,25 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
     if (track_paint_util_should_paint_supports(session.MapPosition))
     {
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
-    paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 32, 0x20);
+    PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
 }
 
-static void TrackLeftBankToFlat(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                            int32_t height, const TrackElement& trackElement)
+static void TrackLeftBankToFlat(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                            int32_t height, const TrackElement& trackElement)
 {
 	TrackFlatToRightBank(session, ride, trackSequence, (direction + 2) & 3, height, trackElement);
 }
 
-static void TrackRightBankToFlat(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                             int32_t height, const TrackElement& trackElement)
+static void TrackRightBankToFlat(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                             int32_t height, const TrackElement& trackElement)
 {
 	TrackFlatToLeftBank(session, ride, trackSequence, (direction + 2) & 3, height, trackElement);
 }
 
 
-static void TrackLeftBankToUp25(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                                 int32_t height, const TrackElement& trackElement)
+static void TrackLeftBankToUp25(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                                 int32_t height, const TrackElement& trackElement)
 {
     switch (direction)
     {
@@ -2286,21 +2286,21 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
     if (track_paint_util_should_paint_supports(session.MapPosition))
     {
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 3, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 3, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
     if (direction == 0 || direction == 3)
     {
-        paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+        PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
     }
     else
     {
-        paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_8);
+        PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_8);
     }
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 48, 0x20);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
 }
 
-static void TrackRightBankToUp25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                  uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRightBankToUp25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                  uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (direction)
     {
@@ -2323,21 +2323,21 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
     if (track_paint_util_should_paint_supports(session.MapPosition))
     {
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 3, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 3, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
     if (direction == 0 || direction == 3)
     {
-        paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+        PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
     }
     else
     {
-        paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_8);
+        PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_8);
     }
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 48, 0x20);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
 }
 
-static void TrackUp25ToLeftBank(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                                 int32_t height, const TrackElement& trackElement)
+static void TrackUp25ToLeftBank(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                                 int32_t height, const TrackElement& trackElement)
 {
     switch (direction)
     {
@@ -2360,21 +2360,21 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
     if (track_paint_util_should_paint_supports(session.MapPosition))
     {
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
     if (direction == 0 || direction == 3)
     {
-        paint_util_push_tunnel_rotated(session, direction, height - 8, TUNNEL_SQUARE_FLAT);
+        PaintUtilPushTunnelRotated(session, direction, height - 8, TUNNEL_SQUARE_FLAT);
     }
     else
     {
-        paint_util_push_tunnel_rotated(session, direction, height + 8, TUNNEL_14);
+        PaintUtilPushTunnelRotated(session, direction, height + 8, TUNNEL_14);
     }
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 40, 0x20);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 40, 0x20);
 }
 
-static void TrackUp25ToRightBank(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                  uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackUp25ToRightBank(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                  uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (direction)
     {
@@ -2397,41 +2397,41 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
     if (track_paint_util_should_paint_supports(session.MapPosition))
     {
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
     if (direction == 0 || direction == 3)
     {
-        paint_util_push_tunnel_rotated(session, direction, height - 8, TUNNEL_SQUARE_FLAT);
+        PaintUtilPushTunnelRotated(session, direction, height - 8, TUNNEL_SQUARE_FLAT);
     }
     else
     {
-        paint_util_push_tunnel_rotated(session, direction, height + 8, TUNNEL_14);
+        PaintUtilPushTunnelRotated(session, direction, height + 8, TUNNEL_14);
     }
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 40, 0x20);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 40, 0x20);
 }
 
-static void TrackLeftBankToDown25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                   uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackLeftBankToDown25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                   uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     TrackUp25ToRightBank(session, ride, trackSequence, (direction + 2) & 3, height, trackElement);
 }
 
-static void TrackRightBankToDown25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                    uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRightBankToDown25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                    uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     TrackUp25ToLeftBank(session, ride, trackSequence, (direction + 2) & 3, height, trackElement);
 }
 
-static void TrackDown25ToLeftBank(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                   uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackDown25ToLeftBank(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                   uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     TrackRightBankToUp25(session, ride, trackSequence, (direction + 2) & 3, height, trackElement);
 }
 
-static void TrackDown25ToRightBank(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                    uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackDown25ToRightBank(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                    uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     TrackLeftBankToUp25(session, ride, trackSequence, (direction + 2) & 3, height, trackElement);
 }
 
-static void TrackLeftBank(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                    int32_t height, const TrackElement& trackElement)
+static void TrackLeftBank(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                    int32_t height, const TrackElement& trackElement)
 {
     switch (direction)
     {
@@ -2454,20 +2454,20 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
     if (track_paint_util_should_paint_supports(session.MapPosition))
     {
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
-    paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 32, 0x20);
+    PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
 }
 
-static void TrackRightBank(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                     int32_t height, const TrackElement& trackElement)
+static void TrackRightBank(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                     int32_t height, const TrackElement& trackElement)
 {
     TrackLeftBank(session, ride, trackSequence, (direction + 2) & 3, height, trackElement);
 }
 
 
-static void TrackDiagFlatToLeftBank(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                                 int32_t height, const TrackElement& trackElement)
+static void TrackDiagFlatToLeftBank(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                                 int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -2479,9 +2479,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+7),{-16,-16,height},{32,32,0},{-16,-16,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 1:
         switch (direction)
@@ -2491,9 +2491,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+1),{-16,-16,height},{32,32,0},{-16,-16,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 2:
         switch (direction)
@@ -2503,36 +2503,36 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+5),{-16,-16,height},{32,32,0},{-16,-16,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 3:
         switch (direction)
         {
         case 0:
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+2),{-16,-16,height},{32,32,3},{-16,-16,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+3),{-16,-16,height},{32,32,0},{-16,-16,height+27});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 2:
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 3:
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     }
 }
 
-static void TrackDiagFlatToRightBank(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                  uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackDiagFlatToRightBank(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                  uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -2544,9 +2544,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+15),{-16,-16,height},{32,32,0},{-16,-16,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 1:
         switch (direction)
@@ -2556,9 +2556,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+9),{-16,-16,height},{32,32,0},{-16,-16,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 2:
         switch (direction)
@@ -2568,36 +2568,36 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+13),{-16,-16,height},{32,32,0},{-16,-16,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 3:
         switch (direction)
         {
         case 0:
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+10),{-16,-16,height},{32,32,3},{-16,-16,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+11),{-16,-16,height},{32,32,0},{-16,-16,height+27});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 2:
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 3:
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     }
 }
 
-static void TrackDiagLeftBankToFlat(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                                 int32_t height, const TrackElement& trackElement)
+static void TrackDiagLeftBankToFlat(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                                 int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -2609,9 +2609,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+11),{-16,-16,height},{32,32,0},{-16,-16,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 1:
         switch (direction)
@@ -2621,9 +2621,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+13),{-16,-16,height},{32,32,0},{-16,-16,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 2:
         switch (direction)
@@ -2633,36 +2633,36 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+9),{-16,-16,height},{32,32,0},{-16,-16,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 3:
         switch (direction)
         {
         case 0:
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+14),{-16,-16,height},{32,32,3},{-16,-16,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+15),{-16,-16,height},{32,32,0},{-16,-16,height+27});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 2:
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 3:
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     }
 }
 
-static void TrackDiagRightBankToFlat(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                  uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackDiagRightBankToFlat(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                  uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -2674,9 +2674,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+3),{-16,-16,height},{32,32,0},{-16,-16,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 1:
         switch (direction)
@@ -2686,9 +2686,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+5),{-16,-16,height},{32,32,0},{-16,-16,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 2:
         switch (direction)
@@ -2698,36 +2698,36 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+1),{-16,-16,height},{32,32,0},{-16,-16,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 3:
         switch (direction)
         {
         case 0:
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+6),{-16,-16,height},{32,32,3},{-16,-16,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+7),{-16,-16,height},{32,32,0},{-16,-16,height+27});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 2:
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 3:
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     }
 }
 
-static void TrackDiagLeftBankToUp25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                      uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackDiagLeftBankToUp25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                      uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -2739,9 +2739,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+23),{-16,-16,height},{32,32,0},{-16,-16,height+35});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
         break;
     case 1:
         switch (direction)
@@ -2751,9 +2751,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+17),{-16,-16,height},{32,32,0},{-16,-16,height+35});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
         break;
     case 2:
         switch (direction)
@@ -2763,36 +2763,36 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+21),{-16,-16,height},{32,32,0},{-16,-16,height+35});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
         break;
     case 3:
         switch (direction)
         {
         case 0:
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+18),{-16,-16,height},{32,32,3},{-16,-16,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+19),{-16,-16,height},{32,32,0},{-16,-16,height+35});
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 2:
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 3:
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
         break;
     }
 }
 
-static void TrackDiagRightBankToUp25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                       uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackDiagRightBankToUp25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                       uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -2804,9 +2804,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+31),{-16,-16,height},{32,32,0},{-16,-16,height+35});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
         break;
     case 1:
         switch (direction)
@@ -2816,9 +2816,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+25),{-16,-16,height},{32,32,0},{-16,-16,height+35});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
         break;
     case 2:
         switch (direction)
@@ -2828,36 +2828,36 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+29),{-16,-16,height},{32,32,0},{-16,-16,height+35});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
         break;
     case 3:
         switch (direction)
         {
         case 0:
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+26),{-16,-16,height},{32,32,3},{-16,-16,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+27),{-16,-16,height},{32,32,0},{-16,-16,height+35});
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 2:
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 3:
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
         break;
     }
 }
 
-static void TrackDiagUp25ToLeftBank(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                      uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackDiagUp25ToLeftBank(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                      uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -2869,9 +2869,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+39),{-16,-16,height},{32,32,0},{-16,-16,height+35});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 56, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
         break;
     case 1:
         switch (direction)
@@ -2881,9 +2881,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+33),{-16,-16,height},{32,32,0},{-16,-16,height+35});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 56, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
         break;
     case 2:
         switch (direction)
@@ -2893,36 +2893,36 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+37),{-16,-16,height},{32,32,0},{-16,-16,height+35});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 56, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
         break;
     case 3:
         switch (direction)
         {
         case 0:
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+34),{-16,-16,height},{32,32,3},{-16,-16,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+35),{-16,-16,height},{32,32,0},{-16,-16,height+35});
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 2:
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 3:
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 56, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
         break;
     }
 }
 
-static void TrackDiagUp25ToRightBank(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                       uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackDiagUp25ToRightBank(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                       uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -2934,9 +2934,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+47),{-16,-16,height},{32,32,0},{-16,-16,height+35});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 56, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
         break;
     case 1:
         switch (direction)
@@ -2946,9 +2946,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+41),{-16,-16,height},{32,32,0},{-16,-16,height+35});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 56, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
         break;
     case 2:
         switch (direction)
@@ -2958,36 +2958,36 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+45),{-16,-16,height},{32,32,0},{-16,-16,height+35});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 56, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
         break;
     case 3:
         switch (direction)
         {
         case 0:
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+42),{-16,-16,height},{32,32,3},{-16,-16,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+43),{-16,-16,height},{32,32,0},{-16,-16,height+35});
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 2:
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 3:
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 56, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
         break;
     }
 }
 
-static void TrackDiagLeftBankToDown25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                        uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackDiagLeftBankToDown25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                        uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -2999,8 +2999,8 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+43),{-16,-16,height},{32,32,0},{-16,-16,height+35});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
         break;
     case 1:
         switch (direction)
@@ -3010,8 +3010,8 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+45),{-16,-16,height},{32,32,0},{-16,-16,height+35});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
         break;
     case 2:
         switch (direction)
@@ -3021,36 +3021,36 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+41),{-16,-16,height},{32,32,0},{-16,-16,height+35});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
         break;
     case 3:
         switch (direction)
         {
         case 0:
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+46),{-16,-16,height},{32,32,3},{-16,-16,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+47),{-16,-16,height},{32,32,0},{-16,-16,height+35});
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 2:
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 3:
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
         break;
     }
 
-    paint_util_set_general_support_height(session, height + 56, 0x20);
+    PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
 }
 
-static void TrackDiagRightBankToDown25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                         uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackDiagRightBankToDown25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                         uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -3062,8 +3062,8 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+35),{-16,-16,height},{32,32,0},{-16,-16,height+35});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
         break;
     case 1:
         switch (direction)
@@ -3073,8 +3073,8 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+37),{-16,-16,height},{32,32,0},{-16,-16,height+35});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
         break;
     case 2:
         switch (direction)
@@ -3084,36 +3084,36 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+33),{-16,-16,height},{32,32,0},{-16,-16,height+35});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
         break;
     case 3:
         switch (direction)
         {
         case 0:
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+38),{-16,-16,height},{32,32,3},{-16,-16,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+39),{-16,-16,height},{32,32,0},{-16,-16,height+35});
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 2:
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 3:
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 4, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
         break;
     }
 
-    paint_util_set_general_support_height(session, height + 56, 0x20);
+    PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
 }
 
-static void TrackDiagDown25ToLeftBank(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                        uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackDiagDown25ToLeftBank(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                        uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -3125,9 +3125,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+27),{-16,-16,height},{32,32,0},{-16,-16,height+35});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
         break;
     case 1:
         switch (direction)
@@ -3137,9 +3137,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+29),{-16,-16,height},{32,32,0},{-16,-16,height+35});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
         break;
     case 2:
         switch (direction)
@@ -3149,36 +3149,36 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+25),{-16,-16,height},{32,32,0},{-16,-16,height+35});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
         break;
     case 3:
         switch (direction)
         {
         case 0:
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+30),{-16,-16,height},{32,32,3},{-16,-16,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+31),{-16,-16,height},{32,32,0},{-16,-16,height+35});
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 2:
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 3:
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
         break;
     }
 }
 
-static void TrackDiagDown25ToRightBank(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                         uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackDiagDown25ToRightBank(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                         uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -3190,9 +3190,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+19),{-16,-16,height},{32,32,0},{-16,-16,height+35});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
         break;
     case 1:
         switch (direction)
@@ -3202,9 +3202,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+21),{-16,-16,height},{32,32,0},{-16,-16,height+35});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
         break;
     case 2:
         switch (direction)
@@ -3214,36 +3214,36 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+17),{-16,-16,height},{32,32,0},{-16,-16,height+35});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
         break;
     case 3:
         switch (direction)
         {
         case 0:
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+22),{-16,-16,height},{32,32,3},{-16,-16,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+23),{-16,-16,height},{32,32,0},{-16,-16,height+35});
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 2:
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 3:
-            metal_b_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalBSupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
         break;
     }
 }
 
-static void TrackDiagLeftBank(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                         int32_t height, const TrackElement& trackElement)
+static void TrackDiagLeftBank(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                         int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -3255,9 +3255,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+55),{-16,-16,height},{32,32,0},{-16,-16,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 1:
         switch (direction)
@@ -3267,9 +3267,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+49),{-16,-16,height},{32,32,0},{-16,-16,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 2:
         switch (direction)
@@ -3279,36 +3279,36 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+53),{-16,-16,height},{32,32,0},{-16,-16,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 3:
         switch (direction)
         {
         case 0:
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+50),{-16,-16,height},{32,32,3},{-16,-16,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+51),{-16,-16,height},{32,32,0},{-16,-16,height+27});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 2:
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 3:
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     }
 }
 
-static void TrackDiagRightBank(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                          int32_t height, const TrackElement& trackElement)
+static void TrackDiagRightBank(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                          int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -3320,9 +3320,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+51),{-16,-16,height},{32,32,0},{-16,-16,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 1:
         switch (direction)
@@ -3332,9 +3332,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+53),{-16,-16,height},{32,32,0},{-16,-16,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 2:
         switch (direction)
@@ -3344,38 +3344,38 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+49),{-16,-16,height},{32,32,0},{-16,-16,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 3:
         switch (direction)
         {
         case 0:
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+54),{-16,-16,height},{32,32,3},{-16,-16,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_BANK_TRANSITION_DIAGONAL+55),{-16,-16,height},{32,32,0},{-16,-16,height+27});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 2:
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 3:
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     }
 }
 
 
 
-static void TrackLeftQuarterTurn3Tilesbank(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                   uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackLeftQuarterTurn3Tilesbank(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                   uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -3399,17 +3399,17 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_CURVE_BANKED+19),{0,0,height},{32,32,0},{0,0,height+27});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
         if (direction == 0 || direction == 3)
         {
-            paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 1:
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 2:
         switch (direction)
@@ -3431,9 +3431,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_CURVE_BANKED+21),{0,0,height},{32,32,0},{0,0,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 3:
         switch (direction)
@@ -3455,30 +3455,30 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_CURVE_BANKED+23),{0,0,height},{32,32,0},{0,0,height+27});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
         switch (direction)
         {
         case 2:
-            paint_util_push_tunnel_right(session, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRight(session, height, TUNNEL_SQUARE_FLAT);
             break;
         case 3:
-            paint_util_push_tunnel_left(session, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelLeft(session, height, TUNNEL_SQUARE_FLAT);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     }
 }
 
-static void TrackRightQuarterTurn3Tilesbank(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                    uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRightQuarterTurn3Tilesbank(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                    uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     trackSequence = mapLeftQuarterTurn3TilesToRightQuarterTurn3Tiles[trackSequence];
     TrackLeftQuarterTurn3Tilesbank(session, ride, trackSequence, (direction - 1) & 3, height, trackElement);
 }
 
-static void TrackBankedLeftQuarterTurn5(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                     uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackBankedLeftQuarterTurn5(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                     uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -3502,17 +3502,17 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_MEDIUM_CURVE_BANKED+31),{0,0,height},{32,32,3},{0,0,height+27});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
         if (direction == 0 || direction == 3)
         {
-            paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 1:
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 2:
         switch (direction)
@@ -3534,9 +3534,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_MEDIUM_CURVE_BANKED+33),{0,0,height},{32,32,3},{0,0,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 3:
         switch (direction)
@@ -3558,12 +3558,12 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_MEDIUM_CURVE_BANKED+35),{0,0,height},{32,32,3},{0,0,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 4:
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 5:
         switch (direction)
@@ -3585,9 +3585,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_MEDIUM_CURVE_BANKED+37),{0,0,height},{32,32,3},{0,0,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 6:
         switch (direction)
@@ -3609,30 +3609,30 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_MEDIUM_CURVE_BANKED+39),{0,0,height},{32,32,3},{0,0,height+27});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
         switch (direction)
         {
         case 2:
-            paint_util_push_tunnel_right(session, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRight(session, height, TUNNEL_SQUARE_FLAT);
             break;
         case 3:
-            paint_util_push_tunnel_left(session, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelLeft(session, height, TUNNEL_SQUARE_FLAT);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     }
 }
 
-static void TrackBankedRightQuarterTurn5(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                      uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackBankedRightQuarterTurn5(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                      uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     trackSequence = mapLeftQuarterTurn5TilesToRightQuarterTurn5Tiles[trackSequence];
     TrackBankedLeftQuarterTurn5(session, ride, trackSequence, (direction - 1) & 3, height, trackElement);
 }
 
-static void TrackLeftEighthBankTodiag(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                   uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackLeftEighthBankTodiag(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                   uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -3656,14 +3656,14 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE_BANKED+25),{0,0,height},{32,32,0},{0,0,height+27});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
         if (direction == 0 || direction == 3)
         {
-            paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 1:
         switch (direction)
@@ -3685,9 +3685,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE_BANKED+27),{0,0,height},{32,32,0},{0,0,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 2:
         switch (direction)
@@ -3709,14 +3709,14 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE_BANKED+29),{0,0,height},{32,32,0},{0,0,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 3:
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 4:
         switch (direction)
@@ -3724,32 +3724,32 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE_BANKED+6),{0,0,height},{32,32,3},{0,0,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE_BANKED+7),{0,0,height},{32,32,0},{0,0,height+27});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE_BANKED+14),{0,0,height},{32,32,3},{0,0,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE_BANKED+15),{0,0,height},{32,32,0},{0,0,height+27});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE_BANKED+22),{0,0,height},{32,32,3},{0,0,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE_BANKED+23),{0,0,height},{32,32,0},{0,0,height+27});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 3:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE_BANKED+30),{0,0,height},{32,32,3},{0,0,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE_BANKED+31),{0,0,height},{32,32,0},{0,0,height+27});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     }
 }
 
-static void TrackRightEighthBankTodiag(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                    uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRightEighthBankTodiag(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                    uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -3773,14 +3773,14 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE_BANKED+57),{0,0,height},{32,32,0},{0,0,height+27});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
         if (direction == 0 || direction == 3)
         {
-            paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 1:
         switch (direction)
@@ -3802,9 +3802,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE_BANKED+59),{0,0,height},{32,32,0},{0,0,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 2:
         switch (direction)
@@ -3826,14 +3826,14 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE_BANKED+61),{0,0,height},{32,32,0},{0,0,height+27});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 3:
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 4:
         switch (direction)
@@ -3841,38 +3841,38 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE_BANKED+38),{0,0,height},{32,32,3},{0,0,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE_BANKED+39),{0,0,height},{32,32,0},{0,0,height+27});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE_BANKED+46),{0,0,height},{32,32,3},{0,0,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE_BANKED+47),{0,0,height},{32,32,0},{0,0,height+27});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE_BANKED+54),{0,0,height},{32,32,3},{0,0,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE_BANKED+55),{0,0,height},{32,32,0},{0,0,height+27});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 3:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE_BANKED+62),{0,0,height},{32,32,3},{0,0,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_CURVE_BANKED+63),{0,0,height},{32,32,0},{0,0,height+27});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     }
 }
 
-static void TrackLeftEighthBankToorthogonal(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                         uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackLeftEighthBankToOrthogonal(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                         uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     trackSequence = mapLeftEighthTurnToOrthogonal[trackSequence];
     TrackRightEighthBankTodiag(session, ride, trackSequence, (direction + 2) & 3, height, trackElement);
 }
 
-static void TrackRightEighthBankToorthogonal(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                          uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRightEighthBankToOrthogonal(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                          uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     trackSequence = mapLeftEighthTurnToOrthogonal[trackSequence];
     TrackLeftEighthBankTodiag(session, ride, trackSequence, (direction + 3) & 3, height, trackElement);
@@ -3880,12 +3880,9 @@ static void TrackRightEighthBankToorthogonal(paint_session& session, const Ride&
 
 
 
-/*
 
 
-
-
-static void TrackLeftQuarterTurn3TilesUp25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                        uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackLeftQuarterTurn3TilesUp25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                        uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -3894,66 +3891,74 @@ static void TrackLeftQuarterTurn3TilesUp25(paint_session& session, const Ride& r
         {
         case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+0),{0,6,height},{32,20,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+1),{0,6,height},{32,20,3});
             break;
         case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+2),{0,6,height},{32,20,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+4),{0,6,height},{32,20,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+5),{0,6,height},{32,20,3});
             break;
         case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+4),{0,6,height},{32,20,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+8),{0,6,height},{32,20,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+9),{0,6,height},{32,20,3});
             break;
         case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+6),{0,6,height},{32,20,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+12),{0,6,height},{32,20,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+13),{0,6,height},{32,20,3});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
         if (direction == 0 || direction == 3)
         {
-            paint_util_push_tunnel_rotated(session, direction, height - 8, TUNNEL_SQUARE_7);
+            PaintUtilPushTunnelRotated(session, direction, height - 8, TUNNEL_SQUARE_7);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 1:
-        paint_util_set_general_support_height(session, height + 56, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
         break;
     case 2:
-        paint_util_set_general_support_height(session, height + 56, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
         break;
     case 3:
         switch (direction)
         {
         case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+1),{6,0,height},{20,32,3});
-            break;
-        case 1:
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+2),{6,0,height},{20,32,3});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+3),{6,0,height},{20,32,3});
             break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+5),{6,0,height},{20,32,3});
-            break;
-        case 3:
+        case 1:
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+6),{6,0,height},{20,32,3});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+7),{6,0,height},{20,32,3});
             break;
+        case 2:
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+10),{6,0,height},{20,32,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+11),{6,0,height},{20,32,3});
+            break;
+        case 3:
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+14),{6,0,height},{20,32,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+15),{6,0,height},{20,32,3});
+            break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
         switch (direction)
         {
         case 2:
-            paint_util_push_tunnel_right(session, height + 8, TUNNEL_SQUARE_8);
+            PaintUtilPushTunnelRight(session, height + 8, TUNNEL_SQUARE_8);
             break;
         case 3:
-            paint_util_push_tunnel_left(session, height + 8, TUNNEL_SQUARE_8);
+            PaintUtilPushTunnelLeft(session, height + 8, TUNNEL_SQUARE_8);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     }
 }
 
-static void TrackRightQuarterTurn3TilesUp25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                         uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRightQuarterTurn3TilesUp25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                         uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -3961,82 +3966,90 @@ static void TrackRightQuarterTurn3TilesUp25(paint_session& session, const Ride& 
         switch (direction)
         {
         case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+8),{0,6,height},{32,20,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+16),{0,6,height},{32,20,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+17),{0,6,height},{32,20,3});
             break;
         case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+10),{0,6,height},{32,20,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+20),{0,6,height},{32,20,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+21),{0,6,height},{32,20,3});
             break;
         case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+12),{0,6,height},{32,20,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+24),{0,6,height},{32,20,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+25),{0,6,height},{32,20,3});
             break;
         case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+14),{0,6,height},{32,20,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+28),{0,6,height},{32,20,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+29),{0,6,height},{32,20,3});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
         if (direction == 0 || direction == 3)
         {
-            paint_util_push_tunnel_rotated(session, direction, height - 8, TUNNEL_SQUARE_7);
+            PaintUtilPushTunnelRotated(session, direction, height - 8, TUNNEL_SQUARE_7);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 1:
-        paint_util_set_general_support_height(session, height + 56, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
         break;
     case 2:
-        paint_util_set_general_support_height(session, height + 56, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
         break;
     case 3:
         switch (direction)
         {
         case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+9),{6,0,height},{20,32,3});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+18),{6,0,height},{20,32,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+19),{6,0,height},{20,32,3});
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+11),{6,0,height},{20,32,3});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+22),{6,0,height},{20,32,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+23),{6,0,height},{20,32,3});
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+13),{6,0,height},{20,32,3});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 10, height, session.TrackColours[SCHEME_SUPPORTS]);
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+26),{6,0,height},{20,32,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+27),{6,0,height},{20,32,3});
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 10, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+15),{6,0,height},{20,32,3});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+30),{6,0,height},{20,32,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+31),{6,0,height},{20,32,3});
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         }
         switch (direction)
         {
         case 0:
-            paint_util_push_tunnel_right(session, height + 8, TUNNEL_SQUARE_8);
+            PaintUtilPushTunnelRight(session, height + 8, TUNNEL_SQUARE_8);
             break;
         case 1:
-            paint_util_push_tunnel_left(session, height + 8, TUNNEL_SQUARE_8);
+            PaintUtilPushTunnelLeft(session, height + 8, TUNNEL_SQUARE_8);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     }
 }
 
-static void TrackLeftQuarterTurn3TilesDown25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                          uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackLeftQuarterTurn3TilesDown25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                          uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     trackSequence = mapLeftQuarterTurn3TilesToRightQuarterTurn3Tiles[trackSequence];
     TrackRightQuarterTurn3TilesUp25(session, ride, trackSequence, (direction + 1) & 3, height, trackElement);
 }
 
-static void TrackRightQuarterTurn3TilesDown25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                           uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRightQuarterTurn3TilesDown25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                           uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     trackSequence = mapLeftQuarterTurn3TilesToRightQuarterTurn3Tiles[trackSequence];
     TrackLeftQuarterTurn3TilesUp25(session, ride, trackSequence, (direction - 1) & 3, height, trackElement);
 }
 
-static void TrackLeftQuarterTurn5_Up25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                        uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackLeftQuarterTurn5_Up25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                        uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -4045,126 +4058,146 @@ static void TrackLeftQuarterTurn5_Up25(paint_session& session, const Ride& ride,
         {
         case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+0),{0,0,height},{32,20,3},{0,6,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+1),{0,0,height},{32,1,32},{0,31,height});
             break;
         case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+5),{0,0,height},{32,20,3},{0,6,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+10),{0,0,height},{32,20,3},{0,6,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+11),{0,0,height},{32,1,32},{0,31,height});
             break;
         case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+10),{0,0,height},{32,20,3},{0,6,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+20),{0,0,height},{32,20,3},{0,6,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+21),{0,0,height},{32,1,32},{0,31,height});
             break;
         case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+15),{0,0,height},{32,20,3},{0,6,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+30),{0,0,height},{32,20,3},{0,6,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+31),{0,0,height},{32,1,32},{0,31,height});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
         if (direction == 0 || direction == 3)
         {
-            paint_util_push_tunnel_rotated(session, direction, height - 8, TUNNEL_SQUARE_7);
+            PaintUtilPushTunnelRotated(session, direction, height - 8, TUNNEL_SQUARE_7);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 1:
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 2:
         switch (direction)
         {
         case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+1),{0,0,height},{32,16,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+2),{0,0,height},{32,16,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+3),{0,0,height},{32,1,32},{0,31,height});
             break;
         case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+6),{0,0,height},{32,16,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+12),{0,0,height},{32,16,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+13),{0,0,height},{32,1,32},{0,31,height});
             break;
         case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+11),{0,0,height},{32,16,3},{0,16,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+22),{0,0,height},{32,16,3},{0,16,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+23),{0,0,height},{32,32,1},{0,16,height+48});
             break;
         case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+16),{0,0,height},{32,16,3},{0,16,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+32),{0,0,height},{32,16,3},{0,16,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+33),{0,0,height},{32,32,1},{0,16,height+48});
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 3:
         switch (direction)
         {
         case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+2),{0,0,height},{16,16,3},{0,16,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+4),{0,0,height},{16,16,3},{0,16,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+5),{0,0,height},{16,16,3},{0,16,height+48});
             break;
         case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+7),{0,0,height},{16,16,3},{16,16,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+14),{0,0,height},{16,16,3},{16,16,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+15),{0,0,height},{16,16,3},{16,16,height+48});
             break;
         case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+12),{0,0,height},{16,16,3},{16,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+24),{0,0,height},{16,16,3},{16,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+25),{0,0,height},{16,16,3},{16,16,height+48});
             break;
         case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+17),{0,0,height},{16,16,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+34),{0,0,height},{16,16,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+35),{0,0,height},{16,16,3},{0,0,height+48});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 64, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 64, 0x20);
         break;
     case 4:
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 5:
         switch (direction)
         {
         case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+3),{0,0,height},{16,32,3},{16,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+6),{0,0,height},{16,32,3},{16,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+7),{0,0,height},{32,32,1},{16,0,height+48});
             break;
         case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+8),{0,0,height},{16,32,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+16),{0,0,height},{16,32,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+17),{0,0,height},{1,32,32},{31,0,height});
             break;
         case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+13),{0,0,height},{16,32,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+26),{0,0,height},{16,32,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+27),{0,0,height},{1,32,32},{31,0,height});
             break;
         case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+18),{0,0,height},{16,32,3},{16,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+36),{0,0,height},{16,32,3},{16,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+37),{0,0,height},{32,32,1},{0,0,height+48});
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 6:
         switch (direction)
         {
         case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+4),{0,0,height},{20,32,3},{6,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+8),{0,0,height},{20,32,3},{6,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+9),{0,0,height},{1,32,32},{31,0,height});
             break;
         case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+9),{0,0,height},{20,32,3},{6,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+18),{0,0,height},{20,32,3},{6,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+19),{0,0,height},{1,32,32},{31,0,height});
             break;
         case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+14),{0,0,height},{20,32,3},{6,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+28),{0,0,height},{20,32,3},{6,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+29),{0,0,height},{1,32,32},{31,0,height});
             break;
         case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+19),{0,0,height},{20,32,3},{6,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+38),{0,0,height},{20,32,3},{6,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+39),{0,0,height},{1,32,32},{31,0,height});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
         switch (direction)
         {
         case 2:
-            paint_util_push_tunnel_right(session, height + 8, TUNNEL_SQUARE_8);
+            PaintUtilPushTunnelRight(session, height + 8, TUNNEL_SQUARE_8);
             break;
         case 3:
-            paint_util_push_tunnel_left(session, height + 8, TUNNEL_SQUARE_8);
+            PaintUtilPushTunnelLeft(session, height + 8, TUNNEL_SQUARE_8);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     }
 }
 
-static void TrackRightQuarterTurn5_Up25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                         uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRightQuarterTurn5_Up25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                         uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -4172,139 +4205,159 @@ static void TrackRightQuarterTurn5_Up25(paint_session& session, const Ride& ride
         switch (direction)
         {
         case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+20),{0,0,height},{32,20,3},{0,6,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+40),{0,0,height},{32,20,3},{0,6,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+41),{0,0,height},{32,20,3},{0,6,height});
             break;
         case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+25),{0,0,height},{32,20,3},{0,6,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+50),{0,0,height},{32,20,3},{0,6,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+51),{0,0,height},{32,20,3},{0,6,height});
             break;
         case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+30),{0,0,height},{32,20,3},{0,6,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+60),{0,0,height},{32,20,3},{0,6,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+61),{0,0,height},{32,20,3},{0,6,height});
             break;
         case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+35),{0,0,height},{32,20,3},{0,6,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+70),{0,0,height},{32,20,3},{0,6,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+71),{0,0,height},{32,20,3},{0,6,height});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
         if (direction == 0 || direction == 3)
         {
-            paint_util_push_tunnel_rotated(session, direction, height - 8, TUNNEL_SQUARE_7);
+            PaintUtilPushTunnelRotated(session, direction, height - 8, TUNNEL_SQUARE_7);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 1:
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 2:
         switch (direction)
         {
         case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+21),{0,0,height},{32,16,3},{0,16,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+42),{0,0,height},{32,16,3},{0,16,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+43),{0,0,height},{32,16,3},{0,16,height});
             break;
         case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+26),{0,0,height},{32,16,3},{0,16,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+52),{0,0,height},{32,16,3},{0,16,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+53),{0,0,height},{32,16,3},{0,16,height});
             break;
         case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+31),{0,0,height},{32,16,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+62),{0,0,height},{32,16,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+63),{0,0,height},{32,16,3});
             break;
         case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+36),{0,0,height},{32,16,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+72),{0,0,height},{32,16,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+73),{0,0,height},{32,16,3});
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 3:
         switch (direction)
         {
         case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+22),{0,0,height},{16,16,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+44),{0,0,height},{16,16,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+45),{0,0,height},{16,16,3});
             break;
         case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+27),{0,0,height},{16,16,3},{16,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+54),{0,0,height},{16,16,3},{16,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+55),{0,0,height},{16,16,3},{16,0,height});
             break;
         case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+32),{0,0,height},{16,16,3},{16,16,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+64),{0,0,height},{16,16,3},{16,16,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+65),{0,0,height},{16,16,3},{16,16,height});
             break;
         case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+37),{0,0,height},{16,16,3},{0,16,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+74),{0,0,height},{16,16,3},{0,16,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+75),{0,0,height},{16,16,3},{0,16,height});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 64, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 64, 0x20);
         break;
     case 4:
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 5:
         switch (direction)
         {
         case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+23),{0,0,height},{16,32,3},{16,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+46),{0,0,height},{16,32,3},{16,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+47),{0,0,height},{16,32,3},{16,0,height});
             break;
         case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+28),{0,0,height},{16,32,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+56),{0,0,height},{16,32,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+57),{0,0,height},{16,32,3});
             break;
         case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+33),{0,0,height},{16,32,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+66),{0,0,height},{16,32,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+67),{0,0,height},{16,32,3});
             break;
         case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+38),{0,0,height},{16,32,3},{16,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+76),{0,0,height},{16,32,3},{16,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+77),{0,0,height},{16,32,3},{16,0,height});
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 6:
         switch (direction)
         {
         case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+24),{0,0,height},{20,32,3},{6,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+48),{0,0,height},{20,32,3},{6,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+49),{0,0,height},{20,32,3},{6,0,height});
             break;
         case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+29),{0,0,height},{20,32,3},{6,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+58),{0,0,height},{20,32,3},{6,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+59),{0,0,height},{20,32,3},{6,0,height});
             break;
         case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+34),{0,0,height},{20,32,3},{6,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+68),{0,0,height},{20,32,3},{6,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+69),{0,0,height},{20,32,3},{6,0,height});
             break;
         case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+39),{0,0,height},{20,32,3},{6,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+78),{0,0,height},{20,32,3},{6,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+79),{0,0,height},{20,32,3},{6,0,height});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
         switch (direction)
         {
         case 0:
-            paint_util_push_tunnel_right(session, height + 8, TUNNEL_SQUARE_8);
+            PaintUtilPushTunnelRight(session, height + 8, TUNNEL_SQUARE_8);
             break;
         case 1:
-            paint_util_push_tunnel_left(session, height + 8, TUNNEL_SQUARE_8);
+            PaintUtilPushTunnelLeft(session, height + 8, TUNNEL_SQUARE_8);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     }
 }
 
-static void TrackLeftQuarterTurn5_Down25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                          uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackLeftQuarterTurn5_Down25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                          uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     trackSequence = mapLeftQuarterTurn5TilesToRightQuarterTurn5Tiles[trackSequence];
     TrackRightQuarterTurn5_Up25(session, ride, trackSequence, (direction + 1) & 3, height, trackElement);
 }
 
-static void TrackRightQuarterTurn5_Down25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                           uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRightQuarterTurn5_Down25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                           uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     trackSequence = mapLeftQuarterTurn5TilesToRightQuarterTurn5Tiles[trackSequence];
     TrackLeftQuarterTurn5_Up25(session, ride, trackSequence, (direction - 1) & 3, height, trackElement);
 }
 
-static void TrackLeftQuarterTurn1TileUp60(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                        uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackLeftQuarterTurn1TileUp60(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                        uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (direction)
     {
@@ -4325,12 +4378,12 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP_SMALL_CURVE+7),{0,0,height},{28,28,1},{2,2,height+99});
         break;
     }
-    track_paint_util_LeftQuarterTurn1Tiletile_tunnel(session, direction, height, -8, TUNNEL_SQUARE_7, +56, TUNNEL_SQUARE_8);
-    paint_util_set_segment_support_height(session, SEGMENTS_ALL, 0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 104, 0x20);
+    track_paint_util_left_quarter_turn_1_tile_tunnel(session, direction, height, -8, TUNNEL_SQUARE_7, +56, TUNNEL_SQUARE_8);
+    PaintUtilSetSegmentSupportHeight(session, SEGMENTS_ALL, 0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 104, 0x20);
 }
 
-static void TrackRightQuarterTurn1TileUp60(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                         uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRightQuarterTurn1TileUp60(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                         uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (direction)
     {
@@ -4351,22 +4404,23 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP_SMALL_CURVE+15),{0,0,height},{28,28,1},{2,2,height+99});
         break;
     }
-    track_paint_util_RightQuarterTurn1Tiletile_tunnel(session, direction, height, -8, TUNNEL_SQUARE_7, +56, TUNNEL_SQUARE_8);
-    paint_util_set_segment_support_height(session, SEGMENTS_ALL, 0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 104, 0x20);
+  track_paint_util_right_quarter_turn_1_tile_tunnel(session, direction, height, -8, TUNNEL_SQUARE_7, +56, TUNNEL_SQUARE_8);
+    PaintUtilSetSegmentSupportHeight(session, SEGMENTS_ALL, 0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 104, 0x20);
 }
 
-static void TrackLeftQuarterTurn1TileDown60(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                          uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackLeftQuarterTurn1TileDown60(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                          uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     TrackRightQuarterTurn1TileUp60(session, ride, trackSequence, (direction + 1) & 3, height, trackElement);
 }
 
-static void TrackRightQuarterTurn1TileDown60(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                           uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRightQuarterTurn1TileDown60(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                           uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     TrackLeftQuarterTurn1TileUp60(session, ride, trackSequence, (direction - 1) & 3, height, trackElement);
 }
 
-static void TrackLeftQuarterTurn1TileUp90(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                            uint8_t direction, int32_t height, const TrackElement& trackElement)
+/*
+static void TrackLeftQuarterTurn1TileUp90(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                            uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -4389,16 +4443,16 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
             break;
         }
         paint_util_set_vertical_tunnel(session, height + 96);
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 96, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 96, 0x20);
         break;
     case 1:
         break;
     }
 }
 
-static void TrackRightQuarterTurn1TileUp90(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                             uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRightQuarterTurn1TileUp90(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                             uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -4421,21 +4475,21 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
             break;
         }
         paint_util_set_vertical_tunnel(session, height + 96);
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 96, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 96, 0x20);
         break;
     case 1:
         break;
     }
 }
 
-static void TrackLeftQuarterTurn1TileDown90(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                              uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackLeftQuarterTurn1TileDown90(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                              uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     TrackRightQuarterTurn1TileUp90(session, ride, trackSequence, (direction + 1) & 3, height,trackElement);
 }
 
-static void TrackRightQuarterTurn1TileDown90(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                               uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRightQuarterTurn1TileDown90(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                               uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     TrackLeftQuarterTurn1TileUp90(session, ride, trackSequence, (direction - 1) & 3, height,trackElement);
 }
@@ -4443,7 +4497,7 @@ static void TrackRightQuarterTurn1TileDown90(paint_session& session, const Ride&
 
 
 
-static void TrackUp25ToLeftBankedUp25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                             uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackUp25ToLeftBankedUp25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                             uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (direction)
     {
@@ -4463,21 +4517,21 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
     if (track_paint_util_should_paint_supports(session.MapPosition))
     {
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
     if (direction == 0 || direction == 3)
     {
-        paint_util_push_tunnel_rotated(session, direction, height - 8, TUNNEL_SQUARE_7);
+        PaintUtilPushTunnelRotated(session, direction, height - 8, TUNNEL_SQUARE_7);
     }
     else
     {
-        paint_util_push_tunnel_rotated(session, direction, height + 8, TUNNEL_SQUARE_8);
+        PaintUtilPushTunnelRotated(session, direction, height + 8, TUNNEL_SQUARE_8);
     }
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 56, 0x20);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
 }
 
-static void TrackUp25ToRightBankedUp25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                              uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackUp25ToRightBankedUp25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                              uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (direction)
     {
@@ -4497,21 +4551,21 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
     if (track_paint_util_should_paint_supports(session.MapPosition))
     {
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
     if (direction == 0 || direction == 3)
     {
-        paint_util_push_tunnel_rotated(session, direction, height - 8, TUNNEL_SQUARE_7);
+        PaintUtilPushTunnelRotated(session, direction, height - 8, TUNNEL_SQUARE_7);
     }
     else
     {
-        paint_util_push_tunnel_rotated(session, direction, height + 8, TUNNEL_SQUARE_8);
+        PaintUtilPushTunnelRotated(session, direction, height + 8, TUNNEL_SQUARE_8);
     }
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 56, 0x20);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
 }
 
-static void TrackLeftBankedUp25ToUp25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                             uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackLeftBankedUp25ToUp25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                             uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (direction)
     {
@@ -4531,21 +4585,21 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
     if (track_paint_util_should_paint_supports(session.MapPosition))
     {
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
     if (direction == 0 || direction == 3)
     {
-        paint_util_push_tunnel_rotated(session, direction, height - 8, TUNNEL_SQUARE_7);
+        PaintUtilPushTunnelRotated(session, direction, height - 8, TUNNEL_SQUARE_7);
     }
     else
     {
-        paint_util_push_tunnel_rotated(session, direction, height + 8, TUNNEL_SQUARE_8);
+        PaintUtilPushTunnelRotated(session, direction, height + 8, TUNNEL_SQUARE_8);
     }
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 56, 0x20);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
 }
 
-static void TrackRightBankedUp25ToUp25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                              uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRightBankedUp25ToUp25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                              uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (direction)
     {
@@ -4565,41 +4619,41 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
     if (track_paint_util_should_paint_supports(session.MapPosition))
     {
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
     if (direction == 0 || direction == 3)
     {
-        paint_util_push_tunnel_rotated(session, direction, height - 8, TUNNEL_SQUARE_7);
+        PaintUtilPushTunnelRotated(session, direction, height - 8, TUNNEL_SQUARE_7);
     }
     else
     {
-        paint_util_push_tunnel_rotated(session, direction, height + 8, TUNNEL_SQUARE_8);
+        PaintUtilPushTunnelRotated(session, direction, height + 8, TUNNEL_SQUARE_8);
     }
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 56, 0x20);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
 }
 
-static void TrackLeftBankedDown25ToDown25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                                 uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackLeftBankedDown25ToDown25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                                 uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     TrackUp25ToRightBankedUp25(session, ride, trackSequence, (direction + 2) & 3, height,                                                      trackElement);
 }
 
-static void TrackRightBankedDown25ToDown25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                                  uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRightBankedDown25ToDown25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                                  uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     TrackUp25ToLeftBankedUp25(session, ride, trackSequence, (direction + 2) & 3, height,                                                     trackElement);
 }
 
-static void TrackDown25ToLeftBankedDown25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                                 uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackDown25ToLeftBankedDown25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                                 uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     TrackRightBankedUp25ToUp25(session, ride, trackSequence, (direction + 2) & 3, height,                                                      trackElement);
 }
 
-static void TrackDown25ToRightBankedDown25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                                  uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackDown25ToRightBankedDown25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                                  uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     TrackLeftBankedUp25ToUp25(session, ride, trackSequence, (direction + 2) & 3, height,                                                     trackElement);
 }
 
-static void TrackLeftBankedFlatToLeftBankedUp25(paint_session& session, const Ride& ride,                                                                    uint8_t trackSequence, uint8_t direction, int32_t height,                                                                    const TrackElement& trackElement)
+static void TrackLeftBankedFlatToLeftBankedUp25(PaintSession& session, const Ride& ride,                                                                    uint8_t trackSequence, uint8_t direction, int32_t height,                                                                    const TrackElement& trackElement)
 {
     switch (direction)
     {
@@ -4618,21 +4672,21 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
     if (track_paint_util_should_paint_supports(session.MapPosition))
     {
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 3, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 3, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
     if (direction == 0 || direction == 3)
     {
-        paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+        PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
     }
     else
     {
-        paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_8);
+        PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_8);
     }
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 48, 0x20);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
 }
 
-static void TrackRightBankedFlatToRightBankedUp25(paint_session& session, const Ride& ride,                                                                      uint8_t trackSequence, uint8_t direction, int32_t height,                                                                      const TrackElement& trackElement)
+static void TrackRightBankedFlatToRightBankedUp25(PaintSession& session, const Ride& ride,                                                                      uint8_t trackSequence, uint8_t direction, int32_t height,                                                                      const TrackElement& trackElement)
 {
     switch (direction)
     {
@@ -4651,21 +4705,21 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
     if (track_paint_util_should_paint_supports(session.MapPosition))
     {
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 3, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 3, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
     if (direction == 0 || direction == 3)
     {
-        paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+        PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
     }
     else
     {
-        paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_8);
+        PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_8);
     }
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 48, 0x20);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
 }
 
-static void TrackLeftBankedUp25ToLeftBankedFlat(paint_session& session, const Ride& ride,                                                                    uint8_t trackSequence, uint8_t direction, int32_t height,                                                                    const TrackElement& trackElement)
+static void TrackLeftBankedUp25ToLeftBankedFlat(PaintSession& session, const Ride& ride,                                                                    uint8_t trackSequence, uint8_t direction, int32_t height,                                                                    const TrackElement& trackElement)
 {
     switch (direction)
     {
@@ -4684,21 +4738,21 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
     if (track_paint_util_should_paint_supports(session.MapPosition))
     {
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
     if (direction == 0 || direction == 3)
     {
-        paint_util_push_tunnel_rotated(session, direction, height - 8, TUNNEL_SQUARE_FLAT);
+        PaintUtilPushTunnelRotated(session, direction, height - 8, TUNNEL_SQUARE_FLAT);
     }
     else
     {
-        paint_util_push_tunnel_rotated(session, direction, height + 8, TUNNEL_14);
+        PaintUtilPushTunnelRotated(session, direction, height + 8, TUNNEL_14);
     }
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 40, 0x20);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 40, 0x20);
 }
 
-static void TrackRightBankedUp25ToRightBankedFlat(paint_session& session, const Ride& ride,                                                                      uint8_t trackSequence, uint8_t direction, int32_t height,                                                                      const TrackElement& trackElement)
+static void TrackRightBankedUp25ToRightBankedFlat(PaintSession& session, const Ride& ride,                                                                      uint8_t trackSequence, uint8_t direction, int32_t height,                                                                      const TrackElement& trackElement)
 {
     switch (direction)
     {
@@ -4717,41 +4771,41 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
     if (track_paint_util_should_paint_supports(session.MapPosition))
     {
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
     if (direction == 0 || direction == 3)
     {
-        paint_util_push_tunnel_rotated(session, direction, height - 8, TUNNEL_SQUARE_FLAT);
+        PaintUtilPushTunnelRotated(session, direction, height - 8, TUNNEL_SQUARE_FLAT);
     }
     else
     {
-        paint_util_push_tunnel_rotated(session, direction, height + 8, TUNNEL_14);
+        PaintUtilPushTunnelRotated(session, direction, height + 8, TUNNEL_14);
     }
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 40, 0x20);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 40, 0x20);
 }
 
-static void TrackLeftBankedFlatToLeftBankedDown25(paint_session& session, const Ride& ride,                                                                      uint8_t trackSequence, uint8_t direction, int32_t height,                                                                      const TrackElement& trackElement)
+static void TrackLeftBankedFlatToLeftBankedDown25(PaintSession& session, const Ride& ride,                                                                      uint8_t trackSequence, uint8_t direction, int32_t height,                                                                      const TrackElement& trackElement)
 {
     TrackRightBankedUp25ToRightBankedFlat(session, ride, trackSequence, (direction + 2) & 3, height,                                                              trackElement);
 }
 
-static void TrackRightBankedFlatToRightBankedDown25(paint_session& session, const Ride& ride,                                                                        uint8_t trackSequence, uint8_t direction, int32_t height,                                                                        const TrackElement& trackElement)
+static void TrackRightBankedFlatToRightBankedDown25(PaintSession& session, const Ride& ride,                                                                        uint8_t trackSequence, uint8_t direction, int32_t height,                                                                        const TrackElement& trackElement)
 {
     TrackLeftBankedUp25ToLeftBankedFlat(session, ride, trackSequence, (direction + 2) & 3, height,                                                            trackElement);
 }
 
-static void TrackLeftBankedDown25ToLeftBankedFlat(paint_session& session, const Ride& ride,                                                                      uint8_t trackSequence, uint8_t direction, int32_t height,                                                                      const TrackElement& trackElement)
+static void TrackLeftBankedDown25ToLeftBankedFlat(PaintSession& session, const Ride& ride,                                                                      uint8_t trackSequence, uint8_t direction, int32_t height,                                                                      const TrackElement& trackElement)
 {
     TrackRightBankedFlatToRightBankedUp25(session, ride, trackSequence, (direction + 2) & 3, height,                                                              trackElement);
 }
 
-static void TrackRightBankedDown25ToRightBankedFlat(paint_session& session, const Ride& ride,                                                                        uint8_t trackSequence, uint8_t direction, int32_t height,                                                                        const TrackElement& trackElement)
+static void TrackRightBankedDown25ToRightBankedFlat(PaintSession& session, const Ride& ride,                                                                        uint8_t trackSequence, uint8_t direction, int32_t height,                                                                        const TrackElement& trackElement)
 {
     TrackLeftBankedFlatToLeftBankedUp25(session, ride, trackSequence, (direction + 2) & 3, height,                                                            trackElement);
 }
 
-static void TrackUp25LeftBanked(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                                int32_t height, const TrackElement& trackElement)
+static void TrackUp25LeftBanked(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                                int32_t height, const TrackElement& trackElement)
 {
     switch (direction)
     {
@@ -4770,21 +4824,21 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
     if (track_paint_util_should_paint_supports(session.MapPosition))
     {
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
     if (direction == 0 || direction == 3)
     {
-        paint_util_push_tunnel_rotated(session, direction, height - 8, TUNNEL_SQUARE_7);
+        PaintUtilPushTunnelRotated(session, direction, height - 8, TUNNEL_SQUARE_7);
     }
     else
     {
-        paint_util_push_tunnel_rotated(session, direction, height + 8, TUNNEL_SQUARE_8);
+        PaintUtilPushTunnelRotated(session, direction, height + 8, TUNNEL_SQUARE_8);
     }
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 56, 0x20);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
 }
 
-static void TrackUp25RightBanked(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                                 int32_t height, const TrackElement& trackElement)
+static void TrackUp25RightBanked(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                                 int32_t height, const TrackElement& trackElement)
 {
     switch (direction)
     {
@@ -4803,31 +4857,31 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
     if (track_paint_util_should_paint_supports(session.MapPosition))
     {
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
     if (direction == 0 || direction == 3)
     {
-        paint_util_push_tunnel_rotated(session, direction, height - 8, TUNNEL_SQUARE_7);
+        PaintUtilPushTunnelRotated(session, direction, height - 8, TUNNEL_SQUARE_7);
     }
     else
     {
-        paint_util_push_tunnel_rotated(session, direction, height + 8, TUNNEL_SQUARE_8);
+        PaintUtilPushTunnelRotated(session, direction, height + 8, TUNNEL_SQUARE_8);
     }
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 56, 0x20);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
 }
 
-static void TrackDown25LeftBanked(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                  uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackDown25LeftBanked(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                  uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     TrackUp25RightBanked(session, ride, trackSequence, (direction + 2) & 3, height, trackElement);
 }
 
-static void TrackDown25RightBanked(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                   uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackDown25RightBanked(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                   uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     TrackUp25LeftBanked(session, ride, trackSequence, (direction + 2) & 3, height, trackElement);
 }
 
-static void TrackFlatToLeftBankedUp25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                        uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackFlatToLeftBankedUp25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                        uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (direction)
     {
@@ -4847,21 +4901,21 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
     if (track_paint_util_should_paint_supports(session.MapPosition))
     {
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 3, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 3, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
     if (direction == 0 || direction == 3)
     {
-        paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+        PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
     }
     else
     {
-        paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_8);
+        PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_8);
     }
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 48, 0x20);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
 }
 
-static void TrackFlatToRightBankedUp25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                         uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackFlatToRightBankedUp25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                         uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (direction)
     {
@@ -4881,21 +4935,21 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
     if (track_paint_util_should_paint_supports(session.MapPosition))
     {
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 3, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 3, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
     if (direction == 0 || direction == 3)
     {
-        paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+        PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
     }
     else
     {
-        paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_8);
+        PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_8);
     }
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 48, 0x20);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
 }
 
-static void TrackLeftBankedUp25ToFlat(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                        uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackLeftBankedUp25ToFlat(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                        uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (direction)
     {
@@ -4915,21 +4969,21 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
     if (track_paint_util_should_paint_supports(session.MapPosition))
     {
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
     if (direction == 0 || direction == 3)
     {
-        paint_util_push_tunnel_rotated(session, direction, height - 8, TUNNEL_SQUARE_FLAT);
+        PaintUtilPushTunnelRotated(session, direction, height - 8, TUNNEL_SQUARE_FLAT);
     }
     else
     {
-        paint_util_push_tunnel_rotated(session, direction, height + 8, TUNNEL_14);
+        PaintUtilPushTunnelRotated(session, direction, height + 8, TUNNEL_14);
     }
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 40, 0x20);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 40, 0x20);
 }
 
-static void TrackRightBankedUp25ToFlat(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                         uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRightBankedUp25ToFlat(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                         uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (direction)
     {
@@ -4949,41 +5003,41 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
     if (track_paint_util_should_paint_supports(session.MapPosition))
     {
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
     if (direction == 0 || direction == 3)
     {
-        paint_util_push_tunnel_rotated(session, direction, height - 8, TUNNEL_SQUARE_FLAT);
+        PaintUtilPushTunnelRotated(session, direction, height - 8, TUNNEL_SQUARE_FLAT);
     }
     else
     {
-        paint_util_push_tunnel_rotated(session, direction, height + 8, TUNNEL_14);
+        PaintUtilPushTunnelRotated(session, direction, height + 8, TUNNEL_14);
     }
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 40, 0x20);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 40, 0x20);
 }
 
-static void TrackFlatToLeftBankedDown25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                          uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackFlatToLeftBankedDown25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                          uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     TrackRightBankedUp25ToFlat(session, ride, trackSequence, (direction + 2) & 3, height, trackElement);
 }
 
-static void TrackFlatToRightBankedDown25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                           uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackFlatToRightBankedDown25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                           uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     TrackLeftBankedUp25ToFlat(session, ride, trackSequence, (direction + 2) & 3, height, trackElement);
 }
 
-static void TrackLeftBankedDown25ToFlat(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                          uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackLeftBankedDown25ToFlat(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                          uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     TrackFlatToRightBankedUp25(session, ride, trackSequence, (direction + 2) & 3, height, trackElement);
 }
 
-static void TrackRightBankedDown25ToFlat(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                           uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRightBankedDown25ToFlat(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                           uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     TrackFlatToLeftBankedUp25(session, ride, trackSequence, (direction + 2) & 3, height, trackElement);
 }
 
-static void TrackLeftBankedQuarterTurn3TilesUp25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                               uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackLeftBankedQuarterTurn3TilesUp25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                               uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -5003,20 +5057,20 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE_BANKED+6),{0,6,height},{32,20,3});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
         if (direction == 0 || direction == 3)
         {
-            paint_util_push_tunnel_rotated(session, direction, height - 8, TUNNEL_SQUARE_7);
+            PaintUtilPushTunnelRotated(session, direction, height - 8, TUNNEL_SQUARE_7);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 1:
-        paint_util_set_general_support_height(session, height + 56, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
         break;
     case 2:
-        paint_util_set_general_support_height(session, height + 56, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
         break;
     case 3:
         switch (direction)
@@ -5034,24 +5088,24 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE_BANKED+7),{6,0,height},{20,32,3});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
         switch (direction)
         {
         case 2:
-            paint_util_push_tunnel_right(session, height + 8, TUNNEL_SQUARE_8);
+            PaintUtilPushTunnelRight(session, height + 8, TUNNEL_SQUARE_8);
             break;
         case 3:
-            paint_util_push_tunnel_left(session, height + 8, TUNNEL_SQUARE_8);
+            PaintUtilPushTunnelLeft(session, height + 8, TUNNEL_SQUARE_8);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     }
 }
 
-static void TrackRightBankedQuarterTurn3TilesUp25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                                uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRightBankedQuarterTurn3TilesUp25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                                uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -5071,70 +5125,70 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE_BANKED+14),{0,6,height},{32,20,3});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
         if (direction == 0 || direction == 3)
         {
-            paint_util_push_tunnel_rotated(session, direction, height - 8, TUNNEL_SQUARE_7);
+            PaintUtilPushTunnelRotated(session, direction, height - 8, TUNNEL_SQUARE_7);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 1:
-        paint_util_set_general_support_height(session, height + 56, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
         break;
     case 2:
-        paint_util_set_general_support_height(session, height + 56, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
         break;
     case 3:
         switch (direction)
         {
         case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE_BANKED+9),{6,0,height},{20,32,3});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE_BANKED+11),{6,0,height},{1,32,34},{27,0,height});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE_BANKED+13),{6,0,height},{1,32,34},{27,0,height});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 10, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 10, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 3:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE_BANKED+15),{6,0,height},{20,32,3});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         }
         switch (direction)
         {
         case 0:
-            paint_util_push_tunnel_right(session, height + 8, TUNNEL_SQUARE_8);
+            PaintUtilPushTunnelRight(session, height + 8, TUNNEL_SQUARE_8);
             break;
         case 1:
-            paint_util_push_tunnel_left(session, height + 8, TUNNEL_SQUARE_8);
+            PaintUtilPushTunnelLeft(session, height + 8, TUNNEL_SQUARE_8);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     }
 }
 
-static void TrackLeftBankedQuarterTurn3TilesDown25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                                 uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackLeftBankedQuarterTurn3TilesDown25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                                 uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     trackSequence = mapLeftQuarterTurn3TilesToRightQuarterTurn3Tiles[trackSequence];
     TrackRightBankedQuarterTurn3TilesUp25(session, ride, trackSequence, (direction + 1) & 3, height,                                                        trackElement);
 }
 
-static void TrackRightBankedQuarterTurn3TilesDown25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                                  uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRightBankedQuarterTurn3TilesDown25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                                  uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     trackSequence = mapLeftQuarterTurn3TilesToRightQuarterTurn3Tiles[trackSequence];
     TrackLeftBankedQuarterTurn3TilesUp25(session, ride, trackSequence, (direction - 1) & 3, height,                                                       trackElement);
 }
 
-static void TrackLeftBankedQuarterTurn5_Up25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                               uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackLeftBankedQuarterTurn5_Up25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                               uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -5154,17 +5208,17 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE_BANKED+15),{0,0,height},{32,20,3},{0,6,height});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
         if (direction == 0 || direction == 3)
         {
-            paint_util_push_tunnel_rotated(session, direction, height - 8, TUNNEL_SQUARE_7);
+            PaintUtilPushTunnelRotated(session, direction, height - 8, TUNNEL_SQUARE_7);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 1:
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 2:
         switch (direction)
@@ -5182,9 +5236,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE_BANKED+16),{0,0,height},{32,16,3},{0,16,height});
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 3:
         switch (direction)
@@ -5202,12 +5256,12 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE_BANKED+17),{0,0,height},{16,16,3});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 64, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 64, 0x20);
         break;
     case 4:
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 5:
         switch (direction)
@@ -5225,9 +5279,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE_BANKED+18),{0,0,height},{16,32,3},{16,0,height});
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 6:
         switch (direction)
@@ -5245,24 +5299,24 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE_BANKED+19),{0,0,height},{20,32,3},{6,0,height});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
         switch (direction)
         {
         case 2:
-            paint_util_push_tunnel_right(session, height + 8, TUNNEL_SQUARE_8);
+            PaintUtilPushTunnelRight(session, height + 8, TUNNEL_SQUARE_8);
             break;
         case 3:
-            paint_util_push_tunnel_left(session, height + 8, TUNNEL_SQUARE_8);
+            PaintUtilPushTunnelLeft(session, height + 8, TUNNEL_SQUARE_8);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     }
 }
 
-static void TrackRightBankedQuarterTurn5_Up25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                                uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRightBankedQuarterTurn5_Up25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                                uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -5282,17 +5336,17 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE_BANKED+35),{0,0,height},{32,20,3},{0,6,height});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
         if (direction == 0 || direction == 3)
         {
-            paint_util_push_tunnel_rotated(session, direction, height - 8, TUNNEL_SQUARE_7);
+            PaintUtilPushTunnelRotated(session, direction, height - 8, TUNNEL_SQUARE_7);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 1:
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 2:
         switch (direction)
@@ -5310,9 +5364,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE_BANKED+36),{0,0,height},{32,16,3});
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 3:
         switch (direction)
@@ -5330,12 +5384,12 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE_BANKED+37),{0,0,height},{16,16,3},{0,16,height});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 64, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 64, 0x20);
         break;
     case 4:
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 5:
         switch (direction)
@@ -5353,9 +5407,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE_BANKED+38),{0,0,height},{16,32,3},{16,0,height});
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     case 6:
         switch (direction)
@@ -5373,36 +5427,36 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE_BANKED+39),{0,0,height},{20,32,3},{6,0,height});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
         switch (direction)
         {
         case 0:
-            paint_util_push_tunnel_right(session, height + 8, TUNNEL_SQUARE_8);
+            PaintUtilPushTunnelRight(session, height + 8, TUNNEL_SQUARE_8);
             break;
         case 1:
-            paint_util_push_tunnel_left(session, height + 8, TUNNEL_SQUARE_8);
+            PaintUtilPushTunnelLeft(session, height + 8, TUNNEL_SQUARE_8);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 72, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
         break;
     }
 }
 
-static void TrackLeftBankedQuarterTurn5_Down25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                                 uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackLeftBankedQuarterTurn5_Down25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                                 uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     trackSequence = mapLeftQuarterTurn5TilesToRightQuarterTurn5Tiles[trackSequence];
     TrackRightBankedQuarterTurn5_Up25(session, ride, trackSequence, (direction + 1) & 3, height,                                                        trackElement);
 }
 
-static void TrackRightBankedQuarterTurn5_Down25(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                                  uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRightBankedQuarterTurn5_Down25(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                                  uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     trackSequence = mapLeftQuarterTurn5TilesToRightQuarterTurn5Tiles[trackSequence];
     TrackLeftBankedQuarterTurn5_Up25(session, ride, trackSequence, (direction - 1) & 3, height,                                                       trackElement);
 }
 
-static void Tracks_bend_left(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                      int32_t height, const TrackElement& trackElement)
+static void Tracks_bend_left(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                      int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -5422,25 +5476,25 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_S_BEND+7),{0,0,height},{32,20,3},{0,6,height});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
         if (direction == 0 || direction == 3)
         {
-            paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 1:
         switch (direction)
         {
         case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_S_BEND+1),{0,0,height},{32,26,3});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 5, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 5, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_S_BEND+5),{0,0,height},{32,26,3});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 6, 1, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 6, 1, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_S_BEND+2),{0,0,height},{32,26,3},{0,6,height});
@@ -5449,9 +5503,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_S_BEND+6),{0,0,height},{32,26,3},{0,6,height});
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 2:
         switch (direction)
@@ -5464,16 +5518,16 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_S_BEND+1),{0,0,height},{32,26,3});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 5, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 5, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 3:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_S_BEND+5),{0,0,height},{32,26,3});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 6, 1, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 6, 1, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 3:
         switch (direction)
@@ -5491,24 +5545,24 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_S_BEND+4),{0,0,height},{32,20,3},{0,6,height});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
         switch (direction)
         {
         case 1:
-            paint_util_push_tunnel_right(session, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRight(session, height, TUNNEL_SQUARE_FLAT);
             break;
         case 2:
-            paint_util_push_tunnel_left(session, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelLeft(session, height, TUNNEL_SQUARE_FLAT);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     }
 }
 
-static void Tracks_bend_right(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                       int32_t height, const TrackElement& trackElement)
+static void Tracks_bend_right(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                       int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -5528,25 +5582,25 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_S_BEND+15),{0,0,height},{32,20,3},{0,6,height});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
         if (direction == 0 || direction == 3)
         {
-            paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 1:
         switch (direction)
         {
         case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_S_BEND+9),{0,0,height},{32,26,3},{0,6,height});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 8, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 8, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_S_BEND+13),{0,0,height},{32,26,3},{0,6,height});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 7, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 7, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_S_BEND+10),{0,0,height},{32,26,3});
@@ -5555,9 +5609,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_S_BEND+14),{0,0,height},{32,26,3});
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 2:
         switch (direction)
@@ -5570,16 +5624,16 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_S_BEND+9),{0,0,height},{32,26,3},{0,6,height});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 8, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 8, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 3:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_S_BEND+13),{0,0,height},{32,26,3},{0,6,height});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 7, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 7, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 3:
         switch (direction)
@@ -5597,19 +5651,19 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_S_BEND+12),{0,0,height},{32,20,3},{0,6,height});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
         switch (direction)
         {
         case 1:
-            paint_util_push_tunnel_right(session, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRight(session, height, TUNNEL_SQUARE_FLAT);
             break;
         case 2:
-            paint_util_push_tunnel_left(session, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelLeft(session, height, TUNNEL_SQUARE_FLAT);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     }
 }
@@ -5617,7 +5671,7 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 
 
 
-static void TrackLefthalf_Bankedhelix_Upsmall(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                          uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackLefthalf_Bankedhelix_Upsmall(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                          uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -5638,17 +5692,17 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+11),{0,0,height},{32,20,3},{0,6,height});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
         if (direction == 0 || direction == 3)
         {
-            paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 1:
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 2:
         switch (direction)
@@ -5666,9 +5720,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+12),{0,0,height},{16,16,3},{16,16,height});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 3:
         switch (direction)
@@ -5687,19 +5741,19 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+13),{0,0,height},{20,32,3},{6,0,height});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
         switch (direction)
         {
         case 2:
-            paint_util_push_tunnel_right(session, height + 8, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRight(session, height + 8, TUNNEL_SQUARE_FLAT);
             break;
         case 3:
-            paint_util_push_tunnel_left(session, height + 8, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelLeft(session, height + 8, TUNNEL_SQUARE_FLAT);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 4:
         switch (direction)
@@ -5718,22 +5772,22 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+7),{0,0,height},{20,32,3},{6,0,height});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
         switch (direction)
         {
         case 0:
-            paint_util_push_tunnel_right(session, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRight(session, height, TUNNEL_SQUARE_FLAT);
             break;
         case 1:
-            paint_util_push_tunnel_left(session, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelLeft(session, height, TUNNEL_SQUARE_FLAT);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 5:
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 6:
         switch (direction)
@@ -5751,9 +5805,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+8),{0,0,height},{16,16,3},{16,0,height});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 7:
         switch (direction)
@@ -5772,19 +5826,19 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+10),{0,0,height},{32,1,26},{0,27,height});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
         if (direction == 0 || direction == 3)
         {
-            paint_util_push_tunnel_rotated(session, direction, height + 8, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRotated(session, direction, height + 8, TUNNEL_SQUARE_FLAT);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     }
 }
 
-static void TrackRighthalf_Bankedhelix_Upsmall(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                           uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRighthalf_Bankedhelix_Upsmall(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                           uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -5805,17 +5859,17 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+25),{0,0,height},{32,1,26},{0,27,height});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
         if (direction == 0 || direction == 3)
         {
-            paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 1:
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 2:
         switch (direction)
@@ -5833,9 +5887,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+26),{0,0,height},{16,16,3},{16,0,height});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 3:
         switch (direction)
@@ -5854,19 +5908,19 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+27),{0,0,height},{20,32,3},{6,0,height});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
         switch (direction)
         {
         case 0:
-            paint_util_push_tunnel_right(session, height + 8, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRight(session, height + 8, TUNNEL_SQUARE_FLAT);
             break;
         case 1:
-            paint_util_push_tunnel_left(session, height + 8, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelLeft(session, height + 8, TUNNEL_SQUARE_FLAT);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 4:
         switch (direction)
@@ -5885,22 +5939,22 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+14),{0,0,height},{20,32,3},{6,0,height});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
         switch (direction)
         {
         case 2:
-            paint_util_push_tunnel_right(session, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRight(session, height, TUNNEL_SQUARE_FLAT);
             break;
         case 3:
-            paint_util_push_tunnel_left(session, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelLeft(session, height, TUNNEL_SQUARE_FLAT);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 5:
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 6:
         switch (direction)
@@ -5918,9 +5972,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+15),{0,0,height},{16,16,3},{16,16,height});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 7:
         switch (direction)
@@ -5939,19 +5993,19 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+16),{0,0,height},{32,20,3},{0,6,height});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
         if (direction == 0 || direction == 3)
         {
-            paint_util_push_tunnel_rotated(session, direction, height + 8, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRotated(session, direction, height + 8, TUNNEL_SQUARE_FLAT);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     }
 }
 
-static void TrackLefthalf_Bankedhelix_Downsmall(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                            uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackLefthalf_Bankedhelix_Downsmall(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                            uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     if (trackSequence >= 4)
     {
@@ -5962,7 +6016,7 @@ static void TrackLefthalf_Bankedhelix_Downsmall(paint_session& session, const Ri
     TrackRighthalf_Bankedhelix_Upsmall(session, ride, trackSequence, (direction + 1) & 3, height, trackElement);
 }
 
-static void TrackRighthalf_Bankedhelix_Downsmall(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                             uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRighthalf_Bankedhelix_Downsmall(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                             uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     if (trackSequence >= 4)
     {
@@ -5973,7 +6027,7 @@ static void TrackRighthalf_Bankedhelix_Downsmall(paint_session& session, const R
     TrackLefthalf_Bankedhelix_Upsmall(session, ride, trackSequence, (direction - 1) & 3, height, trackElement);
 }
 
-static void TrackLefthalf_Bankedhelix_Uplarge(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                          uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackLefthalf_Bankedhelix_Uplarge(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                          uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -5994,17 +6048,17 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+17),{0,0,height},{32,20,3},{0,6,height});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 1, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 1, height, session.TrackColours[SCHEME_SUPPORTS]);
         if (direction == 0 || direction == 3)
         {
-            paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 1:
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 2:
         switch (direction)
@@ -6022,9 +6076,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+18),{0,0,height},{32,16,3},{0,16,height});
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 3:
         switch (direction)
@@ -6042,12 +6096,12 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+19),{0,0,height},{16,16,3},{0,0,height});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 4:
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 5:
         switch (direction)
@@ -6065,9 +6119,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+20),{0,0,height},{16,32,3},{16,0,height});
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 6:
         switch (direction)
@@ -6086,19 +6140,19 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+21),{0,0,height},{20,32,3},{6,0,height});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 7, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 7, height, session.TrackColours[SCHEME_SUPPORTS]);
         switch (direction)
         {
         case 2:
-            paint_util_push_tunnel_right(session, height + 8, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRight(session, height + 8, TUNNEL_SQUARE_FLAT);
             break;
         case 3:
-            paint_util_push_tunnel_left(session, height + 8, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelLeft(session, height + 8, TUNNEL_SQUARE_FLAT);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 7:
         switch (direction)
@@ -6117,22 +6171,22 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+11),{0,0,height},{20,32,3},{6,0,height});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 1, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 1, height, session.TrackColours[SCHEME_SUPPORTS]);
         switch (direction)
         {
         case 0:
-            paint_util_push_tunnel_right(session, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRight(session, height, TUNNEL_SQUARE_FLAT);
             break;
         case 1:
-            paint_util_push_tunnel_left(session, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelLeft(session, height, TUNNEL_SQUARE_FLAT);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 8:
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 9:
         switch (direction)
@@ -6150,9 +6204,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+12),{0,0,height},{16,32,3},{16,0,height});
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 10:
         switch (direction)
@@ -6170,12 +6224,12 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+13),{0,0,height},{16,16,3},{0,16,height});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 11:
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 12:
         switch (direction)
@@ -6193,9 +6247,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+14),{0,0,height},{32,16,3},{0,0,height});
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 13:
         switch (direction)
@@ -6214,18 +6268,18 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+16),{0,0,height},{32,1,26},{0,27,height});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 7, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 7, height, session.TrackColours[SCHEME_SUPPORTS]);
         if (direction == 0 || direction == 3)
         {
-            paint_util_push_tunnel_rotated(session, direction, height + 8, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRotated(session, direction, height + 8, TUNNEL_SQUARE_FLAT);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     }
 }
-static void TrackRighthalf_Bankedhelix_Uplarge(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                           uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRighthalf_Bankedhelix_Uplarge(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                           uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -6246,17 +6300,17 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+39),{0,0,height},{32,1,26},{0,27,height});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 1, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 1, height, session.TrackColours[SCHEME_SUPPORTS]);
         if (direction == 0 || direction == 3)
         {
-            paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 1:
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 2:
         switch (direction)
@@ -6274,9 +6328,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+40),{0,0,height},{32,16,3},{0,0,height});
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 3:
         switch (direction)
@@ -6294,12 +6348,12 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+41),{0,0,height},{16,16,3},{0,16,height});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 4:
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 5:
         switch (direction)
@@ -6317,43 +6371,43 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+42),{0,0,height},{16,32,3},{16,0,height});
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 6:
         switch (direction)
         {
         case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+26),{0,0,height},{20,32,3},{6,0,height});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 7, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 7, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+31),{0,0,height},{20,32,3},{6,0,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+32),{0,0,height},{1,32,26},{27,0,height});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 3, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 3, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+37),{0,0,height},{1,32,26},{27,0,height});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 7, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 7, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 3:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+43),{0,0,height},{20,32,3},{6,0,height});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 7, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 7, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         }
         switch (direction)
         {
         case 0:
-            paint_util_push_tunnel_right(session, height + 8, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRight(session, height + 8, TUNNEL_SQUARE_FLAT);
             break;
         case 1:
-            paint_util_push_tunnel_left(session, height + 8, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelLeft(session, height + 8, TUNNEL_SQUARE_FLAT);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 7:
         switch (direction)
@@ -6372,22 +6426,22 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+22),{0,0,height},{20,32,3},{6,0,height});
             break;
         }
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 1, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 1, height, session.TrackColours[SCHEME_SUPPORTS]);
         switch (direction)
         {
         case 2:
-            paint_util_push_tunnel_right(session, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRight(session, height, TUNNEL_SQUARE_FLAT);
             break;
         case 3:
-            paint_util_push_tunnel_left(session, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelLeft(session, height, TUNNEL_SQUARE_FLAT);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 8:
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 9:
         switch (direction)
@@ -6405,9 +6459,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+23),{0,0,height},{16,32,3},{16,0,height});
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 10:
         switch (direction)
@@ -6425,12 +6479,12 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+24),{0,0,height},{16,16,3},{0,0,height});
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 11:
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 12:
         switch (direction)
@@ -6448,9 +6502,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+25),{0,0,height},{32,16,3},{0,16,height});
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 13:
         switch (direction)
@@ -6458,33 +6512,33 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+31),{0,0,height},{32,20,3},{0,6,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+32),{0,0,height},{32,1,26},{0,27,height});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 3, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 3, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+37),{0,0,height},{32,1,26},{0,27,height});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 7, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 7, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+43),{0,0,height},{32,20,3},{0,6,height});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 7, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 7, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 3:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+26),{0,0,height},{32,20,3},{0,6,height});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 7, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 7, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         }
         if (direction == 0 || direction == 3)
         {
-            paint_util_push_tunnel_rotated(session, direction, height + 8, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRotated(session, direction, height + 8, TUNNEL_SQUARE_FLAT);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     }
 }
 
-static void TrackLefthalf_Bankedhelix_Downlarge(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                            uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackLefthalf_Bankedhelix_Downlarge(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                            uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     if (trackSequence >= 7)
     {
@@ -6495,7 +6549,7 @@ static void TrackLefthalf_Bankedhelix_Downlarge(paint_session& session, const Ri
     TrackRighthalf_Bankedhelix_Uplarge(session, ride, trackSequence, (direction + 1) & 3, height, trackElement);
 }
 
-static void TrackRighthalf_Bankedhelix_Downlarge(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                             uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRighthalf_Bankedhelix_Downlarge(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                             uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     if (trackSequence >= 7)
     {
@@ -6508,7 +6562,7 @@ static void TrackRighthalf_Bankedhelix_Downlarge(paint_session& session, const R
 
 */
 
-static void TrackLeftTwistDownToUp(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                          uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackLeftTwistDownToUp(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                          uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -6518,31 +6572,31 @@ static void TrackLeftTwistDownToUp(paint_session& session, const Ride& ride, uin
         case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+0),{0,0,height},{32,20,3},{0,6,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+1),{0,0,height},{32,20,0},{0,6,height+32});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+6),{0,0,height},{32,20,3},{0,6,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+7),{0,0,height},{32,20,0},{0,6,height+32});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+12),{0,0,height},{32,20,3},{0,6,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+13),{0,0,height},{32,20,0},{0,6,height+32});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 3:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+18),{0,0,height},{32,20,3},{0,6,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+19),{0,0,height},{32,20,0},{0,6,height+32});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         }
         if (direction == 0 || direction == 3)
         {
-            paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 1:
         switch (direction)
@@ -6564,9 +6618,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+21),{0,0,height},{32,20,0},{0,6,height+32});
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
         break;
     case 2:
         switch (direction)
@@ -6591,20 +6645,20 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         switch (direction)
         {
         case 1:
-            paint_util_push_tunnel_right(session, height, TUNNEL_SQUARE_INVERTED_9);
+            PaintUtilPushTunnelRight(session, height, TUNNEL_SQUARE_INVERTED_9);
             break;
         case 2:
-            paint_util_push_tunnel_left(session, height, TUNNEL_SQUARE_INVERTED_9);
+            PaintUtilPushTunnelLeft(session, height, TUNNEL_SQUARE_INVERTED_9);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
         break;
     }
 }
 
-static void TrackRightTwistDownToUp(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                           uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRightTwistDownToUp(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                           uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -6614,31 +6668,31 @@ static void TrackRightTwistDownToUp(paint_session& session, const Ride& ride, ui
         case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+24),{0,0,height},{32,20,3},{0,6,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+25),{0,0,height},{32,20,0},{0,6,height+32});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 0, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+30),{0,0,height},{32,20,3},{0,6,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+31),{0,0,height},{32,20,0},{0,6,height+32});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 2, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+36),{0,0,height},{32,20,3},{0,6,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+37),{0,0,height},{32,20,0},{0,6,height+32});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 3, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 3:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+42),{0,0,height},{32,20,3},{0,6,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+43),{0,0,height},{32,20,0},{0,6,height+32});
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 1, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         }
         if (direction == 0 || direction == 3)
         {
-            paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 32, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
         break;
     case 1:
         switch (direction)
@@ -6660,9 +6714,9 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+45),{0,0,height},{32,20,0},{0,6,height+32});
             break;
         }
-        paint_util_set_segment_support_height(
-            session,            paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session,            PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
         break;
     case 2:
         switch (direction)
@@ -6687,31 +6741,31 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         switch (direction)
         {
         case 1:
-            paint_util_push_tunnel_right(session, height, TUNNEL_SQUARE_INVERTED_9);
+            PaintUtilPushTunnelRight(session, height, TUNNEL_SQUARE_INVERTED_9);
             break;
         case 2:
-            paint_util_push_tunnel_left(session, height, TUNNEL_SQUARE_INVERTED_9);
+            PaintUtilPushTunnelLeft(session, height, TUNNEL_SQUARE_INVERTED_9);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
         break;
     }
 }
 
-static void TrackLeftTwistUpToDown(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                          uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackLeftTwistUpToDown(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                          uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     TrackLeftTwistDownToUp(session, ride, 2 - trackSequence, (direction + 2) & 3, height,                                                         trackElement);
 }
 
-static void TrackRightTwistUpToDown(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                           uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRightTwistUpToDown(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                           uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     TrackRightTwistDownToUp(session, ride, 2 - trackSequence, (direction + 2) & 3, height,                                                          trackElement);
 }
 
 static void TrackHalfLoopUp(
-    paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,    const TrackElement& trackElement)
+    PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,    const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -6735,14 +6789,14 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_HALF_LOOP+25),{0,6,height},{32,1,33},{0,27,height});
                     break;
             }
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
             if (direction == 0 || direction == 3)
             {
-                paint_util_push_tunnel_rotated(session, direction, height - 8, TUNNEL_1);
+                PaintUtilPushTunnelRotated(session, direction, height - 8, TUNNEL_1);
             }
-            paint_util_set_segment_support_height(
-                session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-            paint_util_set_general_support_height(session, height + 56, 0x20);
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
             break;
         case 1:
             switch (direction)
@@ -6750,30 +6804,30 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
                 case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_HALF_LOOP+2),{0,0,height},{32,20,3},{0,6,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_HALF_LOOP+3),{0,0,height},{32,1,63},{0,27,height});
-                    metal_a_supports_paint_setup(
+                    MetalASupportsPaintSetup(
                         session, METAL_SUPPORTS_TUBES, 4, 20, height, session.TrackColours[SCHEME_SUPPORTS]);
                     break;
                 case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_HALF_LOOP+10),{0,14,height},{32,20,3},{0,6,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_HALF_LOOP+11),{0,14,height},{3,1,63},{0,27,height});
-                    metal_a_supports_paint_setup(
+                    MetalASupportsPaintSetup(
                         session, METAL_SUPPORTS_TUBES, 4, 15, height, session.TrackColours[SCHEME_SUPPORTS]);
                     break;
                 case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_HALF_LOOP+18),{0,6,height},{32,20,3},{0,6,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_HALF_LOOP+19),{0,6,height},{32,1,63},{0,27,height});
-                    metal_a_supports_paint_setup(
+                    MetalASupportsPaintSetup(
                         session, METAL_SUPPORTS_TUBES, 4, 16, height, session.TrackColours[SCHEME_SUPPORTS]);
                     break;
                 case 3:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_HALF_LOOP+26),{0,6,height},{32,20,3});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_HALF_LOOP+27),{0,6,height},{32,1,63},{0,27,height});
-                    metal_a_supports_paint_setup(
+                    MetalASupportsPaintSetup(
                         session, METAL_SUPPORTS_TUBES, 4, 16, height, session.TrackColours[SCHEME_SUPPORTS]);
                     break;
             }
-            paint_util_set_segment_support_height(session, SEGMENTS_ALL, 0xFFFF, 0);
-            paint_util_set_general_support_height(session, height + 72, 0x20);
+            PaintUtilSetSegmentSupportHeight(session, SEGMENTS_ALL, 0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 72, 0x20);
             break;
         case 2:
             switch (direction)
@@ -6795,10 +6849,10 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_HALF_LOOP+29),{16,16,height},{32,1,119},{15,6,height});
                     break;
             }
-            paint_util_set_segment_support_height(
-                session,                paint_util_rotate_segments(
+            PaintUtilSetSegmentSupportHeight(
+                session,                PaintUtilRotateSegments(
                     SEGMENT_B8 | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),                0xFFFF, 0);
-            paint_util_set_general_support_height(session, height + 168, 0x20);
+            PaintUtilSetGeneralSupportHeight(session, height + 168, 0x20);
             break;
         case 3:
             switch (direction)
@@ -6822,22 +6876,22 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
             }
             if (direction == 0 || direction == 3)
             {
-                paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_0);
+                PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_0);
             }
-            paint_util_set_segment_support_height(
-                session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-            paint_util_set_general_support_height(session, height + 48, 0x20);
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
             break;
     }
 }
 
 static void TrackHalfLoopDown(
-    paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,    const TrackElement& trackElement)
+    PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,    const TrackElement& trackElement)
 {
     TrackHalfLoopUp(session, ride, 3 - trackSequence, direction, height, trackElement);
 }
 /*
-static void Trackbrakes(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,                                 const TrackElement& trackElement)
+static void Trackbrakes(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction, int32_t height,                                 const TrackElement& trackElement)
 {
     switch (direction)
     {
@@ -6852,49 +6906,49 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
     if (track_paint_util_should_paint_supports(session.MapPosition))
     {
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
-    paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 32, 0x20);
+    PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
 }
 
-static void Trackon_ride_photo(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                        int32_t height, const TrackElement& trackElement)
+static void Trackon_ride_photo(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                        int32_t height, const TrackElement& trackElement)
 {
     switch (direction)
     {
     case 0:
 PaintAddImageAsParentRotated(session,direction,IMAGE_TYPE_REMAP|SPR_STATION_BASE_D,0,0,32,32,1,height);
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 5, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 8, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 5, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 8, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_FLAT+0),{0,0,height},{32,20,0},{0,6,height+3});
         break;
     case 1:
 PaintAddImageAsParentRotated(session,direction,IMAGE_TYPE_REMAP|SPR_STATION_BASE_D,0,0,32,32,1,height);
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 6, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 7, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 6, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 7, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_FLAT+1),{0,0,height},{32,20,0},{0,6,height+3});
         break;
     case 2:
 PaintAddImageAsParentRotated(session,direction,IMAGE_TYPE_REMAP|SPR_STATION_BASE_D,0,0,32,32,1,height);
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 5, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 8, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 5, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 8, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_FLAT+0),{0,0,height},{32,20,0},{0,6,height+3});
         break;
     case 3:
 PaintAddImageAsParentRotated(session,direction,IMAGE_TYPE_REMAP|SPR_STATION_BASE_D,0,0,32,32,1,height);
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 6, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 7, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 6, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 7, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_FLAT+1),{0,0,height},{32,20,0},{0,6,height+3});
         break;
     }
     track_paint_util_onride_phoTopaint(session, direction, height + 3, trackElement);
-    paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
-    paint_util_set_segment_support_height(session, SEGMENTS_ALL, 0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 48, 0x20);
+    PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+    PaintUtilSetSegmentSupportHeight(session, SEGMENTS_ALL, 0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
 }
 
-static void TrackFlatToUp60long_base(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                      uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackFlatToUp60long_base(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                      uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -6916,15 +6970,15 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
             }
             if (track_paint_util_should_paint_supports(session.MapPosition))
             {
-                metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 3, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 3, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
             }
         if (direction == 0 || direction == 3)
         {
-            paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
         break;
     case 1:
             switch (direction)
@@ -6944,11 +6998,11 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
             }
             if (track_paint_util_should_paint_supports(session.MapPosition))
             {
-                metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 5, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 5, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
             }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 48, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
         break;
     case 2:
             switch (direction)
@@ -6968,11 +7022,11 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
             }
             if (track_paint_util_should_paint_supports(session.MapPosition))
             {
-                metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 7, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 7, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
             }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 64, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 64, 0x20);
         break;
     case 3:
             switch (direction)
@@ -6992,24 +7046,24 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
             }
             if (track_paint_util_should_paint_supports(session.MapPosition))
             {
-                metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 12, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
+                MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 12, height,                                             session.TrackColours[SCHEME_SUPPORTS]);
             }
         switch (direction)
         {
         case 1:
-            paint_util_push_tunnel_right(session, height + 24, TUNNEL_SQUARE_8);
+            PaintUtilPushTunnelRight(session, height + 24, TUNNEL_SQUARE_8);
             break;
         case 2:
-            paint_util_push_tunnel_left(session, height + 24, TUNNEL_SQUARE_8);
+            PaintUtilPushTunnelLeft(session, height + 24, TUNNEL_SQUARE_8);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 80, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 80, 0x20);
         break;
     }
 }
-static void TrackUp60ToFlat_long_base(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                      uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackUp60ToFlat_long_base(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                      uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -7031,15 +7085,15 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         }
         if (track_paint_util_should_paint_supports(session.MapPosition))
         {
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 16, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 16, height, session.TrackColours[SCHEME_SUPPORTS]);
         }
         if (direction == 0 || direction == 3)
         {
-            paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_7);
+            PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_7);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 80, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 80, 0x20);
         break;
     case 1:
         switch (direction)
@@ -7059,11 +7113,11 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         }
         if (track_paint_util_should_paint_supports(session.MapPosition))
         {
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 12, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 12, height, session.TrackColours[SCHEME_SUPPORTS]);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 80, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 80, 0x20);
         break;
     case 2:
         switch (direction)
@@ -7083,11 +7137,11 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         }
         if (track_paint_util_should_paint_supports(session.MapPosition))
         {
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 9, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 9, height, session.TrackColours[SCHEME_SUPPORTS]);
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 56, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 56, 0x20);
         break;
     case 3:
         switch (direction)
@@ -7107,35 +7161,35 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         }
         if (track_paint_util_should_paint_supports(session.MapPosition))
         {
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 5, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 5, height, session.TrackColours[SCHEME_SUPPORTS]);
         }
         switch (direction)
         {
         case 1:
-            paint_util_push_tunnel_right(session, height + 8, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelRight(session, height + 8, TUNNEL_SQUARE_FLAT);
             break;
         case 2:
-            paint_util_push_tunnel_left(session, height + 8, TUNNEL_SQUARE_FLAT);
+            PaintUtilPushTunnelLeft(session, height + 8, TUNNEL_SQUARE_FLAT);
             break;
         }
-        paint_util_set_segment_support_height(
-            session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-        paint_util_set_general_support_height(session, height + 40, 0x20);
+        PaintUtilSetSegmentSupportHeight(
+            session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+        PaintUtilSetGeneralSupportHeight(session, height + 40, 0x20);
         break;
     }
 }
 
-static void TrackFlatToDown60long_base(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                        uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackFlatToDown60long_base(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                        uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     TrackUp60ToFlat_long_base(session, ride, 3 - trackSequence, (direction + 2) & 3, height, trackElement);
 }
 
-static void TrackDown60ToFlat_long_base(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                         uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackDown60ToFlat_long_base(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                         uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     TrackFlatToUp60long_base(session, ride, 3 - trackSequence, (direction + 2) & 3, height, trackElement);
 }
 
-static void Trackblock_brakes(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                       int32_t height, const TrackElement& trackElement)
+static void Trackblock_brakes(PaintSession& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                       int32_t height, const TrackElement& trackElement)
 {
     switch (direction)
     {
@@ -7150,15 +7204,15 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
     if (track_paint_util_should_paint_supports(session.MapPosition))
     {
-        metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
     }
-    paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
-    paint_util_set_segment_support_height(session, paint_util_rotate_segments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
-    paint_util_set_general_support_height(session, height + 32, 0x20);
+    PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+    PaintUtilSetSegmentSupportHeight(session, PaintUtilRotateSegments(SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction),                                          0xFFFF, 0);
+    PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
 }
 
 static void TrackLeftBankToLeftQuarterTurn3TilesUp25(
-    paint_session& session, ride_id_t ride, uint8_t trackSequence, uint8_t direction, int32_t height,    const TileElement* trackElement)
+    PaintSession& session, ride_id_t ride, uint8_t trackSequence, uint8_t direction, int32_t height,    const TileElement* trackElement)
 {
     switch (trackSequence)
     {
@@ -7179,20 +7233,20 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_TURN_BANK_TRANSITION+7),{0,6,height},{32,20,3});
                     break;
             }
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             if (direction == 0 || direction == 3)
             {
-                paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+                PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
             }
-            paint_util_set_segment_support_height(
-                session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-            paint_util_set_general_support_height(session, height + 64, 0x20);
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 64, 0x20);
             break;
         case 1:
-            paint_util_set_general_support_height(session, height + 48, 0x20);
+            PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
             break;
         case 2:
-            paint_util_set_general_support_height(session, height + 48, 0x20);
+            PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
             break;
         case 3:
             switch (direction)
@@ -7210,25 +7264,25 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_TURN_BANK_TRANSITION+8),{6,0,height},{20,32,3},{0,6,height-6});
                     break;
             }
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             switch (direction)
             {
                 case 2:
-                    paint_util_push_tunnel_right(session, height, TUNNEL_SQUARE_8);
+                    PaintUtilPushTunnelRight(session, height, TUNNEL_SQUARE_8);
                     break;
                 case 3:
-                    paint_util_push_tunnel_left(session, height, TUNNEL_SQUARE_8);
+                    PaintUtilPushTunnelLeft(session, height, TUNNEL_SQUARE_8);
                     break;
             }
-            paint_util_set_segment_support_height(
-                session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
-            paint_util_set_general_support_height(session, height + 64, 0x20);
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 64, 0x20);
             break;
     }
 }
 
 static void TrackRightBankToRightQuarterTurn3TilesUp25(
-    paint_session& session, ride_id_t ride, uint8_t trackSequence, uint8_t direction, int32_t height,    const TileElement* trackElement)
+    PaintSession& session, ride_id_t ride, uint8_t trackSequence, uint8_t direction, int32_t height,    const TileElement* trackElement)
 {
     switch (trackSequence)
     {
@@ -7249,59 +7303,59 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_TURN_BANK_TRANSITION+16),{0,6,height},{32,20,3});
                     break;
             }
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             if (direction == 0 || direction == 3)
             {
-                paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_FLAT);
+                PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
             }
-            paint_util_set_segment_support_height(
-                session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-            paint_util_set_general_support_height(session, height + 64, 0x20);
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 64, 0x20);
             break;
         case 1:
-            paint_util_set_general_support_height(session, height + 48, 0x20);
+            PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
             break;
         case 2:
-            paint_util_set_general_support_height(session, height + 48, 0x20);
+            PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
             break;
         case 3:
             switch (direction)
             {
                 case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_TURN_BANK_TRANSITION+10),{6,0,height},{20,32,3},{0,6,height-6});
-                    metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                    MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
                     break;
                 case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_TURN_BANK_TRANSITION+12),{6,0,height},{20,32,3},{0,6,height-6});
-                    metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                    MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
                     break;
                 case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_TURN_BANK_TRANSITION+15),{6,0,height},{20,32,3},{0,6,height-6});
-                    metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
+                    MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
                     break;
                 case 3:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_TURN_BANK_TRANSITION+17),{6,0,height},{20,32,3},{0,6,height-6});
-                    metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                    MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
                     break;
             }
             switch (direction)
             {
                 case 0:
-                    paint_util_push_tunnel_right(session, height, TUNNEL_SQUARE_8);
+                    PaintUtilPushTunnelRight(session, height, TUNNEL_SQUARE_8);
                     break;
                 case 1:
-                    paint_util_push_tunnel_left(session, height, TUNNEL_SQUARE_8);
+                    PaintUtilPushTunnelLeft(session, height, TUNNEL_SQUARE_8);
                     break;
             }
-            paint_util_set_segment_support_height(
-                session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
-            paint_util_set_general_support_height(session, height + 64, 0x20);
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 64, 0x20);
             break;
     }
 }
 
 static void TrackLeftQuarterTurn3TilesDown25ToLeftBank(
-    paint_session& session, ride_id_t ride, uint8_t trackSequence, uint8_t direction, int32_t height,    const TileElement* trackElement)
+    PaintSession& session, ride_id_t ride, uint8_t trackSequence, uint8_t direction, int32_t height,    const TileElement* trackElement)
 {
     switch (trackSequence)
     {
@@ -7310,34 +7364,34 @@ static void TrackLeftQuarterTurn3TilesDown25ToLeftBank(
             {
                 case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_TURN_BANK_TRANSITION+12),{0,6,height},{32,20,3},{0,6,height-6});
-                    metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                    MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
                     break;
                 case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_TURN_BANK_TRANSITION+15),{0,6,height},{32,20,3},{0,6,height-6});
-                    metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
+                    MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
                     break;
                 case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_TURN_BANK_TRANSITION+17),{0,6,height},{32,20,3},{0,6,height-6});
-                    metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                    MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
                     break;
                 case 3:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_TURN_BANK_TRANSITION+10),{0,6,height},{32,20,3},{0,6,height-6});
-                    metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+                    MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
                     break;
             }
             if (direction == 0 || direction == 3)
             {
-                paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_8);
+                PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_8);
             }
-            paint_util_set_segment_support_height(
-                session, paint_util_rotate_segments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-            paint_util_set_general_support_height(session, height + 64, 0x20);
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 64, 0x20);
             break;
         case 1:
-            paint_util_set_general_support_height(session, height + 48, 0x20);
+            PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
             break;
         case 2:
-            paint_util_set_general_support_height(session, height + 48, 0x20);
+            PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
             break;
         case 3:
             switch (direction)
@@ -7356,25 +7410,25 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_TURN_BANK_TRANSITION+9),{6,0,height},{20,32,3});
                     break;
             }
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             switch (direction)
             {
                 case 2:
-                    paint_util_push_tunnel_right(session, height, TUNNEL_SQUARE_FLAT);
+                    PaintUtilPushTunnelRight(session, height, TUNNEL_SQUARE_FLAT);
                     break;
                 case 3:
-                    paint_util_push_tunnel_left(session, height, TUNNEL_SQUARE_FLAT);
+                    PaintUtilPushTunnelLeft(session, height, TUNNEL_SQUARE_FLAT);
                     break;
             }
-            paint_util_set_segment_support_height(
-                session, paint_util_rotate_segments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
-            paint_util_set_general_support_height(session, height + 64, 0x20);
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 64, 0x20);
             break;
     }
 }
 
 static void TrackRightQuarterTurn3TilesDown25ToRightBank(
-    paint_session& session, ride_id_t ride, uint8_t trackSequence, uint8_t direction, int32_t height,    const TileElement* trackElement)
+    PaintSession& session, ride_id_t ride, uint8_t trackSequence, uint8_t direction, int32_t height,    const TileElement* trackElement)
 {
     switch (trackSequence)
     {
@@ -7394,20 +7448,20 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_TURN_BANK_TRANSITION+6),{0,6,height},{32,20,3},{0,6,height-6});
                     break;
             }
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             if (direction == 0 || direction == 3)
             {
-                paint_util_push_tunnel_rotated(session, direction, height, TUNNEL_SQUARE_8);
+                PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_8);
             }
-            paint_util_set_segment_support_height(
-                session, paint_util_rotate_segments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
-            paint_util_set_general_support_height(session, height + 64, 0x20);
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0, direction), 0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 64, 0x20);
             break;
         case 1:
-            paint_util_set_general_support_height(session, height + 48, 0x20);
+            PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
             break;
         case 2:
-            paint_util_set_general_support_height(session, height + 48, 0x20);
+            PaintUtilSetGeneralSupportHeight(session, height + 48, 0x20);
             break;
         case 3:
             switch (direction)
@@ -7426,19 +7480,19 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_TURN_BANK_TRANSITION+5),{6,0,height},{20,32,3});
                     break;
             }
-            metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 0, height, session.TrackColours[SCHEME_SUPPORTS]);
             switch (direction)
             {
                 case 0:
-                    paint_util_push_tunnel_right(session, height, TUNNEL_SQUARE_FLAT);
+                    PaintUtilPushTunnelRight(session, height, TUNNEL_SQUARE_FLAT);
                     break;
                 case 1:
-                    paint_util_push_tunnel_left(session, height, TUNNEL_SQUARE_FLAT);
+                    PaintUtilPushTunnelLeft(session, height, TUNNEL_SQUARE_FLAT);
                     break;
             }
-            paint_util_set_segment_support_height(
-                session, paint_util_rotate_segments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
-            paint_util_set_general_support_height(session, height + 64, 0x20);
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D4, direction), 0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 64, 0x20);
             break;
     }
 }
@@ -7514,7 +7568,6 @@ TRACK_PAINT_FUNCTION GetTrackPaintFunction(int32_t trackType)
         return TrackLeftBank;
     case TrackElemType::RightBank:
         return TrackRightBank;
-/*
     case TrackElemType::LeftQuarterTurn5TilesUp25:
         return TrackLeftQuarterTurn5_Up25;
     case TrackElemType::RightQuarterTurn5TilesUp25:
@@ -7523,6 +7576,7 @@ TRACK_PAINT_FUNCTION GetTrackPaintFunction(int32_t trackType)
         return TrackLeftQuarterTurn5_Down25;
     case TrackElemType::RightQuarterTurn5TilesDown25:
         return TrackRightQuarterTurn5_Down25;
+/*
     case TrackElemType::SBendLeft:
         return Tracks_bend_left;
     case TrackElemType::SBendRight:
@@ -7536,7 +7590,6 @@ TRACK_PAINT_FUNCTION GetTrackPaintFunction(int32_t trackType)
         return TrackLeftQuarterTurn3Tilesbank;
     case TrackElemType::RightBankedQuarterTurn3Tiles:
         return TrackRightQuarterTurn3Tilesbank;
-/*
     case TrackElemType::LeftQuarterTurn3TilesUp25:
         return TrackLeftQuarterTurn3TilesUp25;
     case TrackElemType::RightQuarterTurn3TilesUp25:
@@ -7545,6 +7598,7 @@ TRACK_PAINT_FUNCTION GetTrackPaintFunction(int32_t trackType)
         return TrackLeftQuarterTurn3TilesDown25;
     case TrackElemType::RightQuarterTurn3TilesDown25:
         return TrackRightQuarterTurn3TilesDown25;
+/*
     case TrackElemType::LeftHalfBankedHelixUpSmall:
         return TrackLefthalf_Bankedhelix_Upsmall;
     case TrackElemType::RightHalfBankedHelixUpSmall:
@@ -7561,6 +7615,7 @@ TRACK_PAINT_FUNCTION GetTrackPaintFunction(int32_t trackType)
         return TrackLefthalf_Bankedhelix_Downlarge;
     case TrackElemType::RightHalfBankedHelixDownLarge:
         return TrackRighthalf_Bankedhelix_Downlarge;
+*/
     case TrackElemType::LeftQuarterTurn1TileUp60:
         return TrackLeftQuarterTurn1TileUp60;
     case TrackElemType::RightQuarterTurn1TileUp60:
@@ -7569,6 +7624,7 @@ TRACK_PAINT_FUNCTION GetTrackPaintFunction(int32_t trackType)
         return TrackLeftQuarterTurn1TileDown60;
     case TrackElemType::RightQuarterTurn1TileDown60:
         return TrackRightQuarterTurn1TileDown60;
+/*
     case TrackElemType::Brakes:
         return Trackbrakes;
     case TrackElemType::Up25LeftBanked:
@@ -7595,17 +7651,17 @@ TRACK_PAINT_FUNCTION GetTrackPaintFunction(int32_t trackType)
     case TrackElemType::RightEighthToDiag:
         return TrackRightEighthTodiag;
     case TrackElemType::LeftEighthToOrthogonal:
-        return TrackLeftEighthToorthogonal;
+        return TrackLeftEighthToOrthogonal;
     case TrackElemType::RightEighthToOrthogonal:
-        return TrackRightEighthToorthogonal;
+        return TrackRightEighthToOrthogonal;
     case TrackElemType::LeftEighthBankToDiag:
         return TrackLeftEighthBankTodiag;
     case TrackElemType::RightEighthBankToDiag:
         return TrackRightEighthBankTodiag;
     case TrackElemType::LeftEighthBankToOrthogonal:
-        return TrackLeftEighthBankToorthogonal;
+        return TrackLeftEighthBankToOrthogonal;
     case TrackElemType::RightEighthBankToOrthogonal:
-        return TrackRightEighthBankToorthogonal;
+        return TrackRightEighthBankToOrthogonal;
     case TrackElemType::DiagFlat:
         return TrackDiagFlat;
     case TrackElemType::DiagUp25:
