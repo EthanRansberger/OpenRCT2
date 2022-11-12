@@ -704,7 +704,7 @@ static void TrackRightQuarterTurn5(paint_session& session, const Ride& ride, uin
     TrackLeftQuarterTurn5(session, ride, trackSequence, (direction - 1) & 3, height, trackElement);
 }
 
-static void TrackLefteighth_Todiag(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                              int32_t height, const TrackElement& trackElement)
+static void TrackLeftEighthTodiag(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                              int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -821,7 +821,7 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
 }
 
-static void TrackRighteighth_Todiag(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                               int32_t height, const TrackElement& trackElement)
+static void TrackRightEighthTodiag(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                               int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -938,21 +938,21 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
 }
 
-static void TrackLefteighth_Toorthogonal(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                    uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackLeftEighthToorthogonal(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                    uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     trackSequence = mapLeftEighthTurnToOrthogonal[trackSequence];
-    TrackRighteighth_Todiag(session, ride, trackSequence, (direction + 2) & 3, height, trackElement);
+    TrackRightEighthTodiag(session, ride, trackSequence, (direction + 2) & 3, height, trackElement);
 }
 
-static void TrackRighteighth_Toorthogonal(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                     uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRightEighthToorthogonal(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                     uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     trackSequence = mapLeftEighthTurnToOrthogonal[trackSequence];
-    TrackLefteighth_Todiag(session, ride, trackSequence, (direction + 3) & 3, height, trackElement);
+    TrackLeftEighthTodiag(session, ride, trackSequence, (direction + 3) & 3, height, trackElement);
 }
 
 
 
-static void TrackDiagflat(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                    int32_t height, const TrackElement& trackElement)
+static void TrackDiagFlat(paint_session& session, const Ride& ride, uint8_t trackSequence, uint8_t direction,                                    int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -3632,7 +3632,7 @@ static void TrackBankedRightQuarterTurn5(paint_session& session, const Ride& rid
     TrackBankedLeftQuarterTurn5(session, ride, trackSequence, (direction - 1) & 3, height, trackElement);
 }
 
-static void TrackLefteighth_bank_Todiag(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                   uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackLeftEighthBankTodiag(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                   uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -3749,7 +3749,7 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
 }
 
-static void TrackRighteighth_bank_Todiag(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                    uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRightEighthBankTodiag(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                    uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -3866,16 +3866,16 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
 }
 
-static void TrackLefteighth_bank_Toorthogonal(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                         uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackLeftEighthBankToorthogonal(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                         uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     trackSequence = mapLeftEighthTurnToOrthogonal[trackSequence];
-    TrackRighteighth_bank_Todiag(session, ride, trackSequence, (direction + 2) & 3, height, trackElement);
+    TrackRightEighthBankTodiag(session, ride, trackSequence, (direction + 2) & 3, height, trackElement);
 }
 
-static void TrackRighteighth_bank_Toorthogonal(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                          uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRightEighthBankToorthogonal(paint_session& session, const Ride& ride, uint8_t trackSequence,                                                          uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     trackSequence = mapLeftEighthTurnToOrthogonal[trackSequence];
-    TrackLefteighth_bank_Todiag(session, ride, trackSequence, (direction + 3) & 3, height, trackElement);
+    TrackLeftEighthBankTodiag(session, ride, trackSequence, (direction + 3) & 3, height, trackElement);
 }
 
 
@@ -6517,22 +6517,22 @@ static void TrackLeftTwistDownToUp(paint_session& session, const Ride& ride, uin
         {
         case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+0),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+1),{0,0,height},{32,20,0},{0,6,height+28});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+1),{0,0,height},{32,20,0},{0,6,height+32});
             metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+6),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+7),{0,0,height},{32,20,0},{0,6,height+28});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+7),{0,0,height},{32,20,0},{0,6,height+32});
             metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+12),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+13),{0,0,height},{32,20,0},{0,6,height+28});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+13),{0,0,height},{32,20,0},{0,6,height+32});
             metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 3:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+18),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+19),{0,0,height},{32,20,0},{0,6,height+28});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+19),{0,0,height},{32,20,0},{0,6,height+32});
             metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         }
@@ -6549,19 +6549,19 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         {
         case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+2),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+3),{0,0,height},{32,20,0},{0,6,height+28});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+3),{0,0,height},{32,20,0},{0,6,height+32});
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+8),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+9),{0,0,height},{32,20,0},{0,6,height+28});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+9),{0,0,height},{32,20,0},{0,6,height+32});
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+14),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+15),{0,0,height},{32,20,0},{0,6,height+28});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+15),{0,0,height},{32,20,0},{0,6,height+32});
             break;
         case 3:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+20),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+21),{0,0,height},{32,20,0},{0,6,height+28});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+21),{0,0,height},{32,20,0},{0,6,height+32});
             break;
         }
         paint_util_set_segment_support_height(
@@ -6572,20 +6572,20 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         switch (direction)
         {
         case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+4),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+5),{0,0,height},{32,20,0},{0,6,height+44});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+4),{0,0,height},{32,20,3},{0,6,height-16});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+5),{0,0,height},{32,20,0},{0,6,height+16});
             break;
         case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+10),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+11),{0,0,height},{32,20,0},{0,6,height+44});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+10),{0,0,height},{32,20,3},{0,6,height-16});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+11),{0,0,height},{32,20,0},{0,6,height+16});
             break;
         case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+16),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+17),{0,0,height},{32,20,0},{0,6,height+44});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+16),{0,0,height},{32,20,3},{0,6,height-16});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+17),{0,0,height},{32,20,0},{0,6,height+16});
             break;
         case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+22),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+23),{0,0,height},{32,20,0},{0,6,height+44});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+22),{0,0,height},{32,20,3},{0,6,height-16});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+23),{0,0,height},{32,20,0},{0,6,height+16});
             break;
         }
         switch (direction)
@@ -6613,22 +6613,22 @@ static void TrackRightTwistDownToUp(paint_session& session, const Ride& ride, ui
         {
         case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+24),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+25),{0,0,height},{32,20,0},{0,6,height+28});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+25),{0,0,height},{32,20,0},{0,6,height+32});
             metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 0, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+30),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+31),{0,0,height},{32,20,0},{0,6,height+28});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+31),{0,0,height},{32,20,0},{0,6,height+32});
             metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 2, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+36),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+37),{0,0,height},{32,20,0},{0,6,height+28});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+37),{0,0,height},{32,20,0},{0,6,height+32});
             metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 3, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 3:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+42),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+43),{0,0,height},{32,20,0},{0,6,height+28});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+43),{0,0,height},{32,20,0},{0,6,height+32});
             metal_a_supports_paint_setup(session, METAL_SUPPORTS_TUBES, 1, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         }
@@ -6645,19 +6645,19 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         {
         case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+26),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+27),{0,0,height},{32,20,0},{0,6,height+28});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+27),{0,0,height},{32,20,0},{0,6,height+32});
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+32),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+33),{0,0,height},{32,20,0},{0,6,height+28});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+33),{0,0,height},{32,20,0},{0,6,height+32});
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+38),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+39),{0,0,height},{32,20,0},{0,6,height+28});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+39),{0,0,height},{32,20,0},{0,6,height+32});
             break;
         case 3:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+44),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+45),{0,0,height},{32,20,0},{0,6,height+28});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+45),{0,0,height},{32,20,0},{0,6,height+32});
             break;
         }
         paint_util_set_segment_support_height(
@@ -6668,20 +6668,20 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         switch (direction)
         {
         case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+28),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+29),{0,0,height},{32,20,0},{0,6,height+44});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+28),{0,0,height},{32,20,3},{0,6,height-16});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+29),{0,0,height},{32,20,0},{0,6,height+16});
             break;
         case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+34),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+35),{0,0,height},{32,20,0},{0,6,height+44});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+34),{0,0,height},{32,20,3},{0,6,height-16});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+35),{0,0,height},{32,20,0},{0,6,height+26});
             break;
         case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+40),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+41),{0,0,height},{32,20,0},{0,6,height+44});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+40),{0,0,height},{32,20,3},{0,6,height-16});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+41),{0,0,height},{32,20,0},{0,6,height+16});
             break;
         case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+46),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+47),{0,0,height},{32,20,0},{0,6,height+44});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+46),{0,0,height},{32,20,3},{0,6,height-16});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_INLINE_TWIST+47),{0,0,height},{32,20,0},{0,6,height+16});
             break;
         }
         switch (direction)
@@ -7591,23 +7591,23 @@ TRACK_PAINT_FUNCTION GetTrackPaintFunction(int32_t trackType)
         return TrackDown60ToFlat_long_base;
 */
     case TrackElemType::LeftEighthToDiag:
-        return TrackLefteighth_Todiag;
+        return TrackLeftEighthTodiag;
     case TrackElemType::RightEighthToDiag:
-        return TrackRighteighth_Todiag;
+        return TrackRightEighthTodiag;
     case TrackElemType::LeftEighthToOrthogonal:
-        return TrackLefteighth_Toorthogonal;
+        return TrackLeftEighthToorthogonal;
     case TrackElemType::RightEighthToOrthogonal:
-        return TrackRighteighth_Toorthogonal;
+        return TrackRightEighthToorthogonal;
     case TrackElemType::LeftEighthBankToDiag:
-        return TrackLefteighth_bank_Todiag;
+        return TrackLeftEighthBankTodiag;
     case TrackElemType::RightEighthBankToDiag:
-        return TrackRighteighth_bank_Todiag;
+        return TrackRightEighthBankTodiag;
     case TrackElemType::LeftEighthBankToOrthogonal:
-        return TrackLefteighth_bank_Toorthogonal;
+        return TrackLeftEighthBankToorthogonal;
     case TrackElemType::RightEighthBankToOrthogonal:
-        return TrackRighteighth_bank_Toorthogonal;
+        return TrackRightEighthBankToorthogonal;
     case TrackElemType::DiagFlat:
-        return TrackDiagflat;
+        return TrackDiagFlat;
     case TrackElemType::DiagUp25:
         return TrackDiagUp25;
     case TrackElemType::DiagUp60:
