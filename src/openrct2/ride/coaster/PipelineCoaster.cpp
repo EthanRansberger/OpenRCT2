@@ -182,11 +182,11 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP+17),{0,0,height},{32,1,50},{0,27,height});
         break;
     case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP+18),{0,0,height},{32,1,98},{0,27,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP+18),{0,0,height},{32,20,3},{0,6,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP+19),{0,0,height},{32,1,50},{0,27,height});
         break;
     case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP+20),{0,0,height},{32,1,98},{0,27,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP+20),{0,0,height},{32,20,3},{0,6,height});
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_STEEP+21),{0,0,height},{32,1,50},{0,27,height});
         break;
     case 3:
@@ -3375,7 +3375,7 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
 
 
 
-static void TrackLeftQuarterTurn3Tilesbank(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                   uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackLeftQuarterTurn3TilesBank(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                   uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     switch (trackSequence)
     {
@@ -3472,10 +3472,10 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
 }
 
-static void TrackRightQuarterTurn3Tilesbank(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                    uint8_t direction, int32_t height, const TrackElement& trackElement)
+static void TrackRightQuarterTurn3TilesBank(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                    uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
     trackSequence = mapLeftQuarterTurn3TilesToRightQuarterTurn3Tiles[trackSequence];
-    TrackLeftQuarterTurn3Tilesbank(session, ride, trackSequence, (direction - 1) & 3, height, trackElement);
+    TrackLeftQuarterTurn3TilesBank(session, ride, trackSequence, (direction - 1) & 3, height, trackElement);
 }
 
 static void TrackBankedLeftQuarterTurn5(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                     uint8_t direction, int32_t height, const TrackElement& trackElement)
@@ -3891,19 +3891,19 @@ static void TrackLeftQuarterTurn3TilesUp25(PaintSession& session, const Ride& ri
         {
         case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+0),{0,6,height},{32,20,3});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+1),{0,6,height},{32,20,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+1),{0,6,height},{32,1,32},{0,28,height});
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+4),{0,6,height},{32,20,3});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+5),{0,6,height},{32,20,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+5),{0,6,height},{32,1,32},{0,28,height});
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+8),{0,6,height},{32,20,3});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+9),{0,6,height},{32,20,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+9),{0,6,height},{32,1,32},{0,28,height});
             break;
         case 3:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+12),{0,6,height},{32,20,3});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+13),{0,6,height},{32,20,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+13),{0,6,height},{32,1,32},{0,28,height});
             break;
         }
         MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
@@ -3926,19 +3926,19 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         {
         case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+2),{6,0,height},{20,32,3});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+3),{6,0,height},{20,32,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+3),{6,0,height},{1,32,32},{28,0,height});
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+6),{6,0,height},{20,32,3});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+7),{6,0,height},{20,32,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+7),{6,0,height},{1,32,32},{28,0,height});
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+10),{6,0,height},{20,32,3});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+11),{6,0,height},{20,32,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+11),{6,0,height},{1,32,32},{28,0,height});
             break;
         case 3:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+14),{6,0,height},{20,32,3});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+15),{6,0,height},{20,32,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+15),{6,0,height},{1,32,32},{28,0,height});
             break;
         }
         MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
@@ -3967,19 +3967,19 @@ static void TrackRightQuarterTurn3TilesUp25(PaintSession& session, const Ride& r
         {
         case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+16),{0,6,height},{32,20,3});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+17),{0,6,height},{32,20,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+17),{0,6,height},{32,1,32},{0,28,height});
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+20),{0,6,height},{32,20,3});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+21),{0,6,height},{32,20,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+21),{0,6,height},{32,1,32},{0,28,height});
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+24),{0,6,height},{32,20,3});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+25),{0,6,height},{32,20,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+25),{0,6,height},{32,1,32},{0,28,height});
             break;
         case 3:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+28),{0,6,height},{32,20,3});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+29),{0,6,height},{32,20,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+29),{0,6,height},{32,1,32},{0,28,height});
             break;
         }
         MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
@@ -4002,22 +4002,22 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         {
         case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+18),{6,0,height},{20,32,3});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+19),{6,0,height},{20,32,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+19),{6,0,height},{1,32,32},{28,0,height});
             MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+22),{6,0,height},{20,32,3});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+23),{6,0,height},{20,32,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+23),{6,0,height},{1,32,32},{28,0,height});
             MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+26),{6,0,height},{20,32,3});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+27),{6,0,height},{20,32,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+27),{6,0,height},{1,32,32},{28,0,height});
             MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 10, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         case 3:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+30),{6,0,height},{20,32,3});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+31),{6,0,height},{20,32,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_SMALL_CURVE+31),{6,0,height},{1,32,32},{28,0,height});
             MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
             break;
         }
@@ -4058,19 +4058,19 @@ static void TrackLeftQuarterTurn5_Up25(PaintSession& session, const Ride& ride, 
         {
         case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+0),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+1),{0,0,height},{32,1,32},{0,31,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+1),{0,0,height},{32,1,32},{0,28,height});
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+10),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+11),{0,0,height},{32,1,32},{0,31,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+11),{0,0,height},{32,1,32},{0,28,height});
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+20),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+21),{0,0,height},{32,1,32},{0,31,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+21),{0,0,height},{32,1,32},{0,28,height});
             break;
         case 3:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+30),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+31),{0,0,height},{32,1,32},{0,31,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+31),{0,0,height},{32,1,32},{0,28,height});
             break;
         }
         MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
@@ -4090,19 +4090,19 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         {
         case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+2),{0,0,height},{32,16,3});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+3),{0,0,height},{32,1,32},{0,31,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+3),{0,0,height},{32,1,32},{0,28,height});
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+12),{0,0,height},{32,16,3});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+13),{0,0,height},{32,1,32},{0,31,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+13),{0,0,height},{32,1,32},{0,28,height});
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+22),{0,0,height},{32,16,3},{0,16,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+23),{0,0,height},{32,32,1},{0,16,height+48});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+23),{0,0,height},{28,28,1},{2,2,height+40});
             break;
         case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+32),{0,0,height},{32,16,3},{0,16,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+33),{0,0,height},{32,32,1},{0,16,height+48});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+32),{0,0,height},{28,16,3},{2,16,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+33),{0,0,height},{28,28,1},{2,2,height+40});
             break;
         }
         PaintUtilSetSegmentSupportHeight(
@@ -4114,19 +4114,19 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         {
         case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+4),{0,0,height},{16,16,3},{0,16,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+5),{0,0,height},{16,16,3},{0,16,height+48});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+5),{0,0,height},{16,16,3},{0,16,height+40});
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+14),{0,0,height},{16,16,3},{16,16,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+15),{0,0,height},{16,16,3},{16,16,height+48});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+15),{0,0,height},{16,16,3},{16,16,height+40});
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+24),{0,0,height},{16,16,3},{16,0,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+25),{0,0,height},{16,16,3},{16,16,height+48});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+25),{0,0,height},{16,16,3},{16,0,height+40});
             break;
         case 3:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+34),{0,0,height},{16,16,3});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+35),{0,0,height},{16,16,3},{0,0,height+48});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+35),{0,0,height},{16,16,3},{0,0,height+40});
             break;
         }
         PaintUtilSetSegmentSupportHeight(
@@ -4141,19 +4141,19 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         {
         case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+6),{0,0,height},{16,32,3},{16,0,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+7),{0,0,height},{32,32,1},{16,0,height+48});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+7),{0,0,height},{32,32,1},{16,0,height+40});
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+16),{0,0,height},{16,32,3});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+17),{0,0,height},{1,32,32},{31,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+17),{0,0,height},{1,32,32},{28,0,height});
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+26),{0,0,height},{16,32,3});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+27),{0,0,height},{1,32,32},{31,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+27),{0,0,height},{1,32,32},{28,0,height});
             break;
         case 3:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+36),{0,0,height},{16,32,3},{16,0,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+37),{0,0,height},{32,32,1},{0,0,height+48});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+37),{0,0,height},{28,28,1},{2,2,height+40});
             break;
         }
         PaintUtilSetSegmentSupportHeight(
@@ -4164,20 +4164,20 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         switch (direction)
         {
         case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+8),{0,0,height},{20,32,3},{6,0,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+9),{0,0,height},{1,32,32},{31,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+8),{0,0,height},{20,32,10},{6,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+9),{0,0,height},{1,32,32},{28,0,height});
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+18),{0,0,height},{20,32,3},{6,0,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+19),{0,0,height},{1,32,32},{31,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+19),{0,0,height},{1,32,32},{28,0,height});
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+28),{0,0,height},{20,32,3},{6,0,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+29),{0,0,height},{1,32,32},{31,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+29),{0,0,height},{1,32,32},{28,0,height});
             break;
         case 3:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+38),{0,0,height},{20,32,3},{6,0,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+39),{0,0,height},{1,32,32},{31,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+39),{0,0,height},{1,32,32},{28,0,height});
             break;
         }
         MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
@@ -4206,19 +4206,19 @@ static void TrackRightQuarterTurn5_Up25(PaintSession& session, const Ride& ride,
         {
         case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+40),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+41),{0,0,height},{32,20,3},{0,6,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+41),{0,0,height},{32,1,32},{0,28,height});
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+50),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+51),{0,0,height},{32,20,3},{0,6,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+51),{0,0,height},{32,1,32},{0,28,height});
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+60),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+61),{0,0,height},{32,20,3},{0,6,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+61),{0,0,height},{32,1,32},{0,28,height});
             break;
         case 3:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+70),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+71),{0,0,height},{32,20,3},{0,6,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+71),{0,0,height},{32,1,32},{0,28,height});
             break;
         }
         MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
@@ -4237,20 +4237,20 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         switch (direction)
         {
         case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+42),{0,0,height},{32,16,3},{0,16,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+43),{0,0,height},{32,16,3},{0,16,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+42),{0,0,height},{28,16,3},{2,16,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+43),{0,0,height},{28,28,1},{2,2,height+40});
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+52),{0,0,height},{32,16,3},{0,16,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+53),{0,0,height},{32,16,3},{0,16,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+53),{0,0,height},{28,28,1},{2,2,height+40});
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+62),{0,0,height},{32,16,3});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+63),{0,0,height},{32,16,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+63),{0,0,height},{28,28,1},{2,2,height+40});
             break;
         case 3:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+72),{0,0,height},{32,16,3});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+73),{0,0,height},{32,16,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+73),{0,0,height},{32,1,32},{0,28,height});
             break;
         }
         PaintUtilSetSegmentSupportHeight(
@@ -4262,19 +4262,19 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         {
         case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+44),{0,0,height},{16,16,3});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+45),{0,0,height},{16,16,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+45),{0,0,height},{16,16,3},{0,0,height+40});
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+54),{0,0,height},{16,16,3},{16,0,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+55),{0,0,height},{16,16,3},{16,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+55),{0,0,height},{16,16,3},{16,0,height+40});
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+64),{0,0,height},{16,16,3},{16,16,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+65),{0,0,height},{16,16,3},{16,16,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+65),{0,0,height},{16,16,3},{16,16,height+40});
             break;
         case 3:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+74),{0,0,height},{16,16,3},{0,16,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+75),{0,0,height},{16,16,3},{0,16,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+75),{0,0,height},{16,16,3},{0,16,height+40});
             break;
         }
         PaintUtilSetSegmentSupportHeight(
@@ -4289,19 +4289,19 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         {
         case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+46),{0,0,height},{16,32,3},{16,0,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+47),{0,0,height},{16,32,3},{16,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+47),{0,0,height},{28,28,1},{2,2,height+40});
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+56),{0,0,height},{16,32,3});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+57),{0,0,height},{16,32,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+57),{0,0,height},{1,32,32},{28,0,height});
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+66),{0,0,height},{16,32,3});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+67),{0,0,height},{16,32,3});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+67),{0,0,height},{1,32,32},{28,0,height});
             break;
         case 3:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+76),{0,0,height},{16,32,3},{16,0,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+77),{0,0,height},{16,32,3},{16,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+77),{0,0,height},{28,28,1},{2,2,height+40});
             break;
         }
         PaintUtilSetSegmentSupportHeight(
@@ -4313,19 +4313,19 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
         {
         case 0:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+48),{0,0,height},{20,32,3},{6,0,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+49),{0,0,height},{20,32,3},{6,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+49),{0,0,height},{1,32,32},{28,0,height});
             break;
         case 1:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+58),{0,0,height},{20,32,3},{6,0,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+59),{0,0,height},{20,32,3},{6,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+59),{0,0,height},{1,32,32},{28,0,height});
             break;
         case 2:
 PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+68),{0,0,height},{20,32,3},{6,0,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+69),{0,0,height},{20,32,3},{6,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+69),{0,0,height},{1,32,32},{28,0,height});
             break;
         case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+78),{0,0,height},{20,32,3},{6,0,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+79),{0,0,height},{20,32,3},{6,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+78),{0,0,height},{20,32,10},{6,0,height});
+PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_GENTLE_MEDIUM_CURVE+79),{0,0,height},{1,32,32},{28,0,height});
             break;
         }
         MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 8, height, session.TrackColours[SCHEME_SUPPORTS]);
@@ -5668,899 +5668,1548 @@ PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK
     }
 }
 
-
-
-
-static void TrackLefthalf_Bankedhelix_Upsmall(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                          uint8_t direction, int32_t height, const TrackElement& trackElement)
-{
-    switch (trackSequence)
-    {
-    case 0:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+0),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+1),{0,0,height},{32,1,26},{0,27,height});
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+4),{0,0,height},{32,1,26},{0,27,height});
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+7),{0,0,height},{32,20,3},{0,6,height});
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+11),{0,0,height},{32,20,3},{0,6,height});
-            break;
-        }
-        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
-        if (direction == 0 || direction == 3)
-        {
-            PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 1:
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 2:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+2),{0,0,height},{16,16,3},{16,0,height});
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+5),{0,0,height},{16,16,1},{0,0,height+27});
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+8),{0,0,height},{16,16,3},{0,16,height});
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+12),{0,0,height},{16,16,3},{16,16,height});
-            break;
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 3:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+3),{0,0,height},{20,32,3},{6,0,height});
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+6),{0,0,height},{1,32,26},{27,0,height});
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+9),{0,0,height},{20,32,3},{6,0,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+10),{0,0,height},{1,32,26},{27,0,height});
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+13),{0,0,height},{20,32,3},{6,0,height});
-            break;
-        }
-        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
-        switch (direction)
-        {
-        case 2:
-            PaintUtilPushTunnelRight(session, height + 8, TUNNEL_SQUARE_FLAT);
-            break;
-        case 3:
-            PaintUtilPushTunnelLeft(session, height + 8, TUNNEL_SQUARE_FLAT);
-            break;
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 4:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+11),{0,0,height},{20,32,3},{6,0,height});
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+0),{0,0,height},{20,32,3},{6,0,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+1),{0,0,height},{1,32,26},{27,0,height});
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+4),{0,0,height},{1,32,26},{27,0,height});
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+7),{0,0,height},{20,32,3},{6,0,height});
-            break;
-        }
-        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
-        switch (direction)
-        {
-        case 0:
-            PaintUtilPushTunnelRight(session, height, TUNNEL_SQUARE_FLAT);
-            break;
-        case 1:
-            PaintUtilPushTunnelLeft(session, height, TUNNEL_SQUARE_FLAT);
-            break;
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 5:
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 6:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+12),{0,0,height},{16,16,3},{16,16,height});
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+2),{0,0,height},{16,16,3},{0,16,height});
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+5),{0,0,height},{16,16,1},{0,0,height+27});
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+8),{0,0,height},{16,16,3},{16,0,height});
-            break;
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 7:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+13),{0,0,height},{32,20,3},{0,6,height});
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+3),{0,0,height},{32,20,3},{0,6,height});
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+6),{0,0,height},{32,1,26},{0,27,height});
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+9),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+10),{0,0,height},{32,1,26},{0,27,height});
-            break;
-        }
-        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
-        if (direction == 0 || direction == 3)
-        {
-            PaintUtilPushTunnelRotated(session, direction, height + 8, TUNNEL_SQUARE_FLAT);
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    }
-}
-
-static void TrackRighthalf_Bankedhelix_Upsmall(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                           uint8_t direction, int32_t height, const TrackElement& trackElement)
-{
-    switch (trackSequence)
-    {
-    case 0:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+14),{0,0,height},{32,20,3},{0,6,height});
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+17),{0,0,height},{32,20,3},{0,6,height});
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+21),{0,0,height},{32,1,26},{0,27,height});
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+24),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+25),{0,0,height},{32,1,26},{0,27,height});
-            break;
-        }
-        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
-        if (direction == 0 || direction == 3)
-        {
-            PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 1:
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 2:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+15),{0,0,height},{16,16,3},{16,16,height});
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+18),{0,0,height},{16,16,3},{0,16,height});
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+22),{0,0,height},{16,16,1},{0,0,height+27});
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+26),{0,0,height},{16,16,3},{16,0,height});
-            break;
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 3:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+16),{0,0,height},{20,32,3},{6,0,height});
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+19),{0,0,height},{20,32,3},{6,0,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+20),{0,0,height},{1,32,26},{27,0,height});
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+23),{0,0,height},{1,32,26},{27,0,height});
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+27),{0,0,height},{20,32,3},{6,0,height});
-            break;
-        }
-        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
-        switch (direction)
-        {
-        case 0:
-            PaintUtilPushTunnelRight(session, height + 8, TUNNEL_SQUARE_FLAT);
-            break;
-        case 1:
-            PaintUtilPushTunnelLeft(session, height + 8, TUNNEL_SQUARE_FLAT);
-            break;
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 4:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+17),{0,0,height},{20,32,3},{6,0,height});
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+21),{0,0,height},{1,32,26},{27,0,height});
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+24),{0,0,height},{20,32,3},{6,0,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+25),{0,0,height},{1,32,26},{27,0,height});
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+14),{0,0,height},{20,32,3},{6,0,height});
-            break;
-        }
-        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
-        switch (direction)
-        {
-        case 2:
-            PaintUtilPushTunnelRight(session, height, TUNNEL_SQUARE_FLAT);
-            break;
-        case 3:
-            PaintUtilPushTunnelLeft(session, height, TUNNEL_SQUARE_FLAT);
-            break;
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 5:
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 6:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+18),{0,0,height},{16,16,3},{16,0,height});
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+22),{0,0,height},{16,16,1},{0,0,height+27});
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+26),{0,0,height},{16,16,3},{0,16,height});
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+15),{0,0,height},{16,16,3},{16,16,height});
-            break;
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 7:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+19),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+20),{0,0,height},{32,1,26},{0,27,height});
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+23),{0,0,height},{32,1,26},{0,27,height});
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+27),{0,0,height},{32,20,3},{0,6,height});
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX+16),{0,0,height},{32,20,3},{0,6,height});
-            break;
-        }
-        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
-        if (direction == 0 || direction == 3)
-        {
-            PaintUtilPushTunnelRotated(session, direction, height + 8, TUNNEL_SQUARE_FLAT);
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    }
-}
-
-static void TrackLefthalf_Bankedhelix_Downsmall(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                            uint8_t direction, int32_t height, const TrackElement& trackElement)
-{
-    if (trackSequence >= 4)
-    {
-        trackSequence -= 4;
-        direction = (direction - 1) & 3;
-    }
-    trackSequence = mapLeftQuarterTurn3TilesToRightQuarterTurn3Tiles[trackSequence];
-    TrackRighthalf_Bankedhelix_Upsmall(session, ride, trackSequence, (direction + 1) & 3, height, trackElement);
-}
-
-static void TrackRighthalf_Bankedhelix_Downsmall(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                             uint8_t direction, int32_t height, const TrackElement& trackElement)
-{
-    if (trackSequence >= 4)
-    {
-        trackSequence -= 4;
-        direction = (direction + 1) & 3;
-    }
-    trackSequence = mapLeftQuarterTurn3TilesToRightQuarterTurn3Tiles[trackSequence];
-    TrackLefthalf_Bankedhelix_Upsmall(session, ride, trackSequence, (direction - 1) & 3, height, trackElement);
-}
-
-static void TrackLefthalf_Bankedhelix_Uplarge(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                          uint8_t direction, int32_t height, const TrackElement& trackElement)
-{
-    switch (trackSequence)
-    {
-    case 0:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+0),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+1),{0,0,height},{32,1,26},{0,27,height});
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+6),{0,0,height},{32,1,26},{0,27,height});
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+11),{0,0,height},{32,20,3},{0,6,height});
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+17),{0,0,height},{32,20,3},{0,6,height});
-            break;
-        }
-        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 1, height, session.TrackColours[SCHEME_SUPPORTS]);
-        if (direction == 0 || direction == 3)
-        {
-            PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 1:
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 2:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+2),{0,0,height},{32,16,3},{0,0,height});
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+7),{0,0,height},{32,16,1},{0,0,height+27});
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+12),{0,0,height},{32,16,3},{0,16,height});
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+18),{0,0,height},{32,16,3},{0,16,height});
-            break;
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session,            PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 3:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+3),{0,0,height},{16,16,3},{0,16,height});
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+8),{0,0,height},{16,16,1},{16,16,height+27});
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+13),{0,0,height},{16,16,3},{16,0,height});
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+19),{0,0,height},{16,16,3},{0,0,height});
-            break;
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 4:
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 5:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+4),{0,0,height},{16,32,3},{16,0,height});
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+9),{0,0,height},{16,32,1},{0,0,height+27});
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+14),{0,0,height},{16,32,3},{0,0,height});
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+20),{0,0,height},{16,32,3},{16,0,height});
-            break;
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session,            PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 6:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+5),{0,0,height},{20,32,3},{6,0,height});
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+10),{0,0,height},{1,32,26},{27,0,height});
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+15),{0,0,height},{20,32,3},{6,0,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+16),{0,0,height},{1,32,26},{27,0,height});
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+21),{0,0,height},{20,32,3},{6,0,height});
-            break;
-        }
-        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 7, height, session.TrackColours[SCHEME_SUPPORTS]);
-        switch (direction)
-        {
-        case 2:
-            PaintUtilPushTunnelRight(session, height + 8, TUNNEL_SQUARE_FLAT);
-            break;
-        case 3:
-            PaintUtilPushTunnelLeft(session, height + 8, TUNNEL_SQUARE_FLAT);
-            break;
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 7:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+17),{0,0,height},{20,32,3},{6,0,height});
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+0),{0,0,height},{20,32,3},{6,0,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+1),{0,0,height},{1,32,26},{27,0,height});
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+6),{0,0,height},{1,32,26},{27,0,height});
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+11),{0,0,height},{20,32,3},{6,0,height});
-            break;
-        }
-        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 1, height, session.TrackColours[SCHEME_SUPPORTS]);
-        switch (direction)
-        {
-        case 0:
-            PaintUtilPushTunnelRight(session, height, TUNNEL_SQUARE_FLAT);
-            break;
-        case 1:
-            PaintUtilPushTunnelLeft(session, height, TUNNEL_SQUARE_FLAT);
-            break;
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 8:
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 9:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+18),{0,0,height},{16,32,3},{16,0,height});
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+2),{0,0,height},{16,32,3},{0,0,height});
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+7),{0,0,height},{16,32,1},{0,0,height+27});
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+12),{0,0,height},{16,32,3},{16,0,height});
-            break;
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session,            PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 10:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+19),{0,0,height},{16,16,3},{0,0,height});
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+3),{0,0,height},{16,16,3},{16,0,height});
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+8),{0,0,height},{16,16,1},{16,16,height+27});
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+13),{0,0,height},{16,16,3},{0,16,height});
-            break;
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 11:
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 12:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+20),{0,0,height},{32,16,3},{0,16,height});
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+4),{0,0,height},{32,16,3},{0,16,height});
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+9),{0,0,height},{32,16,1},{0,0,height+27});
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+14),{0,0,height},{32,16,3},{0,0,height});
-            break;
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session,            PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 13:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+21),{0,0,height},{32,20,3},{0,6,height});
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+5),{0,0,height},{32,20,3},{0,6,height});
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+10),{0,0,height},{32,1,26},{0,27,height});
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+15),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+16),{0,0,height},{32,1,26},{0,27,height});
-            break;
-        }
-        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 7, height, session.TrackColours[SCHEME_SUPPORTS]);
-        if (direction == 0 || direction == 3)
-        {
-            PaintUtilPushTunnelRotated(session, direction, height + 8, TUNNEL_SQUARE_FLAT);
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    }
-}
-static void TrackRighthalf_Bankedhelix_Uplarge(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                           uint8_t direction, int32_t height, const TrackElement& trackElement)
-{
-    switch (trackSequence)
-    {
-    case 0:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+22),{0,0,height},{32,20,3},{0,6,height});
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+27),{0,0,height},{32,20,3},{0,6,height});
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+33),{0,0,height},{32,1,26},{0,27,height});
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+38),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+39),{0,0,height},{32,1,26},{0,27,height});
-            break;
-        }
-        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 1, height, session.TrackColours[SCHEME_SUPPORTS]);
-        if (direction == 0 || direction == 3)
-        {
-            PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_SQUARE_FLAT);
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 1:
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 2:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+23),{0,0,height},{32,16,3},{0,16,height});
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+28),{0,0,height},{32,16,3},{0,16,height});
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+34),{0,0,height},{32,16,1},{0,0,height+27});
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+40),{0,0,height},{32,16,3},{0,0,height});
-            break;
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session,            PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 3:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+24),{0,0,height},{16,16,3},{0,0,height});
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+29),{0,0,height},{16,16,3},{16,0,height});
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+35),{0,0,height},{16,16,1},{16,16,height+27});
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+41),{0,0,height},{16,16,3},{0,16,height});
-            break;
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 4:
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 5:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+25),{0,0,height},{16,32,3},{16,0,height});
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+30),{0,0,height},{16,32,3},{0,0,height});
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+36),{0,0,height},{16,32,1},{0,0,height+27});
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+42),{0,0,height},{16,32,3},{16,0,height});
-            break;
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session,            PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 6:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+26),{0,0,height},{20,32,3},{6,0,height});
-            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 7, height, session.TrackColours[SCHEME_SUPPORTS]);
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+31),{0,0,height},{20,32,3},{6,0,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+32),{0,0,height},{1,32,26},{27,0,height});
-            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 3, height, session.TrackColours[SCHEME_SUPPORTS]);
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+37),{0,0,height},{1,32,26},{27,0,height});
-            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 7, height, session.TrackColours[SCHEME_SUPPORTS]);
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+43),{0,0,height},{20,32,3},{6,0,height});
-            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 7, height, session.TrackColours[SCHEME_SUPPORTS]);
-            break;
-        }
-        switch (direction)
-        {
-        case 0:
-            PaintUtilPushTunnelRight(session, height + 8, TUNNEL_SQUARE_FLAT);
-            break;
-        case 1:
-            PaintUtilPushTunnelLeft(session, height + 8, TUNNEL_SQUARE_FLAT);
-            break;
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 7:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+27),{0,0,height},{20,32,3},{6,0,height});
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+33),{0,0,height},{1,32,26},{27,0,height});
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+38),{0,0,height},{20,32,3},{6,0,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+39),{0,0,height},{1,32,26},{27,0,height});
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+22),{0,0,height},{20,32,3},{6,0,height});
-            break;
-        }
-        MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 1, height, session.TrackColours[SCHEME_SUPPORTS]);
-        switch (direction)
-        {
-        case 2:
-            PaintUtilPushTunnelRight(session, height, TUNNEL_SQUARE_FLAT);
-            break;
-        case 3:
-            PaintUtilPushTunnelLeft(session, height, TUNNEL_SQUARE_FLAT);
-            break;
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 8:
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 9:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+28),{0,0,height},{16,32,3},{16,0,height});
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+34),{0,0,height},{16,32,1},{0,0,height+27});
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+40),{0,0,height},{16,32,3},{0,0,height});
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+23),{0,0,height},{16,32,3},{16,0,height});
-            break;
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session,            PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),            0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 10:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+29),{0,0,height},{16,16,3},{0,16,height});
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+35),{0,0,height},{16,16,1},{16,16,height+27});
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+41),{0,0,height},{16,16,3},{16,0,height});
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+24),{0,0,height},{16,16,3},{0,0,height});
-            break;
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 11:
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 12:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+30),{0,0,height},{32,16,3},{0,0,height});
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+36),{0,0,height},{32,16,1},{0,0,height+27});
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+42),{0,0,height},{32,16,3},{0,16,height});
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+25),{0,0,height},{32,16,3},{0,16,height});
-            break;
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session,            PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    case 13:
-        switch (direction)
-        {
-        case 0:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+31),{0,0,height},{32,20,3},{0,6,height});
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+32),{0,0,height},{32,1,26},{0,27,height});
-            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 3, height, session.TrackColours[SCHEME_SUPPORTS]);
-            break;
-        case 1:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+37),{0,0,height},{32,1,26},{0,27,height});
-            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 7, height, session.TrackColours[SCHEME_SUPPORTS]);
-            break;
-        case 2:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+43),{0,0,height},{32,20,3},{0,6,height});
-            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 7, height, session.TrackColours[SCHEME_SUPPORTS]);
-            break;
-        case 3:
-PaintAddImageAsParentRotated(session,direction,session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX+26),{0,0,height},{32,20,3},{0,6,height});
-            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 7, height, session.TrackColours[SCHEME_SUPPORTS]);
-            break;
-        }
-        if (direction == 0 || direction == 3)
-        {
-            PaintUtilPushTunnelRotated(session, direction, height + 8, TUNNEL_SQUARE_FLAT);
-        }
-        PaintUtilSetSegmentSupportHeight(
-            session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),            0xFFFF, 0);
-        PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
-        break;
-    }
-}
-
-static void TrackLefthalf_Bankedhelix_Downlarge(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                            uint8_t direction, int32_t height, const TrackElement& trackElement)
-{
-    if (trackSequence >= 7)
-    {
-        trackSequence -= 7;
-        direction = (direction - 1) & 3;
-    }
-    trackSequence = mapLeftQuarterTurn5TilesToRightQuarterTurn5Tiles[trackSequence];
-    TrackRighthalf_Bankedhelix_Uplarge(session, ride, trackSequence, (direction + 1) & 3, height, trackElement);
-}
-
-static void TrackRighthalf_Bankedhelix_Downlarge(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                             uint8_t direction, int32_t height, const TrackElement& trackElement)
-{
-    if (trackSequence >= 7)
-    {
-        trackSequence -= 7;
-        direction = (direction + 1) & 3;
-    }
-    trackSequence = mapLeftQuarterTurn5TilesToRightQuarterTurn5Tiles[trackSequence];
-    TrackLefthalf_Bankedhelix_Uplarge(session, ride, trackSequence, (direction - 1) & 3, height, trackElement);
-}
-
 */
+
+static void TrackLeftHalfBankedHelixUpSmall(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                          uint8_t direction, int32_t height, const TrackElement& trackElement)
+{
+    switch (trackSequence)
+    {
+        case 0:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 0), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 1), { 0, 0, height },
+                        { 32, 20, 0 }, { 0, 6, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 6), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 7), { 0, 0, height },
+                        { 32, 20, 0 }, { 0, 6, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 12), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 13), { 0, 0, height },
+                        { 40, 32, 0 }, { 0, 0, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 18), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height + 8 });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 19), { 0, 0, height },
+                        { 32, 20, 0 }, { 0, 6, height + 40 });
+                    break;
+            }
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
+            if (direction == 0 || direction == 3)
+            {
+                PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_0);
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),
+                0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 1:
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 2:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 2), { 0, 0, height },
+                        { 16, 16, 2 }, { 16, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 3), { 0, 0, height },
+                        { 32, 32, 0 }, { 16, 0, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 8), { 0, 0, height },
+                        { 16, 16, 2 }, { 0, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 9), { 0, 0, height },
+                        { 16, 16, 0 }, { 0, 0, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 14), { 0, 0, height },
+                        { 24, 16, 2 }, { -8, 16, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 15), { 0, 0, height },
+                        { 16, 40, 0 }, {0, 16, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 20), { 0, 0, height },
+                        { 16, 16, 2 }, { 16, 16, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 21), { 0, 0, height },
+                        { 16, 16, 0 }, { 16, 16, height + 40 });
+                    break;
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 3:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 4), { 0, 0, height },
+                        { 20, 32, 2 }, { 6, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 5), { 0, 0, height },
+                        { 32, 40, 0 }, { 0, 0, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 10), { 0, 0, height },
+                        { 20, 32, 2 }, { 6, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 11), { 0, 0, height },
+                        { 20, 32, 0 }, { 6, 0, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 16), { 0, 0, height },
+                        { 20, 32, 2 }, { 6, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 17), { 0, 0, height },
+                        { 20, 32, 0 }, { 6, 0, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 22), { 0, 0, height },
+                        { 20, 32, 2 }, { 6, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 23), { 0, 0, height },
+                        { 20, 32, 0 }, { 6, 0, height + 40 });
+                    break;
+            }
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
+            switch (direction)
+            {
+                case 2:
+                    PaintUtilPushTunnelRight(session, height + 8, TUNNEL_0);
+                    break;
+                case 3:
+                    PaintUtilPushTunnelLeft(session, height + 8, TUNNEL_0);
+                    break;
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),
+                0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 4:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 18), { 0, 0, height },
+                        { 20, 32, 2 }, { 6, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 19), { 0, 0, height },
+                        { 20, 32, 0 }, { 6, 0, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 0), { 0, 0, height },
+                        { 20, 32, 2 }, { 6, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 1), { 0, 0, height },
+                        { 20, 32, 0 }, { 6, 0, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 6), { 0, 0, height },
+                        { 32, 32, 2 }, { -6, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 7), { 0, 0, height },
+                        { 20, 32, 0 }, { 6, 0, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 12), { 0, 0, height },
+                        { 20, 32, 2 }, { 6, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 13), { 0, 0, height },
+                        { 32, 40, 0 }, { 0, 0, height + 40 });
+                    break;
+            }
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
+            switch (direction)
+            {
+                case 0:
+                    PaintUtilPushTunnelRight(session, height, TUNNEL_0);
+                    break;
+                case 1:
+                    PaintUtilPushTunnelLeft(session, height, TUNNEL_0);
+                    break;
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),
+                0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 5:
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 6:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 20), { 0, 0, height },
+                        { 16, 16, 2 }, { 16, 16, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 21), { 0, 0, height },
+                        { 16, 16, 0 }, { 16, 16, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 2), { 0, 0, height },
+                        { 16, 16, 2 }, { 0, 16, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 3), { 0, 0, height },
+                        { 32, 32, 0 }, { 0, 16, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 8), { 0, 0, height },
+                        { 16, 16, 2 }, { 0, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 9), { 0, 0, height },
+                        { 16, 16, 0 }, { 0, 0, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 14), { 0, 0, height },
+                        { 16, 24, 2 }, { 16, -8, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 15), { 0, 0, height },
+                        { 32, 16, 0 }, { 16, 0, height + 40 });
+                    break;
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 7:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 22), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height + 8 });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 23), { 0, 0, height },
+                        { 32, 20, 0 }, { 0, 6, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 4), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 5), { 0, 0, height },
+                        { 40, 32, 0 }, { 0, 0, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 10), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 11), { 0, 0, height },
+                        { 32, 20, 0 }, { 0, 6, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 16), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 17), { 0, 0, height },
+                        { 32, 20, 0 }, { 0, 6, height + 40 });
+                    break;
+            }
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
+            if (direction == 0 || direction == 3)
+            {
+                PaintUtilPushTunnelRotated(session, direction, height + 8, TUNNEL_0);
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),
+                0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+    }
+}
+
+static void TrackRightHalfBankedHelixUpSmall(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                           uint8_t direction, int32_t height, const TrackElement& trackElement)
+{
+    switch (trackSequence)
+    {
+        case 0:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 24), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 25), { 0, 0, height },
+                        { 32, 20, 0 }, { 0, 6, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 30), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 31), { 0, 0, height },
+                        { 32, 20, 0 }, { 0, 6, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 36), { 0, 0, height },
+                        { 32, 32, 2 }, { 0, -6, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 37), { 0, 0, height },
+                        { 32, 20, 0 }, { 0, 6, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 42), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 43), { 0, 0, height },
+                        { 32, 20, 0 }, { 0, 6, height + 40 });
+                    break;
+            }
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
+            if (direction == 0 || direction == 3)
+            {
+                PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_0);
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),
+                0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 1:
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 2:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 26), { 0, 0, height },
+                        { 16, 16, 2 }, { 16, 16, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 27), { 0, 0, height },
+                        { 16, 16, 0 }, { 16, 16, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 32), { 0, 0, height },
+                        { 16, 16, 2 }, { 0, 16, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 33), { 0, 0, height },
+                        { 16, 32, 0 }, { 0, 16, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 38), { 0, 0, height },
+                        { 16, 16, 2 }, { 0, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 39), { 0, 0, height },
+                        { 16, 16, 0 }, { 0, 0, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 44), { 0, 0, height },
+                        { 16, 16, 2 }, { 16, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 45), { 0, 0, height },
+                        { 32, 16, 0 }, { 16, 0, height + 40 });
+                    break;
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_D0 | SEGMENT_D4, direction), 0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 3:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 28), { 0, 0, height },
+                        { 20, 32, 2 }, { 6, 0, height + 8 });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 29), { 0, 0, height },
+                        { 20, 32, 0 }, { 6, 0, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 34), { 0, 0, height },
+                        { 20, 32, 2 }, { 6, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 35), { 0, 0, height },
+                        { 20, 32, 0 }, { 6, 0, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 40), { 0, 0, height },
+                        { 20, 32, 2 }, { 6, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 41), { 0, 0, height },
+                        { 20, 32, 0 }, { 6, 0, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 46), { 0, 0, height },
+                        { 20, 32, 2 }, { 6, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 47), { 0, 0, height },
+                        { 20, 32, 0 }, { 6, 0, height + 40 });
+                    break;
+            }
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
+            switch (direction)
+            {
+                case 0:
+                    PaintUtilPushTunnelRight(session, height + 8, TUNNEL_0);
+                    break;
+                case 1:
+                    PaintUtilPushTunnelLeft(session, height + 8, TUNNEL_0);
+                    break;
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),
+                0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 4:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 30), { 0, 0, height },
+                        { 20, 32, 2 }, { 6, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 31), { 0, 0, height },
+                        { 32, 40, 0 }, {0, 0, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 36), { 0, 0, height },
+                        { 32, 32, 2 }, { -6, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 37), { 0, 0, height },
+                        { 20, 32, 0 }, { 6, 0, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 42), { 0, 0, height },
+                        { 20, 32, 2 }, { 6, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 43), { 0, 0, height },
+                        { 20, 40, 0 }, { 6, 0, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 24), { 0, 0, height },
+                        { 20, 32, 2 }, { 6, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 25), { 0, 0, height },
+                        { 20, 32, 0 }, { 6, 0, height + 40 });
+                    break;
+            }
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 2, height, session.TrackColours[SCHEME_SUPPORTS]);
+            switch (direction)
+            {
+                case 2:
+                    PaintUtilPushTunnelRight(session, height, TUNNEL_0);
+                    break;
+                case 3:
+                    PaintUtilPushTunnelLeft(session, height, TUNNEL_0);
+                    break;
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),
+                0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 5:
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 6:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 32), { 0, 0, height },
+                        { 16, 16, 2 }, { 16, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 33), { 0, 0, height },
+                        { 32, 16, 0 }, { 16, 0, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 38), { 0, 0, height },
+                        { 16, 16, 2 }, { 0, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 39), { 0, 0, height },
+                        { 16, 16, 0 }, { 0, 0, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 44), { 0, 0, height },
+                        { 24, 16, 2 }, { -8, 16, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 45), { 0, 0, height },
+                        { 16, 32, 0 }, { 0, 16, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 26), { 0, 0, height },
+                        { 16, 16, 2 }, { 16, 16, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 27), { 0, 0, height },
+                        { 16, 16, 0 }, { 16, 16, height + 40 });
+                    break;
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0, direction), 0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 7:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 34), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 35), { 0, 0, height },
+                        { 32, 20, 0 }, { 0, 6, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 40), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 41), { 0, 0, height },
+                        { 32, 20, 0 }, { 0, 6, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 46), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 47), { 0, 0, height },
+                        { 40, 20, 0 }, { 0, 6, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 28), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height + 8 });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_SMALL_HELIX + 29), { 0, 0, height },
+                        { 32, 20, 0 }, { 0, 6, height + 40 });
+                    break;
+            }
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 6, height, session.TrackColours[SCHEME_SUPPORTS]);
+            if (direction == 0 || direction == 3)
+            {
+                PaintUtilPushTunnelRotated(session, direction, height + 8, TUNNEL_0);
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),
+                0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+    }
+}
+
+static void TrackLeftHalfBankedHelixDownSmall(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                            uint8_t direction, int32_t height, const TrackElement& trackElement)
+{
+    if (trackSequence >= 4)
+    {
+        trackSequence -= 4;
+        direction = (direction - 1) & 3;
+    }
+    trackSequence = mapLeftQuarterTurn3TilesToRightQuarterTurn3Tiles[trackSequence];
+    TrackRightHalfBankedHelixUpSmall(session, ride, trackSequence, (direction + 1) & 3, height, trackElement);
+}
+
+static void TrackRightHalfBankedHelixDownSmall(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                             uint8_t direction, int32_t height, const TrackElement& trackElement)
+{
+    if (trackSequence >= 4)
+    {
+        trackSequence -= 4;
+        direction = (direction + 1) & 3;
+    }
+    trackSequence = mapLeftQuarterTurn3TilesToRightQuarterTurn3Tiles[trackSequence];
+    TrackLeftHalfBankedHelixUpSmall(session, ride, trackSequence, (direction - 1) & 3, height, trackElement);
+}
+
+
+static void TrackLeftHalfBankedHelixUpLarge(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                          uint8_t direction, int32_t height, const TrackElement& trackElement)
+{
+    switch (trackSequence)
+    {
+        case 0:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 0), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 1), { 0, 0, height },
+                        { 32, 20, 0 }, { 0, 6, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 10), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 11), { 0, 0, height },
+                        { 32, 20, 0 }, { 0, 6, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 20), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 21), { 0, 0, height },
+                        { 32, 20, 0 }, { 0, 6, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 30), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 31), { 0, 0, height },
+                        { 32, 20, 0 }, { 0, 6, height + 40 });
+                    break;
+            }
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 1, height, session.TrackColours[SCHEME_SUPPORTS]);
+            if (direction == 0 || direction == 3)
+            {
+                PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_0);
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),
+                0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 1:
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 2:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 2), { 0, 0, height },
+                        { 32, 16, 2 }, { 0, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 3), { 0, 0, height },
+                        { 32, 16, 0 }, { 0, 0, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 12), { 0, 0, height },
+                        { 32, 16, 2 }, { 0, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 13), { 0, 0, height },
+                        { 32, 16, 0 }, { 0, 0, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 22), { 0, 0, height },
+                        { 32, 16, 2 }, { 0, 16, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 23), { 0, 0, height },
+                        { 32, 16, 0 }, { 0, 16, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 32), { 0, 0, height },
+                        { 32, 16, 2 }, { 0, 16, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 33), { 0, 0, height },
+                        { 32, 16, 0 }, { 0, 16, height + 40 });
+                    break;
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session,
+                PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),
+                0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 3:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 4), { 0, 0, height },
+                        { 16, 16, 2 }, { 0, 16, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 5), { 0, 0, height },
+                        { 16, 16, 0 }, { 0, 16, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 14), { 0, 0, height },
+                        { 16, 16, 2 }, { 16, 16, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 15), { 0, 0, height },
+                        { 16, 16, 0 }, { 16, 16, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 24), { 0, 0, height },
+                        { 16, 16, 2 }, { 16, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 25), { 0, 0, height },
+                        { 16, 16, 0 }, { 16, 0, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 26), { 0, 0, height },
+                        { 16, 16, 2 }, { 0, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 27), { 0, 0, height },
+                        { 16, 16, 0 }, { 0, 0, height + 40 });
+                    break;
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 4:
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 5:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 6), { 0, 0, height },
+                        { 16, 32, 2 }, { 16, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 7), { 0, 0, height },
+                        { 16, 32, 0 }, { 16, 0, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 16), { 0, 0, height },
+                        { 16, 32, 2 }, { 0, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 17), { 0, 0, height },
+                        { 16, 32, 0 }, { 0, 0, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 26), { 0, 0, height },
+                        { 16, 32, 2 }, { 0, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 27), { 0, 0, height },
+                        { 16, 32, 0 }, { 0, 0, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 36), { 0, 0, height },
+                        { 16, 32, 2 }, { 16, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 37), { 0, 0, height },
+                        { 16, 32, 0 }, { 16, 0, height + 40 });
+                    break;
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session,
+                PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),
+                0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 6:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 8), { 0, 0, height },
+                        { 20, 32, 2 }, { 6, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 9), { 0, 0, height },
+                        { 20, 32, 0 }, { 6, 0, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 18), { 0, 0, height },
+                        { 20, 32, 2 }, { 6, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 19), { 0, 0, height },
+                        { 20, 32, 0 }, { 6, 0, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 28), { 0, 0, height },
+                        { 20, 32, 2 }, { 6, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 29), { 0, 0, height },
+                        { 20, 32, 0 }, { 6, 0, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 38), { 0, 0, height },
+                        { 20, 32, 2 }, { 6, 0, height + 8 });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 39), { 0, 0, height },
+                        { 20, 32, 0 }, { 6, 0, height + 40 });
+                    break;
+            }
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 7, height, session.TrackColours[SCHEME_SUPPORTS]);
+            switch (direction)
+            {
+                case 2:
+                    PaintUtilPushTunnelRight(session, height + 8, TUNNEL_0);
+                    break;
+                case 3:
+                    PaintUtilPushTunnelLeft(session, height + 8, TUNNEL_0);
+                    break;
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),
+                0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 7:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 30), { 0, 0, height },
+                        { 20, 32, 2 }, { 6, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 31), { 0, 0, height },
+                        { 20, 32, 0 }, { 6, 0, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 0), { 0, 0, height },
+                        { 20, 32, 2 }, { 6, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 1), { 0, 0, height },
+                        { 20, 32, 0 }, { 6, 0, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 10), { 0, 0, height },
+                        { 20, 32, 2 }, { 6, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 11), { 0, 0, height },
+                        { 20, 32, 0 }, { 6, 0, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 20), { 0, 0, height },
+                        { 20, 32, 2 }, { 6, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 21), { 0, 0, height },
+                        { 20, 32, 0 }, { 6, 0, height + 40 });
+                    break;
+            }
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 1, height, session.TrackColours[SCHEME_SUPPORTS]);
+            switch (direction)
+            {
+                case 0:
+                    PaintUtilPushTunnelRight(session, height, TUNNEL_0);
+                    break;
+                case 1:
+                    PaintUtilPushTunnelLeft(session, height, TUNNEL_0);
+                    break;
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),
+                0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 8:
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 9:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 32), { 0, 0, height },
+                        { 16, 32, 2 }, { 16, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 33), { 0, 0, height },
+                        { 16, 32, 0 }, { 16, 0, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 2), { 0, 0, height },
+                        { 16, 32, 2 }, { 0, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 3), { 0, 0, height },
+                        { 16, 32, 0 }, { 0, 0, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 12), { 0, 0, height },
+                        { 16, 32, 2 }, { 0, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 13), { 0, 0, height },
+                        { 16, 32, 0 }, { 0, 0, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 22), { 0, 0, height },
+                        { 16, 32, 2 }, { 16, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 23), { 0, 0, height },
+                        { 16, 32, 0 }, { 16, 0, height + 40 });
+                    break;
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session,
+                PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),
+                0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 10:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 26), { 0, 0, height },
+                        { 16, 16, 2 }, { 0, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 27), { 0, 0, height },
+                        { 16, 16, 0 }, { 0, 0, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 4), { 0, 0, height },
+                        { 16, 16, 2 }, { 16, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 5), { 0, 0, height },
+                        { 16, 16, 0 }, { 16, 0, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 14), { 0, 0, height },
+                        { 16, 16, 2 }, { 16, 16, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 15), { 0, 0, height },
+                        { 16, 16, 0 }, { 16, 16, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 24), { 0, 0, height },
+                        { 16, 16, 2 }, { 0, 16, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 25), { 0, 0, height },
+                        { 16, 16, 0 }, { 0, 16, height + 40 });
+                    break;
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 11:
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 12:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 36), { 0, 0, height },
+                        { 32, 16, 2 }, { 0, 16, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 37), { 0, 0, height },
+                        { 32, 16, 0 }, { 0, 16, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 6), { 0, 0, height },
+                        { 32, 16, 2 }, { 0, 16, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 7), { 0, 0, height },
+                        { 32, 16, 0 }, { 0, 16, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 16), { 0, 0, height },
+                        { 32, 16, 2 }, { 0, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 17), { 0, 0, height },
+                        { 32, 16, 0 }, { 0, 0, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 26), { 0, 0, height },
+                        { 32, 16, 2 }, { 0, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 27), { 0, 0, height },
+                        { 32, 16, 0 }, { 0, 0, height + 40 });
+                    break;
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session,
+                PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),
+                0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 13:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 38), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height + 8 });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 39), { 0, 0, height },
+                        { 32, 20, 0 }, { 0, 6, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 8), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 9), { 0, 0, height },
+                        { 32, 20, 0 }, { 0, 6, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 18), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 19), { 0, 0, height },
+                        { 32, 20, 0 }, { 0, 6, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 28), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(SPR_G2_PIPELINE_TRACK_LARGE_HELIX + 29), { 0, 0, height },
+                        { 32, 20, 0 }, { 0, 6, height + 40 });
+                    break;
+            }
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 7, height, session.TrackColours[SCHEME_SUPPORTS]);
+            if (direction == 0 || direction == 3)
+            {
+                PaintUtilPushTunnelRotated(session, direction, height + 8, TUNNEL_0);
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),
+                0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+    }
+}
+
+static void TrackRightHalfBankedHelixUpLarge(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                           uint8_t direction, int32_t height, const TrackElement& trackElement)
+{
+    switch (trackSequence)
+    {
+        case 0:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14906), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14926), { 0, 0, height },
+                        { 32, 20, 0 }, { 0, 6, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14911), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14931), { 0, 0, height },
+                        { 32, 20, 0 }, { 0, 6, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14916), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14936), { 0, 0, height },
+                        { 32, 20, 0 }, { 0, 6, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14921), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14941), { 0, 0, height },
+                        { 32, 20, 0 }, { 0, 6, height + 40 });
+                    break;
+            }
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 1, height, session.TrackColours[SCHEME_SUPPORTS]);
+            if (direction == 0 || direction == 3)
+            {
+                PaintUtilPushTunnelRotated(session, direction, height, TUNNEL_0);
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),
+                0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 1:
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 2:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14907), { 0, 0, height },
+                        { 32, 16, 2 }, { 0, 16, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14927), { 0, 0, height },
+                        { 32, 16, 0 }, { 0, 16, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14912), { 0, 0, height },
+                        { 32, 16, 2 }, { 0, 16, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14932), { 0, 0, height },
+                        { 32, 16, 0 }, { 0, 16, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14917), { 0, 0, height },
+                        { 32, 16, 2 }, { 0, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14937), { 0, 0, height },
+                        { 32, 16, 0 }, { 0, 0, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14922), { 0, 0, height },
+                        { 32, 16, 2 }, { 0, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14942), { 0, 0, height },
+                        { 32, 16, 0 }, { 0, 0, height + 40 });
+                    break;
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session,
+                PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D0 | SEGMENT_D4, direction),
+                0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 3:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14908), { 0, 0, height },
+                        { 16, 16, 2 }, { 0, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14928), { 0, 0, height },
+                        { 16, 16, 0 }, { 0, 0, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14913), { 0, 0, height },
+                        { 16, 16, 2 }, { 16, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14933), { 0, 0, height },
+                        { 16, 16, 0 }, { 16, 0, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14918), { 0, 0, height },
+                        { 16, 16, 2 }, { 16, 16, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14938), { 0, 0, height },
+                        { 16, 16, 0 }, { 16, 16, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14923), { 0, 0, height },
+                        { 16, 16, 2 }, { 0, 16, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14943), { 0, 0, height },
+                        { 16, 16, 0 }, { 0, 16, height + 40 });
+                    break;
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC, direction), 0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 4:
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 5:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14909), { 0, 0, height },
+                        { 16, 32, 2 }, { 16, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14929), { 0, 0, height },
+                        { 16, 32, 0 }, { 16, 0, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14914), { 0, 0, height },
+                        { 16, 32, 2 }, { 0, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14934), { 0, 0, height },
+                        { 16, 32, 0 }, { 0, 0, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14919), { 0, 0, height },
+                        { 16, 32, 2 }, { 0, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14939), { 0, 0, height },
+                        { 16, 32, 0 }, { 0, 0, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14924), { 0, 0, height },
+                        { 16, 32, 2 }, { 16, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14944), { 0, 0, height },
+                        { 16, 32, 0 }, { 16, 0, height + 40 });
+                    break;
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session,
+                PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),
+                0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 6:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14910), { 0, 0, height },
+                        { 20, 32, 2 }, { 6, 0, height + 8 });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14930), { 0, 0, height },
+                        { 20, 32, 0 }, { 6, 0, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14915), { 0, 0, height },
+                        { 20, 32, 2 }, { 6, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14935), { 0, 0, height },
+                        { 20, 32, 0 }, { 6, 0, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14920), { 0, 0, height },
+                        { 20, 32, 2 }, { 6, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14940), { 0, 0, height },
+                        { 20, 32, 0 }, { 6, 0, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14925), { 0, 0, height },
+                        { 20, 32, 2 }, { 6, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14945), { 0, 0, height },
+                        { 20, 32, 0 }, { 6, 0, height + 40 });
+                    break;
+            }
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 7, height, session.TrackColours[SCHEME_SUPPORTS]);
+            switch (direction)
+            {
+                case 0:
+                    PaintUtilPushTunnelRight(session, height + 8, TUNNEL_0);
+                    break;
+                case 1:
+                    PaintUtilPushTunnelLeft(session, height + 8, TUNNEL_0);
+                    break;
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),
+                0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 7:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14911), { 0, 0, height },
+                        { 20, 32, 2 }, { 6, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14931), { 0, 0, height },
+                        { 20, 32, 0 }, { 6, 0, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14916), { 0, 0, height },
+                        { 20, 32, 2 }, { 6, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14936), { 0, 0, height },
+                        { 20, 32, 0 }, { 6, 0, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14921), { 0, 0, height },
+                        { 20, 32, 2 }, { 6, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14941), { 0, 0, height },
+                        { 20, 32, 0 }, { 6, 0, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14906), { 0, 0, height },
+                        { 20, 32, 2 }, { 6, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14926), { 0, 0, height },
+                        { 20, 32, 0 }, { 6, 0, height + 40 });
+                    break;
+            }
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 1, height, session.TrackColours[SCHEME_SUPPORTS]);
+            switch (direction)
+            {
+                case 2:
+                    PaintUtilPushTunnelRight(session, height, TUNNEL_0);
+                    break;
+                case 3:
+                    PaintUtilPushTunnelLeft(session, height, TUNNEL_0);
+                    break;
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),
+                0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 8:
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 9:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14912), { 0, 0, height },
+                        { 16, 32, 2 }, { 16, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14932), { 0, 0, height },
+                        { 16, 32, 0 }, { 16, 0, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14917), { 0, 0, height },
+                        { 16, 32, 2 }, { 0, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14937), { 0, 0, height },
+                        { 16, 32, 0 }, { 0, 0, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14922), { 0, 0, height },
+                        { 16, 32, 2 }, { 0, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14942), { 0, 0, height },
+                        { 16, 32, 0 }, { 0, 0, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14907), { 0, 0, height },
+                        { 16, 32, 2 }, { 16, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14927), { 0, 0, height },
+                        { 16, 32, 0 }, { 16, 0, height + 40 });
+                    break;
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session,
+                PaintUtilRotateSegments(SEGMENT_B8 | SEGMENT_C0 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_D0 | SEGMENT_D4, direction),
+                0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 10:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14913), { 0, 0, height },
+                        { 16, 16, 2 }, { 0, 16, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14933), { 0, 0, height },
+                        { 16, 16, 0 }, { 0, 16, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14918), { 0, 0, height },
+                        { 16, 16, 2 }, { 16, 16, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14938), { 0, 0, height },
+                        { 16, 16, 0 }, { 16, 16, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14923), { 0, 0, height },
+                        { 16, 16, 2 }, { 16, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14943), { 0, 0, height },
+                        { 16, 16, 0 }, { 16, 0, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14908), { 0, 0, height },
+                        { 16, 16, 2 }, { 0, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14928), { 0, 0, height },
+                        { 16, 16, 0 }, { 0, 0, height + 40 });
+                    break;
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_BC | SEGMENT_C4 | SEGMENT_CC | SEGMENT_D4, direction), 0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 11:
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 12:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14914), { 0, 0, height },
+                        { 32, 16, 2 }, { 0, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14934), { 0, 0, height },
+                        { 32, 16, 0 }, { 0, 0, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14919), { 0, 0, height },
+                        { 32, 16, 2 }, { 0, 0, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14939), { 0, 0, height },
+                        { 32, 16, 0 }, { 0, 0, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14924), { 0, 0, height },
+                        { 32, 16, 2 }, { 0, 16, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14944), { 0, 0, height },
+                        { 32, 16, 0 }, { 0, 16, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14909), { 0, 0, height },
+                        { 32, 16, 2 }, { 0, 16, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14929), { 0, 0, height },
+                        { 32, 16, 0 }, { 0, 16, height + 40 });
+                    break;
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session,
+                PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_B8 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),
+                0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+        case 13:
+            switch (direction)
+            {
+                case 0:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14915), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14935), { 0, 0, height },
+                        { 32, 20, 0 }, { 0, 6, height + 40 });
+                    break;
+                case 1:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14920), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14940), { 0, 0, height },
+                        { 32, 20, 0 }, { 0, 6, height + 40 });
+                    break;
+                case 2:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14925), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14945), { 0, 0, height },
+                        { 32, 20, 0 }, { 0, 6, height + 40 });
+                    break;
+                case 3:
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14910), { 0, 0, height },
+                        { 32, 20, 2 }, { 0, 6, height + 8 });
+                    PaintAddImageAsParentRotated(
+                        session, direction, session.TrackColours[SCHEME_TRACK].WithIndex(14930), { 0, 0, height },
+                        { 32, 20, 0 }, { 0, 6, height + 40 });
+                    break;
+            }
+            MetalASupportsPaintSetup(session, METAL_SUPPORTS_TUBES, 4, 7, height, session.TrackColours[SCHEME_SUPPORTS]);
+            if (direction == 0 || direction == 3)
+            {
+                PaintUtilPushTunnelRotated(session, direction, height + 8, TUNNEL_0);
+            }
+            PaintUtilSetSegmentSupportHeight(
+                session, PaintUtilRotateSegments(SEGMENT_B4 | SEGMENT_C4 | SEGMENT_C8 | SEGMENT_CC | SEGMENT_D0, direction),
+                0xFFFF, 0);
+            PaintUtilSetGeneralSupportHeight(session, height + 32, 0x20);
+            break;
+    }
+}
+
+static void TrackLeftHalfBankedHelixDownLarge(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                            uint8_t direction, int32_t height, const TrackElement& trackElement)
+{
+    if (trackSequence >= 7)
+    {
+        trackSequence -= 7;
+        direction = (direction - 1) & 3;
+    }
+    trackSequence = mapLeftQuarterTurn5TilesToRightQuarterTurn5Tiles[trackSequence];
+    TrackRightHalfBankedHelixUpLarge(session, ride, trackSequence, (direction + 1) & 3, height, trackElement);
+}
+
+static void TrackRightHalfBankedHelixDownLarge(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                             uint8_t direction, int32_t height, const TrackElement& trackElement)
+{
+    if (trackSequence >= 7)
+    {
+        trackSequence -= 7;
+        direction = (direction + 1) & 3;
+    }
+    trackSequence = mapLeftQuarterTurn5TilesToRightQuarterTurn5Tiles[trackSequence];
+    TrackLeftHalfBankedHelixUpLarge(session, ride, trackSequence, (direction - 1) & 3, height, trackElement);
+}
 
 static void TrackLeftTwistDownToUp(PaintSession& session, const Ride& ride, uint8_t trackSequence,                                                          uint8_t direction, int32_t height, const TrackElement& trackElement)
 {
@@ -7587,9 +8236,9 @@ TRACK_PAINT_FUNCTION GetTrackPaintFunction(int32_t trackType)
     case TrackElemType::RightQuarterTurn3Tiles:
         return TrackRightQuarterTurn3;
     case TrackElemType::LeftBankedQuarterTurn3Tiles:
-        return TrackLeftQuarterTurn3Tilesbank;
+        return TrackLeftQuarterTurn3TilesBank;
     case TrackElemType::RightBankedQuarterTurn3Tiles:
-        return TrackRightQuarterTurn3Tilesbank;
+        return TrackRightQuarterTurn3TilesBank;
     case TrackElemType::LeftQuarterTurn3TilesUp25:
         return TrackLeftQuarterTurn3TilesUp25;
     case TrackElemType::RightQuarterTurn3TilesUp25:
@@ -7598,24 +8247,22 @@ TRACK_PAINT_FUNCTION GetTrackPaintFunction(int32_t trackType)
         return TrackLeftQuarterTurn3TilesDown25;
     case TrackElemType::RightQuarterTurn3TilesDown25:
         return TrackRightQuarterTurn3TilesDown25;
-/*
     case TrackElemType::LeftHalfBankedHelixUpSmall:
-        return TrackLefthalf_Bankedhelix_Upsmall;
+        return TrackLeftHalfBankedHelixUpSmall;
     case TrackElemType::RightHalfBankedHelixUpSmall:
-        return TrackRighthalf_Bankedhelix_Upsmall;
+        return TrackRightHalfBankedHelixUpSmall;
     case TrackElemType::LeftHalfBankedHelixDownSmall:
-        return TrackLefthalf_Bankedhelix_Downsmall;
+        return TrackLeftHalfBankedHelixDownSmall;
     case TrackElemType::RightHalfBankedHelixDownSmall:
-        return TrackRighthalf_Bankedhelix_Downsmall;
+        return TrackRightHalfBankedHelixDownSmall;
     case TrackElemType::LeftHalfBankedHelixUpLarge:
-        return TrackLefthalf_Bankedhelix_Uplarge;
+        return TrackLeftHalfBankedHelixUpLarge;
     case TrackElemType::RightHalfBankedHelixUpLarge:
-        return TrackRighthalf_Bankedhelix_Uplarge;
+        return TrackRightHalfBankedHelixUpLarge;
     case TrackElemType::LeftHalfBankedHelixDownLarge:
-        return TrackLefthalf_Bankedhelix_Downlarge;
+        return TrackLeftHalfBankedHelixDownLarge;
     case TrackElemType::RightHalfBankedHelixDownLarge:
-        return TrackRighthalf_Bankedhelix_Downlarge;
-*/
+        return TrackRightHalfBankedHelixDownLarge;
     case TrackElemType::LeftQuarterTurn1TileUp60:
         return TrackLeftQuarterTurn1TileUp60;
     case TrackElemType::RightQuarterTurn1TileUp60:
