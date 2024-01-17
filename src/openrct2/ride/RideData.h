@@ -215,8 +215,8 @@ struct RideAlternateTrack
 
 struct RideAlternateTrackList
 {
-    uint8_t count = 0;
-    RideAlternateTrack list[4] = { { 0, 0 }, { 0, 0 }, { 0, 0 } };
+    uint8_t count;
+    RideAlternateTrack list[4];
 };
 
 struct RatingsModifier
@@ -345,7 +345,7 @@ struct RideTypeDescriptor
     std::string_view Name;
 
     RideRatingsDescriptor RatingsData;
-  
+
     UpdateRotatingFunction UpdateRotating = UpdateRotatingDefault;
 
     LightFXAddLightsMagicVehicleFunction LightFXAddLightsMagicVehicle = nullptr;
@@ -357,6 +357,9 @@ struct RideTypeDescriptor
     RideClassification Classification = RideClassification::Ride;
 
     PeepUpdateRideLeaveEntranceFunc UpdateLeaveEntrance = PeepUpdateRideLeaveEntranceDefault;
+
+    
+
     SpecialElementRatingAdjustmentFunc SpecialElementRatingAdjustment = SpecialTrackElementRatingsAjustment_Default;
 
     RideLocationFunction GetGuestWaypointLocation = GetGuestWaypointLocationDefault;
@@ -369,7 +372,9 @@ struct RideTypeDescriptor
     MusicTrackOffsetLengthFunc MusicTrackOffsetLength = OpenRCT2::RideAudio::RideMusicGetTrackOffsetLength_Default;
 
     UpdateRideApproachVehicleWaypointsFunction UpdateRideApproachVehicleWaypoints = UpdateRideApproachVehicleWaypointsDefault;
+    
     RideAlternateTrackList AlternateTrackList = { 0, { { 0, 0 }, { 0, 0 }, { 0, 0 } } };
+
     bool HasFlag(uint64_t flag) const;
     void GetAvailableTrackPieces(RideTrackGroup& res) const;
     bool SupportsTrackPiece(const uint64_t trackPiece) const;
@@ -567,7 +572,6 @@ constexpr RideTypeDescriptor DummyRTD =
     SET_FIELD(ColourPresets, DEFAULT_FLAT_RIDE_COLOUR_PRESET),
     SET_FIELD(ColourPreview, { static_cast<uint32_t>(SPR_NONE), static_cast<uint32_t>(SPR_NONE) }),
     SET_FIELD(ColourKey, RideColourKey::Ride),
-    
     SET_FIELD(Name, "invalid"),
 	SET_FIELD(RatingsData,
     {
@@ -580,7 +584,6 @@ constexpr RideTypeDescriptor DummyRTD =
             { RatingsModifierType::NoModifier, 0, 0, 0, 0 },
         },
     }),
-    SET_FIELD(AlternateTrackList, { 0, { { 0, 0 }, { 0, 0 }, { 0, 0 } } }),
     SET_FIELD(UpdateRotating, UpdateRotatingDefault),
     SET_FIELD(LightFXAddLightsMagicVehicle, nullptr),
     SET_FIELD(StartRideMusic, OpenRCT2::RideAudio::DefaultStartRideMusicChannel),
@@ -588,6 +591,14 @@ constexpr RideTypeDescriptor DummyRTD =
     SET_FIELD(MusicUpdateFunction, DefaultMusicUpdate),
     SET_FIELD(Classification, RideClassification::Ride),
     SET_FIELD(UpdateLeaveEntrance, PeepUpdateRideLeaveEntranceDefault),
+    SET_FIELD(SpecialElementRatingAdjustment, SpecialTrackElementRatingsAjustment_Default),
+    SET_FIELD(GetGuestWaypointLocation, GetGuestWaypointLocationDefault),
+    SET_FIELD(ConstructionWindowContext, RideConstructionWindowContext::Default),
+    SET_FIELD(RideUpdate, nullptr),
+    SET_FIELD(UpdateMeasurementsSpecialElements, RideUpdateMeasurementsSpecialElements_Default),
+    SET_FIELD(MusicTrackOffsetLength, OpenRCT2::RideAudio::RideMusicGetTrackOffsetLength_Default),
+    SET_FIELD(UpdateRideApproachVehicleWaypoints, UpdateRideApproachVehicleWaypointsMotionSimulator),
+    SET_FIELD(AlternateTrackList, {0,{{0,static_cast<uint32_t>(SPR_NONE)}}})
 };
 // clang-format on
 
