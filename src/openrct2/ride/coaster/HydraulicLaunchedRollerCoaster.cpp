@@ -17715,8 +17715,6 @@ namespace HydraulicLaunchedRC
         {
             case TrackElemType::Flat:
                 return TrackFlat;
-            case TrackElemType::EndStation:
-            case TrackElemType::BeginStation:
             case TrackElemType::MiddleStation:
                 return TrackStation;
             case TrackElemType::Up25:
@@ -18099,7 +18097,6 @@ namespace HydraulicLaunchedRC
                 return TrackDiagFlatTo60DegDown;
             case TrackElemType::DiagDown60ToFlat:
                 return TrackDiag60DegDownToFlat;
-
             case TrackElemType::LeftEighthToDiagUp25:
                 return TrackLeftEighthToDiagUp25;
             case TrackElemType::RightEighthToDiagUp25:
@@ -18116,7 +18113,6 @@ namespace HydraulicLaunchedRC
                 return TrackLeftEighthToOrthogonalDown25;
             case TrackElemType::RightEighthToOrthogonalDown25:
                 return TrackRightEighthToOrthogonalDown25;
-
             case TrackElemType::DiagUp25ToLeftBankedUp25:
                 return TrackDiagUp25ToLeftBankedUp25;
             case TrackElemType::DiagUp25ToRightBankedUp25:
@@ -18133,7 +18129,6 @@ namespace HydraulicLaunchedRC
                 return TrackDiagLeftBankedDown25ToDown25;
             case TrackElemType::DiagRightBankedDown25ToDown25:
                 return TrackDiagRightBankedDown25ToDown25;
-
             case TrackElemType::DiagLeftBankedFlatToLeftBankedUp25:
                 return TrackDiagLeftBankedFlatToLeftBankedUp25;
             case TrackElemType::DiagRightBankedFlatToRightBankedUp25:
@@ -18198,6 +18193,8 @@ namespace HydraulicLaunchedRC
                 return TrackMagneticBrakeDown25;
             case TrackElemType::MagneticBrakeDiagDown25:
                 return TrackMagneticBrakeDiagDown25;
+            default:
+                return GetTrackPaintFunctionGigaRC(trackType);
         }
     }
 
@@ -18610,7 +18607,7 @@ namespace HydraulicLaunchedRC
             default:
                 return GetTrackPaintFunctionGigaRC(trackType);
         }
-        return nullptr;
+     
     }
 
     static void TrackAlt2Brakes(
