@@ -906,7 +906,7 @@
     <ClCompile Include="ride\coaster\GigaCoaster.cpp" />
     <ClCompile Include="ride\coaster\HeartlineTwisterCoaster.cpp" />
     <ClCompile Include="ride\coaster\HybridCoaster.cpp" />
-    <ClInclude Include="ride\coaster\HydraulicLaunchedRollerCoaster.cpp" />
+    <ClCompile Include="ride\coaster\HydraulicLaunchedRollerCoaster.cpp" />
     <ClCompile Include="ride\coaster\InvertedHairpinCoaster.cpp" />
     <ClCompile Include="ride\coaster\InvertedImpulseCoaster.cpp" />
     <ClCompile Include="ride\coaster\InvertedRollerCoaster.cpp" />

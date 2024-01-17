@@ -18199,7 +18199,6 @@ namespace HydraulicLaunchedRC
             case TrackElemType::MagneticBrakeDiagDown25:
                 return TrackMagneticBrakeDiagDown25;
         }
-        return nullptr;
     }
 
     static void TrackAlt1Brakes(
@@ -19020,7 +19019,6 @@ namespace HydraulicLaunchedRC
             default:
                 return GetTrackPaintFunctionMiniRC(trackType);
         }
-        return nullptr;
     }
 
 } // namespace HydraulicLaunchedRC
