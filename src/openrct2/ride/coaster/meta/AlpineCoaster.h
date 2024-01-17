@@ -50,6 +50,8 @@ constexpr RideTypeDescriptor AlpineCoasterRTD =
     )),
     SET_FIELD(ColourPreview, { SPR_RIDE_DESIGN_PREVIEW_ALPINE_COASTER_TRACK, SPR_RIDE_DESIGN_PREVIEW_ALPINE_COASTER_SUPPORTS }),
     SET_FIELD(ColourKey, RideColourKey::Ride),
+    SET_FIELD(AlternateTrackList, {0,{{0,0}}}),
+
     SET_FIELD(Name, "alpine_rc"),
     SET_FIELD(RatingsData,
     {

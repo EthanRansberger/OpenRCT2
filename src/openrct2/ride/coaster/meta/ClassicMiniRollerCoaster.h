@@ -54,6 +54,8 @@ constexpr RideTypeDescriptor ClassicMiniRollerCoasterRTD =
     SET_FIELD(ColourPreview, { SPR_RIDE_DESIGN_PREVIEW_JUNIOR_ROLLER_COASTER_TRACK, SPR_RIDE_DESIGN_PREVIEW_JUNIOR_ROLLER_COASTER_SUPPORTS }),
     SET_FIELD(ColourKey, RideColourKey::Ride),
     SET_FIELD(Name, "classic_mini_rc"),
+
+
     SET_FIELD(RatingsData,
     {
         RatingsCalculationType::Normal,
