@@ -215,8 +215,8 @@ struct RideAlternateTrack
 
 struct RideAlternateTrackList
 {
-    uint8_t count;
-    RideAlternateTrack list[4];
+    uint8_t count = 0;
+    RideAlternateTrack list[4] = { { 0, 0 }, { 0, 0 }, { 0, 0 } };
 };
 
 struct RatingsModifier
@@ -345,7 +345,7 @@ struct RideTypeDescriptor
     std::string_view Name;
 
     RideRatingsDescriptor RatingsData;
-    RideAlternateTrackList AlternateTrackList = { 0, { { 0, 0 }, { 0, 0 }, { 0, 0 } } };
+  
     UpdateRotatingFunction UpdateRotating = UpdateRotatingDefault;
 
     LightFXAddLightsMagicVehicleFunction LightFXAddLightsMagicVehicle = nullptr;
@@ -369,7 +369,7 @@ struct RideTypeDescriptor
     MusicTrackOffsetLengthFunc MusicTrackOffsetLength = OpenRCT2::RideAudio::RideMusicGetTrackOffsetLength_Default;
 
     UpdateRideApproachVehicleWaypointsFunction UpdateRideApproachVehicleWaypoints = UpdateRideApproachVehicleWaypointsDefault;
-
+    RideAlternateTrackList AlternateTrackList = { 0, { { 0, 0 }, { 0, 0 }, { 0, 0 } } };
     bool HasFlag(uint64_t flag) const;
     void GetAvailableTrackPieces(RideTrackGroup& res) const;
     bool SupportsTrackPiece(const uint64_t trackPiece) const;
