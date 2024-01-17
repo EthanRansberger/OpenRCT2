@@ -49,8 +49,6 @@ constexpr RideTypeDescriptor AirPoweredVerticalCoasterRTD =
     )),
     SET_FIELD(ColourPreview, { SPR_RIDE_DESIGN_PREVIEW_AIR_POWERED_VERTICAL_COASTER_TRACK, SPR_RIDE_DESIGN_PREVIEW_AIR_POWERED_VERTICAL_COASTER_SUPPORTS }),
     SET_FIELD(ColourKey, RideColourKey::Ride),
-    SET_FIELD(AlternateTrackList, {0,{{0,0}}}),
-
     SET_FIELD(Name, "air_powered_vertical_rc"),
     SET_FIELD(RatingsData,
     {
